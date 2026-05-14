@@ -349,3 +349,6 @@ URL https://menew.jp/
 | RSpec          | ドキュメントとしても読めるテストが書け、保守性を高められるため。    |
 | Resend         | 認証メール（パスワード再設定など）を安定して送信するため。       |
 | whenever | cronベースで定期実行を簡単に設定できるため |
+
+## 画面遷移図
+[画面遷移図（MVP）](https://www.figma.com/design/2IupXekaNEZpDr9Bkh7gzp/%E7%84%A1%E9%A1%8C?node-id=0-1&p=f&t=Deo6UxFG2HF0FgiY-0)
