@@ -351,4 +351,7 @@ URL https://menew.jp/
 | whenever | cronベースで定期実行を簡単に設定できるため |
 
 ## 画面遷移図
-[画面遷移図（MVP）](https://www.figma.com/design/2IupXekaNEZpDr9Bkh7gzp/%E7%84%A1%E9%A1%8C?node-id=0-1&p=f&t=Deo6UxFG2HF0FgiY-0)
+[卒業制作/MVP.figma](https://www.figma.com/design/2IupXekaNEZpDr9Bkh7gzp/%E7%84%A1%E9%A1%8C?node-id=0-1&p=f&t=Deo6UxFG2HF0FgiY-0)
+
+## ER図
+[卒業制作/MVP.drawio](https://app.diagrams.net/#G1Z-oQ8c4PjcVLOJOdEhDDwFbMoHjlqG7D#%7B%22pageId%22%3A%22bbRv8jsxfHTHRj3OKq_V%22%7D)
