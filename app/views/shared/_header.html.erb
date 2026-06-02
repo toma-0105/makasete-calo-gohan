@@ -1,0 +1,14 @@
+<header class="bg-[#FDF9DD] border-b border-[#E8E4B8] px-4 py-2.5 flex items-center justify-between sticky top-0 z-10">
+  <%= link_to root_path, class: "text-[15px] font-bold text-[#3a3820]" do %>
+    まかせてカロごはん
+  <% end %>
+  <nav class="flex gap-1.5 items-center">
+    <% if local_assigns[:nav] == :guest %>
+      <%= link_to "マイページ", "#", class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#F9C639] bg-[#F9C639] font-medium" %>
+    <% else %>
+      <%= link_to "使い方", "#", class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium" %>
+      <%= link_to "新規登録", "#", class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium" %>
+      <%= link_to "ログイン", "#", class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#F9C639] bg-[#F9C639] font-medium" %>
+    <% end %>
+  </nav>
+</header>
