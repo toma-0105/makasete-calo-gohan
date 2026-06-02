@@ -1,61 +1,54 @@
-<% content_for :title, "まかせてカロゴハン - 献立を考えなくても、ダイエットは続く。" %>
+<% content_for :title, "まかせてカロごはん - 献立を考えなくても、ダイエットは続く。" %>
 
 <div class="min-h-screen flex flex-col">
   <%= render "shared/header" %>
 
-  <main class="flex-1 flex flex-col gap-3.5 px-5 py-6 max-w-sm mx-auto w-full">
+  <main class="flex-1 flex flex-col px-5 py-6 max-w-sm mx-auto w-full gap-8">
 
     <%# ヒーローセクション %>
     <div class="text-center">
+      <p class="text-[38px] font-bold text-[#2a2810] leading-tight">まかせてカロごはん</p>
       <div class="h-3"></div>
-      <h1 class="text-[26px] font-bold text-[#2a2810] leading-[1.35]">
-        献立を考えなくても、<br>ダイエットは続く。
+      <h1 class="text-[32px] font-bold text-orange-500 leading-[1.25]">
+        献立を考えなくても<br>ダイエットは続く。
       </h1>
-      <div class="h-2.5"></div>
-      <p class="text-[14px] text-[#7a7550] leading-[1.7]">
+      <div class="h-3"></div>
+      <p class="text-[13px] text-[#7a7550] leading-[1.7]">
         TDEE診断で1日の消費カロリーを計算し、<br>あなたに合った朝・昼・夜の献立を提案します。
       </p>
       <div class="h-4"></div>
-      <%= link_to "ゲストでログイン", "#",
-            class: "block w-full bg-[#F9C639] text-[#3a3820] text-center py-3.5 rounded-lg text-[15px] font-semibold" %>
-      <div class="h-2"></div>
-      <%= link_to "ログイン", "#",
-            class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[15px]" %>
+      <div class="flex gap-2">
+        <%= link_to "ゲストでログイン", "#",
+              class: "flex-1 bg-[#F9C639] text-[#3a3820] text-center py-3.5 rounded-lg text-[14px] font-semibold" %>
+        <%= link_to "新規登録", "#",
+              class: "flex-1 border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px]" %>
+      </div>
     </div>
 
-    <div class="h-px bg-[#E8E4B8]"></div>
-
-    <%# TDEE説明セクション %>
+    <%# お悩みセクション %>
     <div>
-      <p class="text-[18px] font-bold text-[#2a2810] text-center">TDEE診断とは？</p>
-      <div class="h-2"></div>
-      <p class="text-[13px] text-[#5a5530] leading-[1.5] text-center">
-        1日に消費するカロリーを簡単に計算できます。
-      </p>
-      <div class="h-2.5"></div>
-      <div class="bg-[#FFF8C4] border border-[#EAE070] rounded-[10px] p-4">
-        <p class="text-[14px] font-semibold text-[#3a3820] mb-1.5 text-center">TDEE（総消費カロリー）とは</p>
-        <p class="text-[13px] text-[#7a7550] leading-[1.6] text-center">
-          身長・体重・年齢・活動量をもとに自動で計算します。<br>難しい知識は不要、入力するだけでOKです。
-        </p>
-      </div>
-      <div class="h-2.5"></div>
-      <%# 入力→算出 ビジュアル %>
-      <div class="flex items-center gap-2.5">
-        <div class="flex-1 bg-[#FFFEF5] border border-[#C8C4A0] rounded-lg p-3 text-center">
-          <p class="text-[11px] text-[#9a9570] mb-1.5">入力するだけ</p>
-          <p class="text-[13px] font-medium text-[#3a3820] leading-[1.4]">身長・体重<br>年齢・活動量</p>
+      <p class="text-[18px] font-bold text-[#2a2810] text-center mb-4">こんなお悩みありませんか？</p>
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-3 bg-[#FFF8C4] border border-[#EAE070] rounded-xl px-4 py-3">
+          <svg class="w-4 h-4 text-[#7a7550] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+          <p class="text-[13px] text-[#3a3820]">毎日の献立を考えるのが面倒くさい</p>
         </div>
-        <span class="text-[20px] text-[#C8C4A0]">→</span>
-        <div class="flex-1 bg-[#E8F5E0] border border-[#A8D898] rounded-lg p-3 text-center">
-          <p class="text-[11px] text-[#9a9570] mb-1.5">自動で算出</p>
-          <p class="text-[22px] font-bold text-[#2a5010]">2,200</p>
-          <p class="text-[11px] text-[#5a8040]">kcal / 日</p>
+        <div class="flex items-center gap-3 bg-[#FFF8C4] border border-[#EAE070] rounded-xl px-4 py-3">
+          <svg class="w-4 h-4 text-[#7a7550] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <p class="text-[13px] text-[#3a3820]">カロリー計算が続かない・難しい</p>
+        </div>
+        <div class="flex items-center gap-3 bg-[#FFF8C4] border border-[#EAE070] rounded-xl px-4 py-3">
+          <svg class="w-4 h-4 text-[#7a7550] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/>
+          </svg>
+          <p class="text-[13px] text-[#3a3820]">何を食べれば正解なのかわからない</p>
         </div>
       </div>
     </div>
-
-    <div class="h-px bg-[#E8E4B8]"></div>
 
     <%# ステップセクション %>
     <div>
@@ -79,24 +72,14 @@
               アレルギー設定
               <span class="text-[10px] px-1.5 py-0.5 rounded-[10px] bg-[#FFF3A0] text-[#5a4a10] ml-1.5">任意</span>
             </p>
-            <p class="text-[12px] text-[#7a7550] leading-[1.5]">食物アレルギー選択。（スキップも可能）</p>
+            <p class="text-[12px] text-[#7a7550] leading-[1.5]">アレルギーや苦手な食材を選択。（スキップも可能）</p>
           </div>
         </div>
         <div class="flex items-start gap-3.5">
           <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">3</div>
           <div>
-            <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">献立を生成</p>
+            <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">献立を自動生成</p>
             <p class="text-[12px] text-[#7a7550] leading-[1.5]">朝・昼・夜の3食分が即座に表示されます。</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-3.5">
-          <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">4</div>
-          <div>
-            <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">
-              アカウント登録
-              <span class="text-[10px] px-1.5 py-0.5 rounded-[10px] bg-[#FFF3A0] text-[#5a4a10] ml-1.5">任意</span>
-            </p>
-            <p class="text-[12px] text-[#7a7550] leading-[1.5]">保存・履歴確認が可能になります。</p>
           </div>
         </div>
       </div>
