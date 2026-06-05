@@ -53,6 +53,16 @@ Ruby 3.4.3 / Rails 7.2.3.1 / PostgreSQL / Tailwind CSS + daisyUI / Devise / Dock
  2. 質問: 10問以上の理解確認質問
  3. 実践: Claude が実装（ファイル編集・コマンド実行）
 
+## テーブル設計（主要テーブル）
+- users: id, name, email, encrypted_password, guest
+- tdee_profiles: id, user_id, height, weight, age, gender, activity_level, tdee
+- menus: id, user_id, date, total_calories
+- meals: id, menu_id, meal_master_id, meal_timing
+- meal_masters: id, name, calories
+- allergen_masters: id, name, category
+- user_allergens: id, user_id, allergen_master_id
+- meal_ingredients: id, meal_master_id, allergen_master_id
+
 ## PRフロー
 - git add 前に必ず RuboCop 自動修正を実行``docker compose exec web bundle exec rubocop -a``
 - 実装完了後は必ず PR を作成する
