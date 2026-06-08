@@ -19,7 +19,7 @@
       <div class="flex gap-2">
         <%= link_to "ゲストでログイン", "#",
               class: "flex-1 bg-[#F9C639] text-[#3a3820] text-center py-3.5 rounded-lg text-[14px] font-semibold" %>
-        <%= link_to "新規登録", "#",
+        <%= link_to "新規登録", new_user_registration_path,
               class: "flex-1 border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px]" %>
       </div>
     </div>
@@ -89,7 +89,7 @@
   <%# 下部CTA %>
   <div class="bg-[#FFF8C4] border-t border-[#EEE9C0] px-5 py-5">
     <div class="max-w-sm mx-auto">
-      <%= link_to "さっそくはじめる", "#",
+      <%= link_to "さっそくはじめる", new_user_registration_path,
             class: "block w-full bg-[#F9C639] text-[#3a3820] text-center py-3.5 rounded-lg text-[15px] font-semibold" %>
     </div>
   </div>
