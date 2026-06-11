@@ -4,6 +4,7 @@
   <% end %>
   <nav class="flex gap-1.5 items-center">
     <% if user_signed_in? %>
+      <%= link_to "マイページ", mypage_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium" %>
       <%= link_to "使い方", "#", class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium" %>
       <%= link_to "ログアウト", destroy_user_session_path,
           data: { turbo_method: :delete },
