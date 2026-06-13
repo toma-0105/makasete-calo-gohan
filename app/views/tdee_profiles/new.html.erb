@@ -1,0 +1,69 @@
+<div class="min-h-screen flex flex-col items-center justify-center px-4 py-8">
+  <div class="w-full max-w-sm">
+
+    <h1 class="text-2xl font-bold text-center mb-2">カロリー診断</h1>
+    <p class="text-sm text-center text-[#7a7550] mb-8">
+      入力した情報をもとに<br>1日の消費カロリーを計算します
+    </p>
+
+    <%= form_with model: @tdee_profile, url: tdee_profiles_path do |f| %>
+      <%= render "shared/error_messages", resource: @tdee_profile %>
+
+      <div class="mb-4">
+        <%= f.label :height, "身長 (cm)", class: "block text-sm mb-1" %>
+        <%= f.number_field :height,
+            placeholder: "例：165",
+            class: "input w-full bg-yellow-50 border-yellow-200" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :weight, "体重 (kg)", class: "block text-sm mb-1" %>
+        <%= f.number_field :weight,
+            placeholder: "例：100",
+            class: "input w-full bg-yellow-50 border-yellow-200" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :age, "年齢", class: "block text-sm mb-1" %>
+        <%= f.number_field :age,
+            placeholder: "例：20",
+            class: "input w-full bg-yellow-50 border-yellow-200" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :gender, "性別", class: "block text-sm mb-1" %>
+        <div class="flex gap-4 mt-1">
+          <label class="flex items-center gap-2">
+            <%= f.radio_button :gender, :male %>
+            <span class="text-sm">男性</span>
+          </label>
+          <label class="flex items-center gap-2">
+            <%= f.radio_button :gender, :female %>
+            <span class="text-sm">女性</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <%= f.label :activity_level, "活動レベル", class: "block text-sm mb-1" %>
+        <%= f.select :activity_level,
+            [
+              ["例：週1〜2回の運動", ""],
+              ["ほとんど運動しない", "sedentary"],
+              ["週1〜3回運動する", "lightly_active"],
+              ["週3〜5回運動する", "moderately_active"],
+              ["週6〜7回運動する", "very_active"],
+              ["非常に活発に動く", "super_active"]
+            ],
+            {},
+            class: "select w-full bg-yellow-50 border-yellow-200" %>
+      </div>
+
+      <div>
+        <%= f.submit "計算する",
+            class: "btn w-full bg-yellow-400 hover:bg-yellow-500 border-none text-white font-bold" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
