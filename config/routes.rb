@@ -12,5 +12,7 @@ Rails.application.routes.draw do
 
   get "mypage", to: "mypages#show", as: :mypage
 
+  resources :tdee_profiles, only: [ :new, :create ]
+
   root "static_pages#top"
 end
