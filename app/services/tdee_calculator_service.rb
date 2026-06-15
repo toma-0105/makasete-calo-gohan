@@ -27,7 +27,7 @@ class TdeeCalculatorService
 
     def calculate_bmr
         if @profile.male?
-            88.362 + (13.397 * @profile.weight) +
+            88.362 +(13.397 * @profile.weight) +
                     (4.799 * @profile.height) -
                     (5.677 * @profile.age)
         else
