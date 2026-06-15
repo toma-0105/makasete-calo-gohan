@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_12_134216) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_14_151403) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_12_134216) do
     t.decimal "tdee"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "target_calories"
     t.index ["user_id"], name: "index_tdee_profiles_on_user_id"
   end
 
