@@ -52,4 +52,3 @@ RSpec.describe TdeeCalculatorService do
         end
     end
 end
-

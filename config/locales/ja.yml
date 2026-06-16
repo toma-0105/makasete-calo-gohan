@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+      tdee_profile: "プロフィール"
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+        name: "名前"
+      tdee_profile:
+        height: "身長"
+        weight: "体重"
+        age: "年齢"
+        gender: "性別"
+        activity_level: "活動レベル"
+        tdee: "TDEE"
+        target_calories: "1日のカロリー上限"
