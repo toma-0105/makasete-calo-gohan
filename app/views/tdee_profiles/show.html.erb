@@ -1,0 +1,30 @@
+<div class="min-h-screen flex flex-col items-center justify-center px-4 py-8">
+  <div class="w-full max-w-sm">
+
+    <h1 class="text-2xl font-bold text-center mb-2">あなたの1日のカロリー目安</h1>
+    <p class="text-sm text-center text-[#7a7550] mb-8">
+      これをもとに、あなたに合った食事を提案します
+    </p>
+
+    <%# TDEE結果 %>
+    <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-8 text-center mb-8">
+      <p class="text-6xl font-bold text-[#3d6b35] mb-2">
+        <%= number_with_delimiter(@tdee_profile.tdee.to_i) %>
+      </p>
+      <p class="text-sm text-[#7a7550]">kcal / 日</p>
+    </div>
+
+    <%# ボタン %>
+    <div class="flex flex-col gap-3">
+      <%# メインボタン：アレルギー設定へ（仮） %>
+      <%= link_to "次へ進む",
+          "#",
+          class: "btn w-full bg-yellow-400 hover:bg-yellow-500 border-none text-white font-bold text-center" %>
+
+      <%# マイページへ %>
+      <%= link_to "マイページへ",
+          mypage_path,
+          class: "btn w-full bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 font-bold text-center" %>
+    </div>
+  </div>
+</div>

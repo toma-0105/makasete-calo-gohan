@@ -10,10 +10,14 @@ class TdeeProfilesController < ApplicationController
     @tdee_profile.user = current_user
     if @tdee_profile.save
       TdeeCalculatorService.new(@tdee_profile).calculate
-      redirect_to root_path, notice: "TDEE診断が完了しました"
+      redirect_to tdee_profile_path(@tdee_profile), notice: "TDEE診断が完了しました"
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @tdee_profile = TdeeProfile.find(params[:id])
   end
 
   private
