@@ -68,5 +68,12 @@ RSpec.describe TdeeProfile, type: :model do
         expect(tdee_profile).not_to be_valid
       end
     end
+
+    context "年齢が小数の場合" do
+      it "無効になる" do
+        tdee_profile.age = 20.5
+        expect(tdee_profile).not_to be_valid
+      end
+    end 
   end
 end
