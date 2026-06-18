@@ -1,9 +1,32 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# 特定原材料（義務）
+AllergenMaster.create!(name: "えび", category: :mandatory)
+AllergenMaster.create!(name: "カシューナッツ", category: :mandatory)
+AllergenMaster.create!(name: "かに", category: :mandatory)
+AllergenMaster.create!(name: "くるみ", category: :mandatory)
+AllergenMaster.create!(name: "小麦", category: :mandatory)
+AllergenMaster.create!(name: "そば", category: :mandatory)
+AllergenMaster.create!(name: "卵", category: :mandatory)
+AllergenMaster.create!(name: "乳", category: :mandatory)
+AllergenMaster.create!(name: "落花生", category: :mandatory)
+
+# 特定原材料に準ずるもの（推奨）
+AllergenMaster.create!(name: "アーモンド", category: :recommended)
+AllergenMaster.create!(name: "あわび", category: :recommended)
+AllergenMaster.create!(name: "いか", category: :recommended)
+AllergenMaster.create!(name: "いくら", category: :recommended)
+AllergenMaster.create!(name: "オレンジ", category: :recommended)
+AllergenMaster.create!(name: "キウイフルーツ", category: :recommended)
+AllergenMaster.create!(name: "牛肉", category: :recommended)
+AllergenMaster.create!(name: "ごま", category: :recommended)
+AllergenMaster.create!(name: "さけ", category: :recommended)
+AllergenMaster.create!(name: "さば", category: :recommended)
+AllergenMaster.create!(name: "大豆", category: :recommended)
+AllergenMaster.create!(name: "鶏肉", category: :recommended)
+AllergenMaster.create!(name: "バナナ", category: :recommended)
+AllergenMaster.create!(name: "ピスタチオ", category: :recommended)
+AllergenMaster.create!(name: "豚肉", category: :recommended)
+AllergenMaster.create!(name: "マカダミアナッツ", category: :recommended)
+AllergenMaster.create!(name: "もも", category: :recommended)
+AllergenMaster.create!(name: "やまいも", category: :recommended)
+AllergenMaster.create!(name: "りんご", category: :recommended)
+AllergenMaster.create!(name: "ゼラチン", category: :recommended)

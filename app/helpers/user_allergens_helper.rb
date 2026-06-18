@@ -1,0 +1,2 @@
+module UserAllergensHelper
+end
