@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "user_allergens/new"
+  get "user_allergens/create"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
   get "mypage", to: "mypages#show", as: :mypage
 
   resources :tdee_profiles, only: [ :new, :create, :show ]
+  resources :user_allergens, only: [ :new, :create ]
 
   root "static_pages#top"
 end

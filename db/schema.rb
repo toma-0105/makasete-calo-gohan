@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_14_151403) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_18_060058) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "allergen_masters", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "category", default: 0, null: false
+  end
 
   create_table "tdee_profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -26,6 +33,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_14_151403) do
     t.datetime "updated_at", null: false
     t.decimal "target_calories"
     t.index ["user_id"], name: "index_tdee_profiles_on_user_id"
+  end
+
+  create_table "user_allergens", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "allergen_master_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["allergen_master_id"], name: "index_user_allergens_on_allergen_master_id"
+    t.index ["user_id"], name: "index_user_allergens_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -43,4 +59,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_14_151403) do
   end
 
   add_foreign_key "tdee_profiles", "users"
+  add_foreign_key "user_allergens", "allergen_masters"
+  add_foreign_key "user_allergens", "users"
 end

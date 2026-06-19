@@ -74,6 +74,6 @@ RSpec.describe TdeeProfile, type: :model do
         tdee_profile.age = 20.5
         expect(tdee_profile).not_to be_valid
       end
-    end 
+    end
   end
 end
