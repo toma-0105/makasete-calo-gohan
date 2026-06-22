@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get "user_allergens/new"
-  get "user_allergens/create"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
