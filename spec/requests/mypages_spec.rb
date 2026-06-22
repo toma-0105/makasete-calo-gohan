@@ -21,6 +21,10 @@ RSpec.describe "Mypages", type: :request do
       it "ログインユーザーのメールアドレスが表示される" do
         expect(response.body).to include("test@example.com")
       end
+
+      it "アレルギー設定変更へのリンクが表示される" do
+        expect(response.body).to include(new_user_allergen_path)
+      end
     end
 
     context "ログインしていない場合" do

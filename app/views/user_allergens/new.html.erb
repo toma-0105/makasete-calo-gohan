@@ -19,7 +19,7 @@
             <% @allergen_masters.where(category: :mandatory).each do |allergen| %>
               <div class="form-control">
                 <label class="label cursor-pointer justify-start gap-3">
-                  <%= check_box_tag "allergen_ids[]", allergen.id, false, class: "checkbox" %>
+                  <%= check_box_tag "allergen_ids[]", allergen.id, @selected_allergen_ids.include?(allergen.id), class: "checkbox" %>
                   <span class="label-text"><%= allergen.name %></span>
                 </label>
               </div>
@@ -33,7 +33,7 @@
             <% @allergen_masters.where(category: :recommended).each do |allergen| %>
               <div class="form-control">
                 <label class="label cursor-pointer justify-start gap-3">
-                  <%= check_box_tag "allergen_ids[]", allergen.id, false, class: "checkbox" %>
+                  <%= check_box_tag "allergen_ids[]", allergen.id, @selected_allergen_ids.include?(allergen.id), class: "checkbox" %>
                   <span class="label-text"><%= allergen.name %></span>
                 </label>
               </div>

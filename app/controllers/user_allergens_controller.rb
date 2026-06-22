@@ -4,6 +4,7 @@ class UserAllergensController < ApplicationController
   def new
     @allergen_masters = AllergenMaster.all
     @user_allergen = current_user.user_allergens.build
+    @selected_allergen_ids = current_user.user_allergens.pluck(:allergen_master_id)
   end
 
   def create
