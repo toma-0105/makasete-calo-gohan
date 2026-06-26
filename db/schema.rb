@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_23_053929) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_25_074057) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,16 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_23_053929) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category", default: 0, null: false
+  end
+
+  create_table "meal_ingredients", force: :cascade do |t|
+    t.bigint "meal_master_id", null: false
+    t.bigint "allergen_master_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["allergen_master_id"], name: "index_meal_ingredients_on_allergen_master_id"
+    t.index ["meal_master_id", "allergen_master_id"], name: "index_meal_ingredients_on_meal_master_and_allergen", unique: true
+    t.index ["meal_master_id"], name: "index_meal_ingredients_on_meal_master_id"
   end
 
   create_table "meal_masters", force: :cascade do |t|
@@ -67,6 +77,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_23_053929) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "meal_ingredients", "allergen_masters"
+  add_foreign_key "meal_ingredients", "meal_masters"
   add_foreign_key "tdee_profiles", "users"
   add_foreign_key "user_allergens", "allergen_masters"
   add_foreign_key "user_allergens", "users"
