@@ -11,9 +11,11 @@ class MenuGeneratorService
   # 昼食（お弁当想定）から除外するスープ系一品料理のキーワード
   LUNCH_EXCLUDED_ONE_DISH_KEYWORDS = %w[ラーメン スープ 汁 うどん].freeze
 
-  def initialize
+  def initialize(excluded_meal_master_ids: [])
     # 昼・夕は共通プールのため、選出済みIDを記録して重複を避ける
     @used_meal_master_ids = []
+    # アレルギー食材を含む料理など、選出対象から除外するID（#26）
+    @excluded_meal_master_ids = excluded_meal_master_ids
   end
 
   def generate
@@ -27,11 +29,11 @@ class MenuGeneratorService
   private
 
   def generate_breakfast
-    select_basic_combo(MealMaster.breakfast, include_soup: true)
+    select_basic_combo(MealMaster.breakfast.where.not(id: @excluded_meal_master_ids), include_soup: true)
   end
 
   def generate_lunch_or_dinner(period:)
-    pool = MealMaster.lunch_or_dinner.where.not(id: @used_meal_master_ids)
+    pool = MealMaster.lunch_or_dinner.where.not(id: @used_meal_master_ids + @excluded_meal_master_ids)
     one_dish_candidates = one_dish_candidates_for(pool, period: period)
 
     meals =
