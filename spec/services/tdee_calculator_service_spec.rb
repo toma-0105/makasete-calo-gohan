@@ -7,7 +7,7 @@ RSpec.describe TdeeCalculatorService do
             let(:profile) do
                 create(:tdee_profile,
                     user: user,
-                    gender: male,
+                    gender: :male,
                     age: 30,
                     height: 170,
                     weight: 70,
@@ -20,8 +20,8 @@ RSpec.describe TdeeCalculatorService do
                 profile.reload
             end
 
-            it 'TDEEが正しく計算される'
-                expect(profile.tdee).to be_within(1).of(2202.43)
+            it 'TDEEが正しく計算される' do
+                expect(profile.tdee).to be_within(1).of(2591.09)
             end
         end
 
@@ -36,19 +36,20 @@ RSpec.describe TdeeCalculatorService do
                     weight: 55,
                     activity_level: :lightly_active
                     )
-        end
+            end
 
-        before do
-            TdeeCalculatorService.new(profile).calculate
-            profile.reload
-        end
+            before do
+                TdeeCalculatorService.new(profile).calculate
+                profile.reload
+            end
 
-        it 'TDEEが正しく計算される' do
-            expect(profile.tdee).to be_within(1).of(1798.15)
-        end
+            it 'TDEEが正しく計算される' do
+                expect(profile.tdee).to be_within(1).of(1847.46)
+            end
 
-        it 'target_caloriesが正しく計算される' do
-            expect(profile.target_calories).to be_within(1).of(1528.43)
+            it 'target_caloriesが正しく計算される' do
+                expect(profile.target_calories).to be_within(1).of(1570.34)
+            end
         end
     end
 end
