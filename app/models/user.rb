@@ -5,5 +5,5 @@ class User < ApplicationRecord
          validates :name, presence: true, unless: :guest?
 
          has_many :user_allergens
-         has_many :allergens, through: :user_allergens
+         has_many :allergens, through: :user_allergens, source: :allergen_master
 end

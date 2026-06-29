@@ -157,5 +157,28 @@ RSpec.describe MenuGeneratorService do
         expect(result[:lunch].first.name).not_to include('うどん')
       end
     end
+
+    context '除外IDが指定されている場合（#26 アレルギー除外）' do
+      subject(:service) { described_class.new(excluded_meal_master_ids: [ excluded_breakfast_staple.id, excluded_lunch_or_dinner_staple.id ]) }
+
+      let!(:excluded_breakfast_staple) { create(:meal_master, meal_timing: :breakfast, category: :staple) }
+      let!(:excluded_lunch_or_dinner_staple) { create(:meal_master, meal_timing: :lunch_or_dinner, category: :staple) }
+
+      before do
+        allow(service).to receive(:select_one_dish?).and_return(false)
+        allow(service).to receive(:include_soup?).and_return(false)
+      end
+
+      it '除外IDの料理が朝食に選ばれない' do
+        result = service.generate
+        expect(result[:breakfast].map(&:id)).not_to include(excluded_breakfast_staple.id)
+      end
+
+      it '除外IDの料理が昼食・夕食に選ばれない' do
+        result = service.generate
+        selected_ids = (result[:lunch] + result[:dinner]).map(&:id)
+        expect(selected_ids).not_to include(excluded_lunch_or_dinner_staple.id)
+      end
+    end
   end
 end

@@ -7,6 +7,7 @@ class MenuCalorieRangeSelectorService
   def initialize(tdee_profile)
     @target_calories = tdee_profile.target_calories
     @min_calories = @target_calories * MIN_CALORIE_RATIO
+    @excluded_meal_master_ids = AllergenExclusionService.new(tdee_profile.user).excluded_meal_master_ids
   end
 
   def generate
@@ -14,7 +15,7 @@ class MenuCalorieRangeSelectorService
     closest_diff = Float::INFINITY
 
     MAX_ATTEMPTS.times do
-      menu = MenuGeneratorService.new.generate
+      menu = MenuGeneratorService.new(excluded_meal_master_ids: @excluded_meal_master_ids).generate
       total_calories = total_calories_for(menu)
 
       return menu if within_range?(total_calories)
