@@ -13,6 +13,22 @@
         <%= number_with_delimiter(@menu.total_calories.to_i) %>
         <span class="text-[14px] font-normal text-[#7a7550]">kcal</span>
       </p>
+
+      <%# 目標カロリーとの比較 %>
+      <% if @tdee_profile %>
+        <% diff = @menu.total_calories.to_i - @tdee_profile.target_calories.to_i %>
+        <div class="mt-2 pt-2 border-t border-[#EAE070] flex justify-center gap-4">
+          <p class="text-[11px] text-[#9a9570]">
+            目標: <span class="font-medium text-[#5a5530]"><%= number_with_delimiter(@tdee_profile.target_calories.to_i) %> kcal</span>
+          </p>
+          <p class="text-[11px]">
+            差分:
+            <span class="font-medium <%= diff > 0 ? 'text-red-500' : 'text-[#4a8c5c]' %>">
+              <%= diff > 0 ? '+' : '' %><%= number_with_delimiter(diff) %> kcal
+            </span>
+          </p>
+        </div>
+      <% end %>
     </div>
 
     <%# 朝食・昼食・夕食 %>
@@ -32,8 +48,8 @@
       </div>
     <% end %>
 
-    <%# 再生成ボタン %>
-    <div class="mt-6" data-controller="loading">
+    <%# ボタンエリア %>
+    <div class="mt-6 flex flex-col gap-3" data-controller="loading">
       <%# ローディングオーバーレイ %>
       <div data-loading-target="overlay"
            class="hidden fixed inset-0 bg-[#FFFEF5]/90 flex flex-col items-center justify-center z-50">
@@ -42,6 +58,13 @@
         <p class="text-[12px] text-[#9a9570] mt-1">少しお待ちください</p>
       </div>
 
+      <%# 会員のみ表示：マイページで保存確認 %>
+      <% unless current_user.guest? %>
+        <%= link_to "この献立を保存する", mypage_path,
+              class: "block w-full bg-[#F9C639] text-[#2a2810] text-center py-3.5 rounded-lg text-[14px] font-medium" %>
+      <% end %>
+
+      <%# 再生成ボタン %>
       <%= form_with url: menus_path, data: { action: "submit->loading#showLoading" } do |f| %>
         <%= f.submit "献立を再生成する",
               class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px] cursor-pointer hover:bg-[#FFF8C4] transition-colors" %>
