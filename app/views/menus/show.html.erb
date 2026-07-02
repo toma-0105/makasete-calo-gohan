@@ -1,0 +1,52 @@
+<% content_for :title, "今日の献立 - まかせてカロごはん" %>
+
+<div class="min-h-screen flex flex-col">
+  <main class="flex-1 px-5 py-6 max-w-sm mx-auto w-full">
+
+    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">今日の献立</h1>
+    <p class="text-[13px] text-[#9a9570] mb-5"><%= @menu.date.strftime("%Y年%m月%d日") %></p>
+
+    <%# 合計カロリーカード %>
+    <div class="bg-[#FFF8C4] border border-[#EAE070] rounded-xl p-4 mb-5 text-center">
+      <p class="text-[11px] text-[#9a9570] font-medium mb-1">合計カロリー</p>
+      <p class="text-[28px] font-bold text-[#2a2810]">
+        <%= number_with_delimiter(@menu.total_calories.to_i) %>
+        <span class="text-[14px] font-normal text-[#7a7550]">kcal</span>
+      </p>
+    </div>
+
+    <%# 朝食・昼食・夕食 %>
+    <% [["breakfast", "朝食"], ["lunch", "昼食"], ["dinner", "夕食"]].each do |timing, label| %>
+      <div class="mb-4">
+        <h2 class="text-[14px] font-bold text-[#2a2810] mb-2"><%= label %></h2>
+        <div class="bg-white border border-[#EAE070] rounded-xl divide-y divide-[#F0ECC4]">
+          <% (@meals_by_timing[timing] || []).each do |meal| %>
+            <div class="flex justify-between items-center px-4 py-3">
+              <p class="text-[14px] text-[#3a3820]"><%= meal.meal_master.name %></p>
+              <p class="text-[12px] text-[#9a9570] shrink-0 ml-2">
+                <%= number_with_delimiter(meal.meal_master.calories) %> kcal
+              </p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <%# 再生成ボタン %>
+    <div class="mt-6" data-controller="loading">
+      <%# ローディングオーバーレイ %>
+      <div data-loading-target="overlay"
+           class="hidden fixed inset-0 bg-[#FFFEF5]/90 flex flex-col items-center justify-center z-50">
+        <div class="w-12 h-12 border-4 border-[#EAE070] border-t-[#F9C639] rounded-full animate-spin mb-4"></div>
+        <p class="text-[15px] font-semibold text-[#3a3820]">献立を生成しています...</p>
+        <p class="text-[12px] text-[#9a9570] mt-1">少しお待ちください</p>
+      </div>
+
+      <%= form_with url: menus_path, data: { action: "submit->loading#showLoading" } do |f| %>
+        <%= f.submit "献立を再生成する",
+              class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px] cursor-pointer hover:bg-[#FFF8C4] transition-colors" %>
+      <% end %>
+    </div>
+
+  </main>
+</div>

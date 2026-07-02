@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :tdee_profiles, only: [ :new, :create, :show ]
   resources :user_allergens, only: [ :new, :create ]
+  resources :menus, only: [ :create, :show ]
 
   root "static_pages#top"
 end
