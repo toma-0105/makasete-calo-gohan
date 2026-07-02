@@ -3,5 +3,6 @@ class MypagesController < ApplicationController
 
   def show
     @user = current_user
+    @tdee_profile = current_user.tdee_profiles.last
   end
 end

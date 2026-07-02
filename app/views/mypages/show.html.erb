@@ -32,11 +32,37 @@
     <div class="card bg-[#FFF8C4] border border-[#EAE070] rounded-xl">
       <div class="card-body p-5 gap-2">
         <p class="text-[14px] font-bold text-[#2a2810]">TDEE診断履歴</p>
-        <p class="text-[13px] text-[#7a7550]">まだTDEE診断を行っていません</p>
+        <% if @tdee_profile %>
+          <p class="text-[13px] text-[#7a7550]">
+            1日の消費カロリー目安：<span class="font-bold text-[#3a3820]"><%= number_with_delimiter(@tdee_profile.tdee.to_i) %> kcal</span>
+          </p>
+        <% else %>
+          <p class="text-[13px] text-[#7a7550]">まだTDEE診断を行っていません</p>
+        <% end %>
       </div>
     </div>
 
     <div class="h-5"></div>
+
+    <%# 献立生成ボタン（TDEE診断済みのユーザーのみ表示） %>
+    <% if @tdee_profile %>
+      <div data-controller="loading">
+        <%# ローディングオーバーレイ %>
+        <div data-loading-target="overlay"
+             class="hidden fixed inset-0 bg-[#FFFEF5]/90 flex flex-col items-center justify-center z-50">
+          <div class="w-12 h-12 border-4 border-[#EAE070] border-t-[#F9C639] rounded-full animate-spin mb-4"></div>
+          <p class="text-[15px] font-semibold text-[#3a3820]">献立を生成しています...</p>
+          <p class="text-[12px] text-[#9a9570] mt-1">少しお待ちください</p>
+        </div>
+
+        <%= form_with url: menus_path, data: { action: "submit->loading#showLoading" } do |f| %>
+          <%= f.submit "今日の献立を生成する",
+                class: "block w-full bg-[#F9C639] text-[#3a3820] text-center py-3.5 rounded-lg text-[14px] font-semibold cursor-pointer" %>
+        <% end %>
+      </div>
+
+      <div class="h-3"></div>
+    <% end %>
 
     <%# 各種設定・履歴へのリンク %>
     <div class="flex flex-col gap-3">
