@@ -58,10 +58,18 @@
         <p class="text-[12px] text-[#9a9570] mt-1">少しお待ちください</p>
       </div>
 
-      <%# 会員のみ表示：マイページで保存確認 %>
+      <%# 保存ボタン（会員のみ表示。ゲストには表示しない） %>
       <% unless current_user.guest? %>
-        <%= link_to "この献立を保存する", mypage_path,
-              class: "block w-full bg-[#F9C639] text-[#2a2810] text-center py-3.5 rounded-lg text-[14px] font-medium" %>
+        <% if @menu.saved? %>
+          <p class="block w-full bg-[#F0ECC4] text-[#7a7550] text-center py-3.5 rounded-lg text-[14px] font-medium">
+            保存済みの献立です
+          </p>
+        <% else %>
+          <%= form_with url: save_menu_path(@menu), method: :patch do |f| %>
+            <%= f.submit "この献立を保存する",
+                  class: "block w-full bg-[#F9C639] text-[#2a2810] text-center py-3.5 rounded-lg text-[14px] font-medium cursor-pointer" %>
+          <% end %>
+        <% end %>
       <% end %>
 
       <%# 再生成ボタン（既存の献立を削除して新しく作り直す） %>

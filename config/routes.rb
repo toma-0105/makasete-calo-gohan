@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resources :menus, only: [ :create, :show ] do
     # 献立の再生成（既存の献立を削除して新しい献立を作り直す）
     post :regenerate, on: :member
+    # 献立の保存（会員のみ。保存済みフラグを立てて履歴に残す）
+    patch :save, on: :member
   end
 
   root "static_pages#top"
