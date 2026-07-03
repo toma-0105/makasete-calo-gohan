@@ -64,8 +64,8 @@
               class: "block w-full bg-[#F9C639] text-[#2a2810] text-center py-3.5 rounded-lg text-[14px] font-medium" %>
       <% end %>
 
-      <%# 再生成ボタン %>
-      <%= form_with url: menus_path, data: { action: "submit->loading#showLoading" } do |f| %>
+      <%# 再生成ボタン（既存の献立を削除して新しく作り直す） %>
+      <%= form_with url: regenerate_menu_path(@menu), data: { action: "submit->loading#showLoading" } do |f| %>
         <%= f.submit "献立を再生成する",
               class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px] cursor-pointer hover:bg-[#FFF8C4] transition-colors" %>
       <% end %>
