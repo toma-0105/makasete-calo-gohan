@@ -1,6 +1,57 @@
 require 'rails_helper'
 
 RSpec.describe "Menus", type: :request do
+  describe "GET /menus（献立履歴一覧）" do
+    context "ログインしている場合" do
+      let(:user) { create(:user) }
+
+      before { sign_in user }
+
+      it "200 OKを返す" do
+        get menus_path
+        expect(response).to have_http_status(:ok)
+      end
+
+      it "保存済みの献立の日付と合計カロリーが表示される" do
+        create(:menu, :saved, user: user, date: Date.new(2026, 7, 1), total_calories: 1800)
+        get menus_path
+        expect(response.body).to include("2026年07月01日")
+        expect(response.body).to include("1,800")
+      end
+
+      it "未保存の献立は表示されない" do
+        create(:menu, user: user, date: Date.new(2026, 6, 15))
+        get menus_path
+        expect(response.body).not_to include("2026年06月15日")
+      end
+
+      it "他人の保存済み献立は表示されない" do
+        create(:menu, :saved, date: Date.new(2026, 6, 20))
+        get menus_path
+        expect(response.body).not_to include("2026年06月20日")
+      end
+
+      it "新しい日付の献立が先に表示される" do
+        create(:menu, :saved, user: user, date: Date.new(2026, 7, 1))
+        create(:menu, :saved, user: user, date: Date.new(2026, 7, 2))
+        get menus_path
+        expect(response.body.index("2026年07月02日")).to be < response.body.index("2026年07月01日")
+      end
+
+      it "保存済みの献立がない場合は案内メッセージが表示される" do
+        get menus_path
+        expect(response.body).to include("保存した献立はまだありません")
+      end
+    end
+
+    context "ログインしていない場合" do
+      it "ログインページにリダイレクトされる" do
+        get menus_path
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
   describe "PATCH /menus/:id/save" do
     context "会員としてログインしている場合" do
       let(:user)  { create(:user, guest: false) }

@@ -1,0 +1,41 @@
+<% content_for :title, "献立履歴 - まかせてカロごはん" %>
+
+<div class="min-h-screen flex flex-col">
+  <main class="flex-1 px-5 py-6 max-w-sm mx-auto w-full">
+
+    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">献立履歴</h1>
+    <p class="text-[13px] text-[#9a9570] mb-5">保存した献立の一覧です</p>
+
+    <% if @menus.any? %>
+      <%# 保存済み献立の一覧（新しい順） %>
+      <div class="flex flex-col gap-3">
+        <% @menus.each do |menu| %>
+          <%= link_to menu_path(menu),
+                class: "block bg-white border border-[#EAE070] rounded-xl px-4 py-3.5 hover:bg-[#FFF8C4] transition-colors" do %>
+            <div class="flex justify-between items-center">
+              <p class="text-[14px] font-medium text-[#3a3820]">
+                <%= menu.date.strftime("%Y年%m月%d日") %>
+              </p>
+              <p class="text-[13px] text-[#9a9570] shrink-0 ml-2">
+                <%= number_with_delimiter(menu.total_calories.to_i) %> kcal
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <%# 保存済みの献立がまだない場合 %>
+      <div class="bg-[#FFF8C4] border border-[#EAE070] rounded-xl p-6 text-center">
+        <p class="text-[14px] text-[#5a5530] mb-1">保存した献立はまだありません</p>
+        <p class="text-[12px] text-[#9a9570]">献立を生成して「この献立を保存する」を押すと、ここに表示されます</p>
+      </div>
+    <% end %>
+
+    <%# マイページへ戻る %>
+    <div class="mt-6">
+      <%= link_to "マイページに戻る", mypage_path,
+            class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px]" %>
+    </div>
+
+  </main>
+</div>
