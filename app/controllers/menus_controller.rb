@@ -1,6 +1,12 @@
 class MenusController < ApplicationController
   before_action :authenticate_user!
 
+  # 保存済みの献立履歴一覧（新しい順）
+  def index
+    # 同じ日付の献立が複数ある場合に備えて created_at でも並べる
+    @menus = current_user.menus.saved.order(date: :desc, created_at: :desc)
+  end
+
   def create
     tdee_profile = current_user.tdee_profiles.last
     unless tdee_profile
