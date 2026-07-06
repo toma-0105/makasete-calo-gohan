@@ -27,6 +27,42 @@ RSpec.describe "Mypages", type: :request do
       end
     end
 
+    context "TDEE未診断のユーザーの場合" do
+      let(:user) { create(:user) }
+
+      before do
+        sign_in user
+        get mypage_path
+      end
+
+      it "「TDEE診断を始める」ボタンが表示される" do
+        expect(response.body).to include("TDEE診断を始める")
+        expect(response.body).to include(new_tdee_profile_path)
+      end
+
+      it "再診断リンクは表示されない" do
+        expect(response.body).not_to include("TDEEを再診断する")
+      end
+    end
+
+    context "TDEE診断済みのユーザーの場合" do
+      let(:user) { create(:user) }
+
+      before do
+        create(:tdee_profile, user: user, tdee: 2200)
+        sign_in user
+        get mypage_path
+      end
+
+      it "「TDEEを再診断する」リンクが表示される" do
+        expect(response.body).to include("TDEEを再診断する")
+      end
+
+      it "「TDEE診断を始める」ボタンは表示されない" do
+        expect(response.body).not_to include("TDEE診断を始める")
+      end
+    end
+
     context "ログインしていない場合" do
       before { get mypage_path }
 

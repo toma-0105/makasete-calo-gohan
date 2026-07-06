@@ -36,8 +36,14 @@
           <p class="text-[13px] text-[#7a7550]">
             1日の消費カロリー目安：<span class="font-bold text-[#3a3820]"><%= number_with_delimiter(@tdee_profile.tdee.to_i) %> kcal</span>
           </p>
+          <%# 体重・活動量の変化に合わせて診断し直せる導線 %>
+          <%= link_to "TDEEを再診断する", new_tdee_profile_path,
+                class: "text-[12px] text-[#5a5530] underline" %>
         <% else %>
           <p class="text-[13px] text-[#7a7550]">まだTDEE診断を行っていません</p>
+          <%# 未診断ユーザーが行き止まりにならないよう診断への導線を出す %>
+          <%= link_to "TDEE診断を始める", new_tdee_profile_path,
+                class: "block w-full bg-[#F9C639] text-[#2a2810] text-center py-3 rounded-lg text-[13px] font-medium mt-1" %>
         <% end %>
       </div>
     </div>
