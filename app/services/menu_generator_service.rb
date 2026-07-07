@@ -56,10 +56,12 @@ class MenuGeneratorService
   end
 
   def generate_breakfast
+    # 朝食は主食がジャンルを決定づける（パン＝洋・ご飯＝和）ため、主菜と同ジャンルの主食を優先する
     select_basic_combo(
       MealMaster.breakfast.where.not(id: @excluded_meal_master_ids),
       include_soup: true,
-      allocated_calories: allocated_calories_for(:breakfast)
+      allocated_calories: allocated_calories_for(:breakfast),
+      prefer_exact_staple_genre: true
     )
   end
 
@@ -92,14 +94,16 @@ class MenuGeneratorService
     end
   end
 
-  def select_basic_combo(pool, include_soup:, allocated_calories: nil)
+  def select_basic_combo(pool, include_soup:, allocated_calories: nil, prefer_exact_staple_genre: false)
     # 主菜を最初に選び、その食事のジャンルを確定させる（和洋混在を防ぐ #105）
     main = pick_random(pool.main_dish)
     # 副菜・汁物は倍率調整の対象外（先に確定させる）
     extras = [ SelectedMeal.new(pick_random(genre_matched(pool.side_dish, main)), DEFAULT_SCALE) ]
     extras << SelectedMeal.new(pick_random(genre_matched(pool.soup, main)), DEFAULT_SCALE) if include_soup && include_soup?
 
-    staple_meal, main_meal = fit_staple_and_main(genre_matched(pool.staple, main).to_a, main, extras, allocated_calories)
+    staple_pool = genre_matched(pool.staple, main)
+    staple_pool = prefer_exact_genre(staple_pool, main) if prefer_exact_staple_genre
+    staple_meal, main_meal = fit_staple_and_main(staple_pool.to_a, main, extras, allocated_calories)
     [ staple_meal, main_meal, *extras ]
   end
 
@@ -158,6 +162,15 @@ class MenuGeneratorService
 
     matched = scope.where(genre: [ lead_meal.genre, :neutral ])
     matched.exists? ? matched : scope
+  end
+
+  # 主役と完全に同じジャンルの候補があればそちらを優先する
+  # （例: 洋の主菜ならご飯（汎用）よりパン（洋）を選ぶ。同ジャンルが無ければ元の候補のまま）
+  def prefer_exact_genre(scope, lead_meal)
+    return scope if lead_meal.nil? || lead_meal.neutral?
+
+    exact = scope.where(genre: lead_meal.genre)
+    exact.exists? ? exact : scope
   end
 
   def select_one_dish?

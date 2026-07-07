@@ -115,11 +115,19 @@ RSpec.describe MenuGeneratorService do
         # 分量調整の選択肢となるカロリー違いの主食・主菜を用意する
         [ 100, 150, 200, 250, 300, 350 ].each do |cal|
           create(:meal_master, meal_timing: :breakfast, category: :staple, calories: cal)
-          create(:meal_master, meal_timing: :breakfast, category: :main_dish, calories: cal)
           create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish, calories: cal)
         end
         [ 100, 150, 200, 250, 300, 350, 400, 450 ].each do |cal|
           create(:meal_master, meal_timing: :lunch_or_dinner, category: :staple, calories: cal)
+        end
+        # 朝食の主菜・副菜は実シードと同様に小さめにする
+        # （主菜は選出後に倍率で増やすことしかできず、大きすぎると配分を超過するため）
+        [ 80, 120, 160, 200 ].each do |cal|
+          create(:meal_master, meal_timing: :breakfast, category: :main_dish, calories: cal)
+        end
+        [ 30, 60, 90 ].each do |cal|
+          create(:meal_master, meal_timing: :breakfast, category: :side_dish, calories: cal)
+          create(:meal_master, meal_timing: :lunch_or_dinner, category: :side_dish, calories: cal)
         end
       end
 
@@ -228,6 +236,21 @@ RSpec.describe MenuGeneratorService do
           other_genres = meals.map { |meal| meal.meal_master.genre }
           expect(other_genres).to all(be_in([ lead.meal_master.genre, 'neutral' ]))
         end
+      end
+    end
+
+    it '朝食では主菜と同ジャンルの主食があれば汎用より優先される' do
+      10.times do
+        service = described_class.new
+        allow(service).to receive(:select_one_dish?).and_return(false)
+
+        breakfast = service.generate[:breakfast]
+        main = breakfast.find { |meal| meal.category == 'main_dish' }
+        next if main.meal_master.neutral?
+
+        staple = breakfast.find { |meal| meal.category == 'staple' }
+        # 各ジャンルの朝食主食をbeforeで用意しているため、必ず同ジャンルが選ばれる
+        expect(staple.meal_master.genre).to eq(main.meal_master.genre)
       end
     end
 
