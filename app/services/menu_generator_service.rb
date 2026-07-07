@@ -22,8 +22,13 @@ class MenuGeneratorService
   LUNCH_EXCLUDED_ONE_DISH_KEYWORDS = %w[ラーメン スープ 汁 うどん].freeze
   # 目標カロリーの朝・昼・夕への配分比率
   MEAL_CALORIE_RATIOS = { breakfast: 0.25, lunch: 0.35, dinner: 0.40 }.freeze
-  # 主食・主菜・一品料理に適用できる分量倍率の候補
-  PORTION_SCALES = [ 1.0, 1.25, 1.5, 2.0 ].freeze
+  # 分量の変え方（scaling_type）ごとに適用できる倍率の候補
+  # gram_scalable: グラム換算で細かく調整できる / unit_scalable: 2個分など現実に作れる量のみ / fixed: 調整不可
+  PORTION_SCALES_BY_TYPE = {
+    "fixed"         => [ 1.0 ].freeze,
+    "gram_scalable" => [ 1.0, 1.25, 1.5, 2.0 ].freeze,
+    "unit_scalable" => [ 1.0, 2.0 ].freeze
+  }.freeze
   # 倍率を適用しない場合の値（副菜・汁物は常に等倍）
   DEFAULT_SCALE = 1.0
 
@@ -118,8 +123,8 @@ class MenuGeneratorService
 
     extras_calories = extras.sum(&:calories)
     candidates = staples.flat_map do |staple|
-      PORTION_SCALES.flat_map do |staple_scale|
-        PORTION_SCALES.map do |main_scale|
+      portion_scales_for(staple).flat_map do |staple_scale|
+        portion_scales_for(main).map do |main_scale|
           [ SelectedMeal.new(staple, staple_scale), SelectedMeal.new(main, main_scale) ]
         end
       end
@@ -137,7 +142,12 @@ class MenuGeneratorService
     return DEFAULT_SCALE unless allocated_calories
 
     remaining = allocated_calories - extras.sum(&:calories)
-    PORTION_SCALES.min_by { |scale| ((one_dish.calories * scale) - remaining).abs }
+    portion_scales_for(one_dish).min_by { |scale| ((one_dish.calories * scale) - remaining).abs }
+  end
+
+  # その料理に適用できる倍率の候補（分量の変え方の分類による）
+  def portion_scales_for(meal_master)
+    PORTION_SCALES_BY_TYPE.fetch(meal_master.scaling_type)
   end
 
   def select_one_dish?

@@ -39,10 +39,11 @@
           <% (@meals_by_timing[timing] || []).each do |meal| %>
             <div class="flex justify-between items-center px-4 py-3">
               <p class="text-[14px] text-[#3a3820]">
-                <%= meal.meal_master.name %>
-                <%# 分量倍率が等倍以外のときだけ表示する %>
-                <% if meal.portion_scale > 1 %>
-                  <span class="text-[11px] text-[#b8860b] font-medium">（<%= meal.portion_scale.to_f %>倍量）</span>
+                <%# グラム調整の料理は換算後のグラム数で表示する（例: ご飯(225g)） %>
+                <%= meal_display_name(meal) %>
+                <%# 個数調整の料理は「×2」ラベルを付ける（例: 納豆1パック ×2） %>
+                <% if (label = meal_scale_label(meal)) %>
+                  <span class="text-[11px] text-[#b8860b] font-medium"><%= label %></span>
                 <% end %>
               </p>
               <p class="text-[12px] text-[#9a9570] shrink-0 ml-2">

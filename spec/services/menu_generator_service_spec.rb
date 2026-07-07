@@ -240,4 +240,25 @@ RSpec.describe MenuGeneratorService do
       end
     end
   end
+
+  describe '分量調整方式（scaling_type）ごとの倍率制限' do
+    before do
+      # 個数調整のみ・調整不可の料理もプールに混ぜて、制限が守られることを確認する
+      create(:meal_master, meal_timing: :breakfast, category: :staple, calories: 150, scaling_type: :unit_scalable)
+      create(:meal_master, meal_timing: :breakfast, category: :main_dish, calories: 100, scaling_type: :unit_scalable)
+      create_list(:meal_master, 2, meal_timing: :lunch_or_dinner, category: :staple, calories: 200, scaling_type: :unit_scalable)
+      create_list(:meal_master, 2, meal_timing: :lunch_or_dinner, category: :main_dish, calories: 150, scaling_type: :fixed)
+    end
+
+    it '適用される倍率は料理ごとに許可された候補に必ず収まる' do
+      selected_meals = 10.times.flat_map do
+        described_class.new(target_calories: 2400).generate.values.flatten
+      end
+
+      selected_meals.each do |meal|
+        allowed_scales = described_class::PORTION_SCALES_BY_TYPE.fetch(meal.meal_master.scaling_type)
+        expect(allowed_scales).to include(meal.portion_scale)
+      end
+    end
+  end
 end
