@@ -14,9 +14,9 @@ RSpec.describe MenuRegenerateService do
 
   let(:menu_hash) do
     {
-      breakfast: [ breakfast_meal ],
-      lunch:     [ lunch_meal ],
-      dinner:    [ dinner_meal ]
+      breakfast: [ MenuGeneratorService::SelectedMeal.new(breakfast_meal, 1.0) ],
+      lunch:     [ MenuGeneratorService::SelectedMeal.new(lunch_meal, 1.0) ],
+      dinner:    [ MenuGeneratorService::SelectedMeal.new(dinner_meal, 1.0) ]
     }
   end
 

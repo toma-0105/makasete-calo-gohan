@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_07_03_063741) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_07_053728) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,6 +46,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_03_063741) do
     t.integer "meal_timing", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "portion_scale", precision: 3, scale: 2, default: "1.0", null: false
+    t.decimal "calories", null: false
     t.index ["meal_master_id"], name: "index_meals_on_meal_master_id"
     t.index ["menu_id"], name: "index_meals_on_menu_id"
   end

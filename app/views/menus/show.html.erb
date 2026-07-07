@@ -38,9 +38,15 @@
         <div class="bg-white border border-[#EAE070] rounded-xl divide-y divide-[#F0ECC4]">
           <% (@meals_by_timing[timing] || []).each do |meal| %>
             <div class="flex justify-between items-center px-4 py-3">
-              <p class="text-[14px] text-[#3a3820]"><%= meal.meal_master.name %></p>
+              <p class="text-[14px] text-[#3a3820]">
+                <%= meal.meal_master.name %>
+                <%# 分量倍率が等倍以外のときだけ表示する %>
+                <% if meal.portion_scale > 1 %>
+                  <span class="text-[11px] text-[#b8860b] font-medium">（<%= meal.portion_scale.to_f %>倍量）</span>
+                <% end %>
+              </p>
               <p class="text-[12px] text-[#9a9570] shrink-0 ml-2">
-                <%= number_with_delimiter(meal.meal_master.calories) %> kcal
+                <%= number_with_delimiter(meal.calories.to_i) %> kcal
               </p>
             </div>
           <% end %>

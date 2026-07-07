@@ -28,6 +28,11 @@ RSpec.describe MenuCalorieRangeSelectorService do
         service.generate
         expect(generator).to have_received(:generate).once
       end
+
+      it '生成サービスに目標カロリーが渡される（#103 カロリー配分方式）' do
+        service.generate
+        expect(MenuGeneratorService).to have_received(:new).with(hash_including(target_calories: 2000))
+      end
     end
 
     context '範囲外の献立の後に範囲内の献立が生成される場合' do
