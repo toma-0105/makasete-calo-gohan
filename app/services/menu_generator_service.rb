@@ -93,20 +93,22 @@ class MenuGeneratorService
   end
 
   def select_basic_combo(pool, include_soup:, allocated_calories: nil)
+    # 主菜を最初に選び、その食事のジャンルを確定させる（和洋混在を防ぐ #105）
     main = pick_random(pool.main_dish)
     # 副菜・汁物は倍率調整の対象外（先に確定させる）
-    extras = [ SelectedMeal.new(pick_random(pool.side_dish), DEFAULT_SCALE) ]
-    extras << SelectedMeal.new(pick_random(pool.soup), DEFAULT_SCALE) if include_soup && include_soup?
+    extras = [ SelectedMeal.new(pick_random(genre_matched(pool.side_dish, main)), DEFAULT_SCALE) ]
+    extras << SelectedMeal.new(pick_random(genre_matched(pool.soup, main)), DEFAULT_SCALE) if include_soup && include_soup?
 
-    staple_meal, main_meal = fit_staple_and_main(pool.staple.to_a, main, extras, allocated_calories)
+    staple_meal, main_meal = fit_staple_and_main(genre_matched(pool.staple, main).to_a, main, extras, allocated_calories)
     [ staple_meal, main_meal, *extras ]
   end
 
   def select_one_dish_combo(candidates, pool, include_soup:, allocated_calories: nil)
     one_dish = pick_random(candidates)
     # 品数バランスのため、一品料理にも副菜を必ず添える（最低2品を保証 #106）
-    extras = [ SelectedMeal.new(pick_random(pool.side_dish), DEFAULT_SCALE) ]
-    extras << SelectedMeal.new(pick_random(pool.soup), DEFAULT_SCALE) if include_soup && include_soup?
+    # 副菜・汁物は一品料理のジャンルに合わせる（#105）
+    extras = [ SelectedMeal.new(pick_random(genre_matched(pool.side_dish, one_dish)), DEFAULT_SCALE) ]
+    extras << SelectedMeal.new(pick_random(genre_matched(pool.soup, one_dish)), DEFAULT_SCALE) if include_soup && include_soup?
 
     scale = fit_one_dish_scale(one_dish, extras, allocated_calories)
     [ SelectedMeal.new(one_dish, scale), *extras ]
@@ -146,6 +148,16 @@ class MenuGeneratorService
   # その料理に適用できる倍率の候補（分量の変え方の分類による）
   def portion_scales_for(meal_master)
     PORTION_SCALES_BY_TYPE.fetch(meal_master.scaling_type)
+  end
+
+  # 主役の料理（主菜・一品料理）とジャンルが合う候補に絞り込む
+  # 汎用（neutral）はどのジャンルとも組み合わせ可能。主役が汎用なら絞り込まない
+  # 絞り込むと候補がゼロになる場合は、献立を成立させることを優先して絞り込みを諦める
+  def genre_matched(scope, lead_meal)
+    return scope if lead_meal.nil? || lead_meal.neutral?
+
+    matched = scope.where(genre: [ lead_meal.genre, :neutral ])
+    matched.exists? ? matched : scope
   end
 
   def select_one_dish?

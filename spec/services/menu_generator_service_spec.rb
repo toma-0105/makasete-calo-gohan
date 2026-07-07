@@ -200,6 +200,55 @@ RSpec.describe MenuGeneratorService do
     end
   end
 
+  describe 'ジャンル制約（#105）' do
+    before do
+      # 和・洋それぞれの主菜と、和・洋・汎用の主食・副菜・汁物を用意する
+      { japanese: 2, western: 2 }.each do |genre, count|
+        create_list(:meal_master, count, meal_timing: :breakfast, category: :main_dish, genre: genre)
+        create_list(:meal_master, count, meal_timing: :breakfast, category: :staple, genre: genre)
+        create_list(:meal_master, count, meal_timing: :breakfast, category: :side_dish, genre: genre)
+        create_list(:meal_master, count, meal_timing: :breakfast, category: :soup, genre: genre)
+        create_list(:meal_master, count + 1, meal_timing: :lunch_or_dinner, category: :main_dish, genre: genre)
+        create_list(:meal_master, count + 1, meal_timing: :lunch_or_dinner, category: :staple, genre: genre)
+        create_list(:meal_master, count + 1, meal_timing: :lunch_or_dinner, category: :side_dish, genre: genre)
+        create_list(:meal_master, count + 1, meal_timing: :lunch_or_dinner, category: :soup, genre: genre)
+      end
+    end
+
+    it '主菜がジャンルを持つ食事では、他の料理が同ジャンルか汎用のみになる' do
+      10.times do
+        service = described_class.new
+        allow(service).to receive(:select_one_dish?).and_return(false)
+
+        service.generate.each_value do |meals|
+          lead = meals.find { |meal| meal.category == 'main_dish' }
+          # 主菜が汎用の場合は絞り込まない設計のため検証対象外
+          next if lead.meal_master.neutral?
+
+          other_genres = meals.map { |meal| meal.meal_master.genre }
+          expect(other_genres).to all(be_in([ lead.meal_master.genre, 'neutral' ]))
+        end
+      end
+    end
+
+    describe '#genre_matched（絞り込みのフォールバック）' do
+      it '主役のジャンルに合う候補が無い場合は、絞り込みを諦めて全候補を返す' do
+        japanese_staple = create(:meal_master, category: :staple, genre: :japanese)
+        chinese_main = create(:meal_master, category: :main_dish, genre: :chinese)
+
+        scope = MealMaster.where(id: japanese_staple.id)
+        result = described_class.new.send(:genre_matched, scope, chinese_main)
+        expect(result).to include(japanese_staple)
+      end
+
+      it '主役が汎用（neutral）の場合は絞り込まない' do
+        neutral_main = create(:meal_master, category: :main_dish, genre: :neutral)
+        result = described_class.new.send(:genre_matched, MealMaster.staple, neutral_main)
+        expect(result).to eq(MealMaster.staple)
+      end
+    end
+  end
+
   describe '品数バランス（#106）' do
     it 'どの食事も最低2品以上で構成される' do
       10.times do
