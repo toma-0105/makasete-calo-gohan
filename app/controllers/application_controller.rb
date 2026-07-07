@@ -3,11 +3,8 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # 登録・ログイン後はマイページへ（2回目以降のユーザーの最短動線）
-  def after_sign_up_path_for(resource)
-    mypage_path
-  end
-
+  # ログイン後はマイページへ（2回目以降のユーザーの最短動線）
+  # ※会員登録後の遷移先は Users::RegistrationsController で上書きしている
   def after_sign_in_path_for(resource)
     mypage_path
   end
