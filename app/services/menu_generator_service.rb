@@ -16,8 +16,6 @@ class MenuGeneratorService
   ONE_DISH_SELECTION_PROBABILITY = 0.3
   # 基本形（主食+主菜+副菜）・one_dishに汁物を追加する確率
   SOUP_INCLUSION_PROBABILITY = 0.5
-  # one_dishに副菜・サラダを追加する確率
-  ONE_DISH_SIDE_DISH_INCLUSION_PROBABILITY = 0.5
   # 昼食（お弁当想定）から除外するスープ系一品料理のキーワード
   LUNCH_EXCLUDED_ONE_DISH_KEYWORDS = %w[ラーメン スープ 汁 うどん].freeze
   # 目標カロリーの朝・昼・夕への配分比率
@@ -72,7 +70,7 @@ class MenuGeneratorService
 
     meals =
       if one_dish_candidates.any? && select_one_dish?
-        # one_dishは主食・主菜を追加しないが、副菜・汁物は追加可能（汁物は昼食=弁当想定のため夕食限定）
+        # one_dishは主食・主菜を追加しない。副菜は必ず添え、汁物は夕食のみ確率で追加（昼食=弁当想定）
         select_one_dish_combo(one_dish_candidates, pool,
                               include_soup: period == :dinner, allocated_calories: allocated_calories)
       else
@@ -106,8 +104,8 @@ class MenuGeneratorService
 
   def select_one_dish_combo(candidates, pool, include_soup:, allocated_calories: nil)
     one_dish = pick_random(candidates)
-    extras = []
-    extras << SelectedMeal.new(pick_random(pool.side_dish), DEFAULT_SCALE) if include_side_dish?
+    # 品数バランスのため、一品料理にも副菜を必ず添える（最低2品を保証 #106）
+    extras = [ SelectedMeal.new(pick_random(pool.side_dish), DEFAULT_SCALE) ]
     extras << SelectedMeal.new(pick_random(pool.soup), DEFAULT_SCALE) if include_soup && include_soup?
 
     scale = fit_one_dish_scale(one_dish, extras, allocated_calories)
@@ -156,10 +154,6 @@ class MenuGeneratorService
 
   def include_soup?
     rand < SOUP_INCLUSION_PROBABILITY
-  end
-
-  def include_side_dish?
-    rand < ONE_DISH_SIDE_DISH_INCLUSION_PROBABILITY
   end
 
   def pick_random(meals)

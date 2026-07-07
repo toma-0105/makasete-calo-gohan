@@ -71,30 +71,9 @@ RSpec.describe MenuGeneratorService do
       end
     end
 
-    context '一品料理が選ばれ、副菜・汁物が追加されない場合' do
+    context '一品料理が選ばれ、汁物が追加されない場合' do
       before do
         allow(service).to receive(:select_one_dish?).and_return(true)
-        allow(service).to receive(:include_side_dish?).and_return(false)
-        allow(service).to receive(:include_soup?).and_return(false)
-      end
-
-      it '昼食が一品料理単体になる' do
-        result = service.generate
-        expect(result[:lunch].size).to eq(1)
-        expect(result[:lunch].first.category).to eq('one_dish')
-      end
-
-      it '夕食が一品料理単体になる' do
-        result = service.generate
-        expect(result[:dinner].size).to eq(1)
-        expect(result[:dinner].first.category).to eq('one_dish')
-      end
-    end
-
-    context '一品料理に副菜が追加される場合' do
-      before do
-        allow(service).to receive(:select_one_dish?).and_return(true)
-        allow(service).to receive(:include_side_dish?).and_return(true)
         allow(service).to receive(:include_soup?).and_return(false)
       end
 
@@ -109,38 +88,18 @@ RSpec.describe MenuGeneratorService do
       end
     end
 
-    context '一品料理に汁物が追加される場合' do
+    context '一品料理が選ばれ、汁物が追加される場合' do
       before do
         allow(service).to receive(:select_one_dish?).and_return(true)
-        allow(service).to receive(:include_side_dish?).and_return(false)
         allow(service).to receive(:include_soup?).and_return(true)
       end
 
-      it '夕食が一品料理+汁物の2品になる（例: 親子丼+味噌汁）' do
-        result = service.generate
-        expect(result[:dinner].map(&:category)).to contain_exactly('one_dish', 'soup')
-      end
-
-      it '昼食はお弁当想定のため汁物は追加されず一品料理単体のままになる' do
-        result = service.generate
-        expect(result[:lunch].size).to eq(1)
-        expect(result[:lunch].first.category).to eq('one_dish')
-      end
-    end
-
-    context '一品料理に副菜・汁物の両方が追加される場合' do
-      before do
-        allow(service).to receive(:select_one_dish?).and_return(true)
-        allow(service).to receive(:include_side_dish?).and_return(true)
-        allow(service).to receive(:include_soup?).and_return(true)
-      end
-
-      it '夕食が一品料理+副菜+汁物の3品になる' do
+      it '夕食が一品料理+副菜+汁物の3品になる（例: 親子丼+サラダ+味噌汁）' do
         result = service.generate
         expect(result[:dinner].map(&:category)).to contain_exactly('one_dish', 'side_dish', 'soup')
       end
 
-      it '昼食は汁物を除いた一品料理+副菜の2品になる' do
+      it '昼食はお弁当想定のため汁物は追加されず一品料理+副菜の2品になる' do
         result = service.generate
         expect(result[:lunch].map(&:category)).to contain_exactly('one_dish', 'side_dish')
       end
@@ -237,6 +196,17 @@ RSpec.describe MenuGeneratorService do
         result = service.generate
         selected_ids = (result[:lunch] + result[:dinner]).map(&:id)
         expect(selected_ids).not_to include(excluded_lunch_or_dinner_staple.id)
+      end
+    end
+  end
+
+  describe '品数バランス（#106）' do
+    it 'どの食事も最低2品以上で構成される' do
+      10.times do
+        result = described_class.new.generate
+        result.each_value do |meals|
+          expect(meals.size).to be >= 2
+        end
       end
     end
   end
