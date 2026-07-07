@@ -146,6 +146,65 @@ RSpec.describe MenuGeneratorService do
       end
     end
 
+    context '目標カロリーが指定されている場合（#103 カロリー配分方式）' do
+      subject(:service) { described_class.new(target_calories: target_calories) }
+
+      before do
+        allow(service).to receive(:select_one_dish?).and_return(false)
+        allow(service).to receive(:include_soup?).and_return(false)
+
+        # 分量調整の選択肢となるカロリー違いの主食・主菜を用意する
+        [ 100, 150, 200, 250, 300, 350 ].each do |cal|
+          create(:meal_master, meal_timing: :breakfast, category: :staple, calories: cal)
+          create(:meal_master, meal_timing: :breakfast, category: :main_dish, calories: cal)
+          create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish, calories: cal)
+        end
+        [ 100, 150, 200, 250, 300, 350, 400, 450 ].each do |cal|
+          create(:meal_master, meal_timing: :lunch_or_dinner, category: :staple, calories: cal)
+        end
+      end
+
+      context '目標2,000kcalの場合' do
+        let(:target_calories) { 2000 }
+
+        it '1日の合計カロリーが目標の±10%に収まる' do
+          total = service.generate.values.flatten.sum(&:calories)
+          expect(total).to be_within(200).of(2000)
+        end
+
+        it '副菜の倍率は等倍のまま' do
+          side_dishes = service.generate.values.flatten.select { |meal| meal.category == 'side_dish' }
+          expect(side_dishes.map(&:portion_scale)).to all(eq(1.0))
+        end
+      end
+
+      context '目標3,200kcalの場合（基準カロリーの組み合わせだけでは届かない）' do
+        let(:target_calories) { 3200 }
+
+        it '主食・主菜に等倍より大きい分量倍率が適用される' do
+          scaled_meals = service.generate.values.flatten.select { |meal| meal.portion_scale > 1.0 }
+          expect(scaled_meals).not_to be_empty
+        end
+
+        it '1日の合計カロリーが目標の±10%に収まる' do
+          total = service.generate.values.flatten.sum(&:calories)
+          expect(total).to be_within(320).of(3200)
+        end
+      end
+    end
+
+    context '目標カロリーが未指定の場合' do
+      before do
+        allow(service).to receive(:select_one_dish?).and_return(false)
+        allow(service).to receive(:include_soup?).and_return(false)
+      end
+
+      it '全ての料理の分量倍率が等倍になる' do
+        result = service.generate
+        expect(result.values.flatten.map(&:portion_scale)).to all(eq(1.0))
+      end
+    end
+
     context 'スープ系の一品料理（うどん）がある場合' do
       before do
         create(:meal_master, meal_timing: :lunch_or_dinner, category: :one_dish, name: '天ぷらうどん')
@@ -178,6 +237,27 @@ RSpec.describe MenuGeneratorService do
         result = service.generate
         selected_ids = (result[:lunch] + result[:dinner]).map(&:id)
         expect(selected_ids).not_to include(excluded_lunch_or_dinner_staple.id)
+      end
+    end
+  end
+
+  describe '分量調整方式（scaling_type）ごとの倍率制限' do
+    before do
+      # 個数調整のみ・調整不可の料理もプールに混ぜて、制限が守られることを確認する
+      create(:meal_master, meal_timing: :breakfast, category: :staple, calories: 150, scaling_type: :unit_scalable)
+      create(:meal_master, meal_timing: :breakfast, category: :main_dish, calories: 100, scaling_type: :unit_scalable)
+      create_list(:meal_master, 2, meal_timing: :lunch_or_dinner, category: :staple, calories: 200, scaling_type: :unit_scalable)
+      create_list(:meal_master, 2, meal_timing: :lunch_or_dinner, category: :main_dish, calories: 150, scaling_type: :fixed)
+    end
+
+    it '適用される倍率は料理ごとに許可された候補に必ず収まる' do
+      selected_meals = 10.times.flat_map do
+        described_class.new(target_calories: 2400).generate.values.flatten
+      end
+
+      selected_meals.each do |meal|
+        allowed_scales = described_class::PORTION_SCALES_BY_TYPE.fetch(meal.meal_master.scaling_type)
+        expect(allowed_scales).to include(meal.portion_scale)
       end
     end
   end

@@ -38,9 +38,16 @@
         <div class="bg-white border border-[#EAE070] rounded-xl divide-y divide-[#F0ECC4]">
           <% (@meals_by_timing[timing] || []).each do |meal| %>
             <div class="flex justify-between items-center px-4 py-3">
-              <p class="text-[14px] text-[#3a3820]"><%= meal.meal_master.name %></p>
+              <p class="text-[14px] text-[#3a3820]">
+                <%# グラム調整の料理は換算後のグラム数で表示する（例: ご飯(225g)） %>
+                <%= meal_display_name(meal) %>
+                <%# 個数調整の料理は「×2」ラベルを付ける（例: 納豆1パック ×2） %>
+                <% if (label = meal_scale_label(meal)) %>
+                  <span class="text-[11px] text-[#b8860b] font-medium"><%= label %></span>
+                <% end %>
+              </p>
               <p class="text-[12px] text-[#9a9570] shrink-0 ml-2">
-                <%= number_with_delimiter(meal.meal_master.calories) %> kcal
+                <%= number_with_delimiter(meal.calories.to_i) %> kcal
               </p>
             </div>
           <% end %>

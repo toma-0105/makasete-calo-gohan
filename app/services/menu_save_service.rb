@@ -23,12 +23,14 @@ class MenuSaveService
   end
 
   def save_meals!(menu)
-    @menu_hash.each do |meal_timing, meal_masters|
-      meal_masters.each do |meal_master|
+    @menu_hash.each do |meal_timing, selected_meals|
+      selected_meals.each do |selected|
         Meal.create!(
-          menu:        menu,
-          meal_master: meal_master,
-          meal_timing: meal_timing
+          menu:          menu,
+          meal_master:   selected.meal_master,
+          meal_timing:   meal_timing,
+          portion_scale: selected.portion_scale,
+          calories:      selected.calories
         )
       end
     end

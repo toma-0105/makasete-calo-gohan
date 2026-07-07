@@ -41,9 +41,24 @@ AllergenMaster.create!(name: "ゼラチン", category: :recommended)
 #              単体で1食として選出され、staple(ご飯等)とは組み合わせない想定。
 # ※ ご飯・鮭など朝食・昼夕どちらでも食べる定番品は、プールごとに別レコードとして登録する
 
+# 料理名のパターンから分量の変え方を分類する
+# 個数単位（枚・パック等）を含む → 個数調整のみ / g表記あり → グラム調整可 / どちらもなし → 調整不可
+def scaling_type_for(name)
+  if name.match?(/枚|パック|個|本|切れ|尾/)
+    :unit_scalable
+  elsif name.match?(/\d+g/)
+    :gram_scalable
+  else
+    :fixed
+  end
+end
+
 def create_meal_masters(items, meal_timing:, category:)
   items.each do |name, calories|
-    MealMaster.create!(name: name, calories: calories, meal_timing: meal_timing, category: category)
+    MealMaster.create!(
+      name: name, calories: calories, meal_timing: meal_timing, category: category,
+      scaling_type: scaling_type_for(name)
+    )
   end
 end
 

@@ -8,9 +8,9 @@ RSpec.describe MenuSaveService do
 
   let(:menu_hash) do
     {
-      breakfast: [ breakfast_meal ],
-      lunch:     [ lunch_meal ],
-      dinner:    [ dinner_meal ]
+      breakfast: [ MenuGeneratorService::SelectedMeal.new(breakfast_meal, 1.0) ],
+      lunch:     [ MenuGeneratorService::SelectedMeal.new(lunch_meal, 1.0) ],
+      dinner:    [ MenuGeneratorService::SelectedMeal.new(dinner_meal, 1.5) ]
     }
   end
 
@@ -25,14 +25,22 @@ RSpec.describe MenuSaveService do
       expect { service.save! }.to change(Meal, :count).by(3)
     end
 
-    it 'total_calories が正しく計算・保存される' do
+    it 'total_calories が倍率適用後のカロリーで計算・保存される' do
       menu = service.save!
-      expect(menu.total_calories).to eq(1400)
+      # 300×1.0 + 500×1.0 + 600×1.5 = 1700
+      expect(menu.total_calories).to eq(1700)
     end
 
     it '朝・昼・夕それぞれの meal_timing で保存される' do
       service.save!
       expect(Meal.pluck(:meal_timing)).to contain_exactly('breakfast', 'lunch', 'dinner')
+    end
+
+    it '各mealに分量倍率と確定カロリーが保存される' do
+      service.save!
+      dinner = Meal.dinner.first
+      expect(dinner.portion_scale).to eq(1.5)
+      expect(dinner.calories).to eq(900)
     end
 
     context '保存に失敗した場合' do

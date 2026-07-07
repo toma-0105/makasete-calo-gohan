@@ -15,7 +15,11 @@ class MenuCalorieRangeSelectorService
     closest_diff = Float::INFINITY
 
     MAX_ATTEMPTS.times do
-      menu = MenuGeneratorService.new(excluded_meal_master_ids: @excluded_meal_master_ids).generate
+      # 目標カロリーを渡し、生成側で配分・倍率調整を行う
+      menu = MenuGeneratorService.new(
+        excluded_meal_master_ids: @excluded_meal_master_ids,
+        target_calories: @target_calories
+      ).generate
       total_calories = total_calories_for(menu)
 
       return menu if within_range?(total_calories)
