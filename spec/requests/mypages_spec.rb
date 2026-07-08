@@ -25,6 +25,21 @@ RSpec.describe "Mypages", type: :request do
       it "アレルギー設定変更へのリンクが表示される" do
         expect(response.body).to include(new_user_allergen_path)
       end
+
+      it "献立履歴へのリンクが表示される" do
+        expect(response.body).to include("献立履歴を見る")
+      end
+    end
+
+    context "ゲストとしてログインしている場合" do
+      before do
+        sign_in create(:user, guest: true)
+        get mypage_path
+      end
+
+      it "献立履歴へのリンクが表示されない" do
+        expect(response.body).not_to include("献立履歴を見る")
+      end
     end
 
     context "TDEE未診断のユーザーの場合" do

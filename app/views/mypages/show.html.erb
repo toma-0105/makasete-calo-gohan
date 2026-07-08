@@ -74,8 +74,11 @@
     <div class="flex flex-col gap-3">
       <%= link_to "アレルギー設定を変更", new_user_allergen_path,
             class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px]" %>
-      <%= link_to "献立履歴を見る", menus_path,
-            class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px]" %>
+      <%# 献立履歴は会員限定のため、ゲストには表示しない %>
+      <% unless current_user.guest? %>
+        <%= link_to "献立履歴を見る", menus_path,
+              class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px]" %>
+      <% end %>
     </div>
 
   </main>

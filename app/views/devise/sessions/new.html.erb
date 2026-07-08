@@ -30,6 +30,12 @@
 
     <% end %>
 
+    <%# アカウント登録せずに試せるゲストログイン %>
+    <div class="mb-3">
+      <%= button_to "ゲストでログイン", guest_login_path,
+          class: "btn w-full bg-white border-yellow-300 text-yellow-700 hover:bg-yellow-50" %>
+    </div>
+
     <div class="mb-3">
       <%= link_to "パスワードを忘れた方", new_user_password_path,
           class: "btn w-full bg-white border-yellow-400 text-yellow-500 hover:bg-yellow-50" %>

@@ -17,8 +17,9 @@
       </p>
       <div class="h-4"></div>
       <div class="flex gap-2">
-        <%= link_to "ゲストでログイン", "#",
-              class: "flex-1 bg-[#F9C639] text-[#3a3820] text-center py-3.5 rounded-lg text-[14px] font-semibold" %>
+        <%= button_to "ゲストでログイン", guest_login_path,
+              form_class: "flex-1",
+              class: "w-full bg-[#F9C639] text-[#3a3820] text-center py-3.5 rounded-lg text-[14px] font-semibold cursor-pointer" %>
         <%= link_to "新規登録", new_user_registration_path,
               class: "flex-1 border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px]" %>
       </div>

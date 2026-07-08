@@ -3,6 +3,11 @@ class MenusController < ApplicationController
 
   # 保存済みの献立履歴一覧（新しい順）
   def index
+    # 献立履歴は会員限定（ビューで非表示にした上で、直接アクセスもサーバー側で拒否する）
+    if current_user.guest?
+      return redirect_to mypage_path, alert: "献立履歴は会員限定の機能です"
+    end
+
     # 同じ日付の献立が複数ある場合に備えて created_at でも並べる
     @menus = current_user.menus.saved.order(date: :desc, created_at: :desc)
   end
