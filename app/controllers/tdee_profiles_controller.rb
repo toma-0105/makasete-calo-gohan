@@ -17,7 +17,7 @@ class TdeeProfilesController < ApplicationController
   end
 
   def show
-    @tdee_profile = TdeeProfile.find(params[:id])
+    @tdee_profile = current_user.tdee_profiles.find(params[:id])
   end
 
   private
