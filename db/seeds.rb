@@ -53,16 +53,36 @@ def scaling_type_for(name)
   end
 end
 
+# 料理名のキーワードからジャンルを分類する
+# 判定順序が重要：味噌汁を最優先（具材名の洋風キーワードに誤反応させない）、
+# 次に中華→洋→和の順（「レモンクリーム煮」を洋に、「しらすのスパゲッティ」を洋に倒すため）
+CHINESE_KEYWORDS  = /中華|麻婆|チンジャオ|酢豚|エビチリ|チリソース|春雨|チャプチェ|ナムル|キムチ|ビビンバ|チヂミ|オイスター|甘酢|ごまだれ|チャーハン/
+WESTERN_KEYWORDS  = /トースト|食パン|スパゲッティ|パスタ|ソテー|ムニエル|グリル|クリーム|チーズ|タンドリー|ロースト|マリネ|ピクルス|カプレーゼ|コールスロー|ポテト|ラペ|ズッキーニ|コンソメ|ハニーマスタード|ベーコン|ウインナー|ハヤシ|ナポリタン|ペペロンチーノ|オムライス|カレー|ガーリック|スクランブル|トマトソース|トマト煮|ヨーグルト|バナナ|りんご/
+JAPANESE_KEYWORDS = /味噌|みそ|照り焼き|塩焼き|塩麹|南蛮|生姜焼き|しぐれ煮|煮|お浸し|和え物|和風|きんぴら|ひじき|切り干し|浅漬け|もずく|梅|しそ|つくね|そぼろ|茶碗蒸し|蒸し|おろし|納豆|豚汁|けんちん|かきたま|丼|うどん|そば|お好み焼き|とんぺい|甘辛|唐揚げ|しゃぶ|厚揚げ|チャンプルー|昆布|小松菜|なす|醤油|卵焼き|鮭|鯖|ぶり|さんま|いわし|あじ|たら|白身魚|ごぼう|れんこん|蓮根|豆腐|挟み焼き|鶏団子/
+
+def genre_for(name)
+  # 味噌汁・おにぎりは具材名（ベーコン・チーズ等）より優先して和と判定する
+  return :japanese if name.include?("味噌汁") || name.include?("おにぎり")
+
+  case name
+  when CHINESE_KEYWORDS then :chinese
+  when WESTERN_KEYWORDS then :western
+  when JAPANESE_KEYWORDS then :japanese
+  else :neutral
+  end
+end
+
 def create_meal_masters(items, meal_timing:, category:)
   items.each do |name, calories|
     MealMaster.create!(
       name: name, calories: calories, meal_timing: meal_timing, category: category,
-      scaling_type: scaling_type_for(name)
+      scaling_type: scaling_type_for(name), genre: genre_for(name)
     )
   end
 end
 
-# ---------- 朝食（30件: 主食7/主菜8/副菜11/汁物4） ----------
+# ---------- 朝食（31件: 主食8/主菜8/副菜11/汁物4） ----------
+# ※ 食パンなどのトースト系は朝食専用（昼夕には出さない）
 create_meal_masters(
   {
     "ご飯(100g)" => 156,
@@ -70,6 +90,7 @@ create_meal_masters(
     "ご飯(200g)" => 312,
     "玄米ご飯(150g)" => 228,
     "食パン6枚切り1枚(60g)" => 149,
+    "食パン8枚切り1枚(45g)" => 112,
     "アボカドトースト(食パン1枚+アボカド1/2個)" => 270,
     "チーズトースト(食パン1枚+スライスチーズ1枚)" => 210
   }, meal_timing: :breakfast, category: :staple
@@ -126,7 +147,7 @@ create_meal_masters(
     "うどん1食(ゆで240g)" => 252,
     "そば1食(ゆで200g)" => 264,
     "スパゲッティ(乾80g)" => 302,
-    "食パン8枚切り1枚(45g)" => 112
+    "オートミールの枝豆とチーズの塩昆布おにぎり1個" => 180
   }, meal_timing: :lunch_or_dinner, category: :staple
 )
 
@@ -272,7 +293,7 @@ create_meal_masters(
   }, meal_timing: :lunch_or_dinner, category: :soup
 )
 
-# 一品料理（21件: カレー・丼物・パスタ等）
+# 一品料理（22件: カレー・丼物・パスタ・オートミール粥等）
 create_meal_masters(
   {
     "親子丼(350g)" => 580,
@@ -295,7 +316,8 @@ create_meal_masters(
     "いわし缶の和風スパゲッティ" => 550,
     "たらことえのきのパスタ" => 520,
     "オートミールオムライス" => 320,
-    "オートミール中華粥" => 220
+    "オートミール中華粥" => 220,
+    "オートミールと鶏胸肉の中華粥" => 250
   }, meal_timing: :lunch_or_dinner, category: :one_dish
 )
 
@@ -438,6 +460,8 @@ link_meal_allergens(
     "しらすと青じそのスパゲッティ" => [ "小麦" ],
     "いわし缶の和風スパゲッティ" => [ "小麦" ],
     "たらことえのきのパスタ" => [ "小麦" ],
-    "オートミールオムライス" => [ "卵" ]
+    "オートミールオムライス" => [ "卵" ],
+    "オートミールの枝豆とチーズの塩昆布おにぎり1個" => %w[乳 大豆],
+    "オートミールと鶏胸肉の中華粥" => [ "鶏肉" ]
   }
 )
