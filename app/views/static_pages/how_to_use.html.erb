@@ -1,0 +1,97 @@
+<% content_for :title, "使い方 - まかせてカロごはん" %>
+
+<div class="min-h-screen flex flex-col">
+  <main class="flex-1 px-5 py-6 max-w-sm mx-auto w-full">
+
+    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">使い方</h1>
+    <p class="text-[13px] text-[#9a9570] mb-6">5つのステップで、今日の献立が決まります。</p>
+
+    <div class="flex flex-col gap-5">
+
+      <%# ステップ1: はじめる %>
+      <div class="flex items-start gap-3.5">
+        <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">1</div>
+        <div>
+          <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">アカウント登録 または ゲストログイン</p>
+          <p class="text-[12px] text-[#7a7550] leading-[1.6]">
+            メールアドレスで登録すると、献立の保存と履歴の確認ができます。<br>
+            まず試したい方は、登録不要の「ゲストでログイン」からどうぞ。
+          </p>
+        </div>
+      </div>
+
+      <%# ステップ2: TDEE診断 %>
+      <div class="flex items-start gap-3.5">
+        <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">2</div>
+        <div>
+          <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">TDEE診断</p>
+          <p class="text-[12px] text-[#7a7550] leading-[1.6]">
+            身長・体重・年齢・性別・活動量を入力すると、1日の消費カロリー（TDEE）と、
+            ダイエットに適した目標摂取カロリーを自動で計算します。
+          </p>
+        </div>
+      </div>
+
+      <%# ステップ3: アレルギー設定 %>
+      <div class="flex items-start gap-3.5">
+        <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">3</div>
+        <div>
+          <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">
+            アレルギー設定
+            <span class="text-[10px] px-1.5 py-0.5 rounded-[10px] bg-[#FFF3A0] text-[#5a4a10] ml-1.5">任意</span>
+          </p>
+          <p class="text-[12px] text-[#7a7550] leading-[1.6]">
+            アレルギーのある食材を選ぶと、その食材を除いた献立を提案します。<br>
+            なければスキップしてOKです。
+          </p>
+        </div>
+      </div>
+
+      <%# ステップ4: 献立生成 %>
+      <div class="flex items-start gap-3.5">
+        <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">4</div>
+        <div>
+          <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">献立を自動生成</p>
+          <p class="text-[12px] text-[#7a7550] leading-[1.6]">
+            朝・昼・夜の3食分が即座に表示されます。<br>
+            合計カロリーは目標に合わせて自動調整され、ご飯の量（グラム）や品数まで具体的にわかります。<br>
+            気に入らなければ「再生成」で何度でも作り直せます。
+          </p>
+        </div>
+      </div>
+
+      <%# ステップ5: 保存と履歴 %>
+      <div class="flex items-start gap-3.5">
+        <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">5</div>
+        <div>
+          <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">
+            保存して履歴から見返す
+            <span class="text-[10px] px-1.5 py-0.5 rounded-[10px] bg-[#FFF3A0] text-[#5a4a10] ml-1.5">会員限定</span>
+          </p>
+          <p class="text-[12px] text-[#7a7550] leading-[1.6]">
+            気に入った献立は保存しておけば、マイページの献立履歴からいつでも見返せます。
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <%# トップへ戻る %>
+    <div class="mt-8">
+      <%= link_to "トップページに戻る", root_path,
+            class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px]" %>
+    </div>
+
+  </main>
+
+  <%# 下部CTA %>
+  <div class="bg-[#FFF8C4] border-t border-[#EEE9C0] px-5 py-5">
+    <div class="max-w-sm mx-auto flex gap-2">
+      <%= button_to "ゲストでためす", guest_login_path,
+            form_class: "flex-1",
+            class: "w-full bg-[#F9C639] text-[#3a3820] text-center py-3.5 rounded-lg text-[14px] font-semibold cursor-pointer" %>
+      <%= link_to "新規登録", new_user_registration_path,
+            class: "flex-1 border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px] leading-[1.4] flex items-center justify-center" %>
+    </div>
+  </div>
+</div>
