@@ -3,30 +3,7 @@
 <div class="min-h-screen flex flex-col">
   <main class="flex-1 px-5 py-6 max-w-sm mx-auto w-full">
 
-    <h1 class="text-[20px] font-bold text-[#2a2810] mb-5">マイページ</h1>
-
-    <%# プロフィールカード %>
-    <div class="card bg-[#FFF8C4] border border-[#EAE070] rounded-xl">
-      <div class="card-body p-5 gap-4">
-
-        <%# 名前 %>
-        <div>
-          <p class="text-[11px] text-[#9a9570] font-medium mb-1">名前</p>
-          <p class="text-[15px] text-[#3a3820] font-semibold"><%= @user.name %></p>
-        </div>
-
-        <div class="border-t border-[#E8E4B8]"></div>
-
-        <%# メールアドレス %>
-        <div>
-          <p class="text-[11px] text-[#9a9570] font-medium mb-1">メールアドレス</p>
-          <p class="text-[15px] text-[#3a3820] font-semibold"><%= @user.email %></p>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="h-5"></div>
+    <h1 class="text-[20px] font-bold text-[#2a2810] mb-5"><%= @user.name %>さんのマイページ</h1>
 
     <%# TDEE診断履歴カード %>
     <div class="card bg-[#FFF8C4] border border-[#EAE070] rounded-xl">
