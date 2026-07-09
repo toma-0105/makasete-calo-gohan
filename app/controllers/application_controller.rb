@@ -11,6 +11,17 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # ログイン中ユーザーの「ホーム画面」のパスを返す
+  # 会員: マイページ / ゲスト: 最新のTDEE結果（未診断なら診断ページ）
+  # ゲストをマイページ以外へ逃がす際の遷移先を一元管理し、リダイレクトループを防ぐ
+  def home_path_for(user)
+    return mypage_path unless user.guest?
+
+    tdee_profile = user.tdee_profiles.last
+    tdee_profile ? tdee_profile_path(tdee_profile) : new_tdee_profile_path
+  end
+  helper_method :home_path_for
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :name ])
   end

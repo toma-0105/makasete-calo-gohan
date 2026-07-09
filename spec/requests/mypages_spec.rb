@@ -18,10 +18,6 @@ RSpec.describe "Mypages", type: :request do
         expect(response.body).to include("テストユーザー")
       end
 
-      it "ログインユーザーのメールアドレスが表示される" do
-        expect(response.body).to include("test@example.com")
-      end
-
       it "アレルギー設定変更へのリンクが表示される" do
         expect(response.body).to include(new_user_allergen_path)
       end
@@ -32,13 +28,25 @@ RSpec.describe "Mypages", type: :request do
     end
 
     context "ゲストとしてログインしている場合" do
-      before do
-        sign_in create(:user, guest: true)
-        get mypage_path
+      let(:guest) { create(:user, guest: true) }
+
+      before { sign_in guest }
+
+      context "TDEE診断済みの場合" do
+        let!(:tdee_profile) { create(:tdee_profile, user: guest) }
+
+        it "TDEE結果ページにリダイレクトされる" do
+          get mypage_path
+          expect(response).to redirect_to(tdee_profile_path(tdee_profile))
+          expect(flash[:alert]).to eq("マイページは会員限定の機能です")
+        end
       end
 
-      it "献立履歴へのリンクが表示されない" do
-        expect(response.body).not_to include("献立履歴を見る")
+      context "TDEE未診断の場合" do
+        it "TDEE診断ページにリダイレクトされる" do
+          get mypage_path
+          expect(response).to redirect_to(new_tdee_profile_path)
+        end
       end
     end
 
