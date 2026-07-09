@@ -1,12 +1,12 @@
 <% content_for :title, "マイページ - まかせてカロごはん" %>
 
 <div class="min-h-screen flex flex-col">
-  <main class="flex-1 px-5 py-6 max-w-sm mx-auto w-full">
+  <main class="flex-1 px-5 py-10 max-w-sm mx-auto w-full">
 
-    <h1 class="text-[20px] font-bold text-[#2a2810] mb-5"><%= @user.name %>さんのマイページ</h1>
+    <h1 class="text-[20px] font-bold text-[#2a2810] mb-8"><%= @user.name %>さんのマイページ</h1>
 
     <%# TDEE診断履歴カード %>
-    <div class="card bg-[#FFF8C4] border border-[#EAE070] rounded-xl">
+    <div class="card bg-[#FFF8C4] border border-[#EAE070] rounded-xl mb-5">
       <div class="card-body p-5 gap-2">
         <p class="text-[14px] font-bold text-[#2a2810]">TDEE診断履歴</p>
         <% if @tdee_profile %>
@@ -25,30 +25,28 @@
       </div>
     </div>
 
-    <div class="h-5"></div>
+    <%# ボタン群 %>
+    <div class="mt-16 flex flex-col gap-3">
 
-    <%# 献立生成ボタン（TDEE診断済みのユーザーのみ表示） %>
-    <% if @tdee_profile %>
-      <div data-controller="loading">
-        <%# ローディングオーバーレイ %>
-        <div data-loading-target="overlay"
-             class="hidden fixed inset-0 bg-[#FFFEF5]/90 flex flex-col items-center justify-center z-50">
-          <div class="w-12 h-12 border-4 border-[#EAE070] border-t-[#F9C639] rounded-full animate-spin mb-4"></div>
-          <p class="text-[15px] font-semibold text-[#3a3820]">献立を生成しています...</p>
-          <p class="text-[12px] text-[#9a9570] mt-1">少しお待ちください</p>
+      <%# 献立生成ボタン（TDEE診断済みのユーザーのみ表示） %>
+      <% if @tdee_profile %>
+        <div data-controller="loading">
+          <%# ローディングオーバーレイ %>
+          <div data-loading-target="overlay"
+               class="hidden fixed inset-0 bg-[#FFFEF5]/90 flex flex-col items-center justify-center z-50">
+            <div class="w-12 h-12 border-4 border-[#EAE070] border-t-[#F9C639] rounded-full animate-spin mb-4"></div>
+            <p class="text-[15px] font-semibold text-[#3a3820]">献立を生成しています...</p>
+            <p class="text-[12px] text-[#9a9570] mt-1">少しお待ちください</p>
+          </div>
+
+          <%= form_with url: menus_path, data: { action: "submit->loading#showLoading" } do |f| %>
+            <%= f.submit "今日の献立を生成する",
+                  class: primary_button_classes("block w-full") %>
+          <% end %>
         </div>
+      <% end %>
 
-        <%= form_with url: menus_path, data: { action: "submit->loading#showLoading" } do |f| %>
-          <%= f.submit "今日の献立を生成する",
-                class: primary_button_classes("block w-full") %>
-        <% end %>
-      </div>
-
-      <div class="h-3"></div>
-    <% end %>
-
-    <%# 各種設定・履歴へのリンク %>
-    <div class="flex flex-col gap-3">
+      <%# 各種設定・履歴へのリンク %>
       <%= link_to "アレルギー設定を変更", new_user_allergen_path,
             class: secondary_button_classes("block w-full") %>
       <%# 献立履歴は会員限定のため、ゲストには表示しない %>
@@ -56,6 +54,7 @@
         <%= link_to "献立履歴を見る", menus_path,
               class: secondary_button_classes("block w-full") %>
       <% end %>
+
     </div>
 
   </main>
