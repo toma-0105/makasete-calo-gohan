@@ -17,7 +17,8 @@ class UserAllergensController < ApplicationController
       end
     end
 
-    redirect_to mypage_path, notice: "アレルギー設定を保存しました"
+    # 会員はマイページへ、ゲストはマイページに入れないためゲスト用ホームへ
+    redirect_to home_path_for(current_user), notice: "アレルギー設定を保存しました"
   rescue ActiveRecord::ActiveRecordError
     @allergen_masters = AllergenMaster.all
     flash.now[:alert] = "保存に失敗しました"

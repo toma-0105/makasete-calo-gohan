@@ -34,10 +34,12 @@
       <%= button_to "献立を生成する", menus_path,
           class: "btn w-full bg-yellow-400 hover:bg-yellow-500 border-none text-white font-bold text-center" %>
 
-      <%# マイページへ %>
-      <%= link_to "マイページへ",
-          mypage_path,
-          class: "btn w-full bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 font-bold text-center" %>
+      <%# マイページへ（会員限定のためゲストには表示しない） %>
+      <% unless current_user.guest? %>
+        <%= link_to "マイページへ",
+            mypage_path,
+            class: "btn w-full bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 font-bold text-center" %>
+      <% end %>
     </div>
   </div>
 </div>

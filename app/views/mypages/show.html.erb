@@ -49,11 +49,8 @@
       <%# 各種設定・履歴へのリンク %>
       <%= link_to "アレルギー設定を変更", new_user_allergen_path,
             class: secondary_button_classes("block w-full") %>
-      <%# 献立履歴は会員限定のため、ゲストには表示しない %>
-      <% unless current_user.guest? %>
-        <%= link_to "献立履歴を見る", menus_path,
-              class: secondary_button_classes("block w-full") %>
-      <% end %>
+      <%= link_to "献立履歴を見る", menus_path,
+            class: secondary_button_classes("block w-full") %>
 
     </div>
 

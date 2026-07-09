@@ -47,9 +47,9 @@ RSpec.describe "Menus", type: :request do
     context "ゲストとしてログインしている場合" do
       before { sign_in create(:user, guest: true) }
 
-      it "献立履歴は会員限定のためマイページにリダイレクトされる" do
+      it "献立履歴は会員限定のためTDEE診断ページにリダイレクトされる" do
         get menus_path
-        expect(response).to redirect_to(mypage_path)
+        expect(response).to redirect_to(new_tdee_profile_path)
         expect(flash[:alert]).to eq("献立履歴は会員限定の機能です")
       end
     end
