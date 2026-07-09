@@ -4,15 +4,15 @@
   <% end %>
   <nav class="flex gap-1.5 items-center">
     <% if user_signed_in? %>
-      <%= link_to "マイページ", mypage_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium" %>
-      <%= link_to "使い方", how_to_use_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium" %>
+      <%= link_to "マイページ", mypage_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium #{secondary_button_feedback}" %>
+      <%= link_to "使い方", how_to_use_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium #{secondary_button_feedback}" %>
       <%= link_to "ログアウト", destroy_user_session_path,
           data: { turbo_method: :delete },
-          class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#F9C639] bg-[#F9C639] font-medium" %>
+          class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#F9C639] bg-[#F9C639] font-medium #{primary_button_feedback}" %>
     <% else %>
-      <%= link_to "使い方", how_to_use_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium" %>
-      <%= link_to "新規登録", new_user_registration_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium" %>
-      <%= link_to "ログイン", new_user_session_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#F9C639] bg-[#F9C639] font-medium" %>
+      <%= link_to "使い方", how_to_use_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium #{secondary_button_feedback}" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#E8E4B8] font-medium #{secondary_button_feedback}" %>
+      <%= link_to "ログイン", new_user_session_path, class: "text-[11px] text-[#3a3820] px-2.5 py-1 rounded-md border border-[#F9C639] bg-[#F9C639] font-medium #{primary_button_feedback}" %>
     <% end %>
   </nav>
 </header>

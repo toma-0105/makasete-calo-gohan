@@ -38,12 +38,12 @@
           </p>
           <%# 体重・活動量の変化に合わせて診断し直せる導線 %>
           <%= link_to "TDEEを再診断する", new_tdee_profile_path,
-                class: "block w-full border border-[#D8D4A8] bg-[#FFFEF5] text-[#5a5530] text-center py-2.5 rounded-lg text-[13px] mt-1" %>
+                class: secondary_button_classes("block w-full mt-1 bg-[#FFFEF5]") %>
         <% else %>
           <p class="text-[13px] text-[#7a7550]">まだTDEE診断を行っていません</p>
           <%# 未診断ユーザーが行き止まりにならないよう診断への導線を出す %>
           <%= link_to "TDEE診断を始める", new_tdee_profile_path,
-                class: "block w-full bg-[#F9C639] text-[#2a2810] text-center py-3 rounded-lg text-[13px] font-medium mt-1" %>
+                class: primary_button_classes("block w-full mt-1") %>
         <% end %>
       </div>
     </div>
@@ -63,7 +63,7 @@
 
         <%= form_with url: menus_path, data: { action: "submit->loading#showLoading" } do |f| %>
           <%= f.submit "今日の献立を生成する",
-                class: "block w-full bg-[#F9C639] text-[#3a3820] text-center py-3.5 rounded-lg text-[14px] font-semibold cursor-pointer" %>
+                class: primary_button_classes("block w-full") %>
         <% end %>
       </div>
 
@@ -73,11 +73,11 @@
     <%# 各種設定・履歴へのリンク %>
     <div class="flex flex-col gap-3">
       <%= link_to "アレルギー設定を変更", new_user_allergen_path,
-            class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px]" %>
+            class: secondary_button_classes("block w-full") %>
       <%# 献立履歴は会員限定のため、ゲストには表示しない %>
       <% unless current_user.guest? %>
         <%= link_to "献立履歴を見る", menus_path,
-              class: "block w-full border border-[#D8D4A8] text-[#5a5530] text-center py-3.5 rounded-lg text-[14px]" %>
+              class: secondary_button_classes("block w-full") %>
       <% end %>
     </div>
 
