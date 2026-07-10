@@ -1,3 +1,10 @@
+# マスタデータが投入済みなら何もしない
+# （create!の羅列のため再実行すると重複する。デプロイのたびにseedを流しても安全にするためのガード）
+if AllergenMaster.exists? || MealMaster.exists?
+  puts "マスタデータは投入済みのためseedをスキップしました"
+  return
+end
+
 # 特定原材料（義務）
 AllergenMaster.create!(name: "えび", category: :mandatory)
 AllergenMaster.create!(name: "カシューナッツ", category: :mandatory)

@@ -10,13 +10,19 @@ class AddGenreToMealMasters < ActiveRecord::Migration[7.2]
   WESTERN_KEYWORDS  = /トースト|食パン|スパゲッティ|パスタ|ソテー|ムニエル|グリル|クリーム|チーズ|タンドリー|ロースト|マリネ|ピクルス|カプレーゼ|コールスロー|ポテト|ラペ|ズッキーニ|コンソメ|ハニーマスタード|ベーコン|ウインナー|ハヤシ|ナポリタン|ペペロンチーノ|オムライス|カレー|ガーリック|スクランブル|トマトソース|トマト煮|ヨーグルト|バナナ|りんご/
   JAPANESE_KEYWORDS = /味噌|みそ|照り焼き|塩焼き|塩麹|南蛮|生姜焼き|しぐれ煮|煮|お浸し|和え物|和風|きんぴら|ひじき|切り干し|浅漬け|もずく|梅|しそ|つくね|そぼろ|茶碗蒸し|蒸し|おろし|納豆|豚汁|けんちん|かきたま|丼|うどん|そば|お好み焼き|とんぺい|甘辛|唐揚げ|しゃぶ|厚揚げ|チャンプルー|昆布|小松菜|なす|醤油|卵焼き|鮭|鯖|ぶり|さんま|いわし|あじ|たら|白身魚|ごぼう|れんこん|蓮根|豆腐|挟み焼き|鶏団子/
 
+  # 移行専用モデル。アプリのモデルは将来の定義変更（enum追加等）で
+  # この時点のテーブルとズレる可能性があるため使わない
+  class MigrationMealMaster < ActiveRecord::Base
+    self.table_name = "meal_masters"
+  end
+
   def up
     # 料理のジャンル（neutral: 汎用 / japanese: 和 / western: 洋 / chinese: 中華・アジア）
     add_column :meal_masters, :genre, :integer, null: false, default: NEUTRAL
 
     # 既存レコードを料理名のキーワードで分類する
-    MealMaster.reset_column_information
-    MealMaster.find_each do |meal_master|
+    MigrationMealMaster.reset_column_information
+    MigrationMealMaster.find_each do |meal_master|
       meal_master.update_column(:genre, genre_for(meal_master.name))
     end
   end
