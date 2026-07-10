@@ -84,3 +84,6 @@ test:
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
+  # Neon（PgBouncer経由のpooled接続）はプリペアドステートメントと相性が悪く、
+  # マイグレーション中のモデルクエリが失敗するため本番では無効化する
+  prepared_statements: false
