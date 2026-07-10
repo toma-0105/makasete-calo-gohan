@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* コンテンツの高さが変わって縦スクロールバーが出入りしても、
+   画面が左右にガタつかないようスクロールバー分の幅を常に確保する */
+html {
+  scrollbar-gutter: stable;
+}
