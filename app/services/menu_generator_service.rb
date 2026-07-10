@@ -98,47 +98,65 @@ class MenuGeneratorService
     # 主菜を最初に選び、その食事のジャンルを確定させる（和洋混在を防ぐ #105）
     main = pick_random(pool.main_dish)
     # 副菜・汁物は倍率調整の対象外（先に確定させる）
-    extras = [ SelectedMeal.new(pick_random(genre_matched(pool.side_dish, main)), DEFAULT_SCALE) ]
-    extras << SelectedMeal.new(pick_random(genre_matched(pool.soup, main)), DEFAULT_SCALE) if include_soup && include_soup?
+    extras = [ select_extra(pool.side_dish, main) ]
+    extras << select_extra(pool.soup, main) if include_soup && include_soup?
+    extras.compact!
 
     staple_pool = genre_matched(pool.staple, main)
     staple_pool = prefer_exact_genre(staple_pool, main) if prefer_exact_staple_genre
     staple_meal, main_meal = fit_staple_and_main(staple_pool.to_a, main, extras, allocated_calories)
-    [ staple_meal, main_meal, *extras ]
+    # アレルギー除外などで候補が尽きたカテゴリはnilになるため、除いて献立を成立させる
+    [ staple_meal, main_meal, *extras ].compact
   end
 
   def select_one_dish_combo(candidates, pool, include_soup:, allocated_calories: nil)
     one_dish = pick_random(candidates)
     # 品数バランスのため、一品料理にも副菜を必ず添える（最低2品を保証 #106）
     # 副菜・汁物は一品料理のジャンルに合わせる（#105）
-    extras = [ SelectedMeal.new(pick_random(genre_matched(pool.side_dish, one_dish)), DEFAULT_SCALE) ]
-    extras << SelectedMeal.new(pick_random(genre_matched(pool.soup, one_dish)), DEFAULT_SCALE) if include_soup && include_soup?
+    extras = [ select_extra(pool.side_dish, one_dish) ]
+    extras << select_extra(pool.soup, one_dish) if include_soup && include_soup?
+    extras.compact!
 
     scale = fit_one_dish_scale(one_dish, extras, allocated_calories)
     [ SelectedMeal.new(one_dish, scale), *extras ]
   end
 
+  # 副菜・汁物を主役のジャンルに合わせて1品選ぶ（候補が尽きていればnil＝献立から省く）
+  def select_extra(scope, lead_meal)
+    meal = pick_random(genre_matched(scope, lead_meal))
+    SelectedMeal.new(meal, DEFAULT_SCALE) if meal
+  end
+
   # 配分カロリーに最も近づく「主食×倍率」「主菜の倍率」の組み合わせを選ぶ
   # 目標未指定の場合は主食をランダムに選び、倍率は適用しない
+  # 候補が尽きたカテゴリはnilを返し、呼び出し側で献立から省く
   def fit_staple_and_main(staples, main, extras, allocated_calories)
     if allocated_calories.nil?
-      return [ SelectedMeal.new(staples.sample, DEFAULT_SCALE), SelectedMeal.new(main, DEFAULT_SCALE) ]
+      return [ build_selected(staples.sample), build_selected(main) ]
     end
 
     extras_calories = extras.sum(&:calories)
-    candidates = staples.flat_map do |staple|
-      portion_scales_for(staple).flat_map do |staple_scale|
-        portion_scales_for(main).map do |main_scale|
-          [ SelectedMeal.new(staple, staple_scale), SelectedMeal.new(main, main_scale) ]
-        end
-      end
-    end
-
-    candidates.min_by do |staple_meal, main_meal|
-      diff = (allocated_calories - (extras_calories + staple_meal.calories + main_meal.calories)).abs
+    candidates = scaled_candidates(staples).product(scaled_candidates([ main ].compact))
+    candidates.min_by do |pair|
+      meals = pair.compact
+      diff = (allocated_calories - (extras_calories + meals.sum(&:calories))).abs
       # 差が同じなら控えめな倍率を優先する
-      [ diff, staple_meal.portion_scale + main_meal.portion_scale ]
+      [ diff, meals.sum(&:portion_scale) ]
     end
+  end
+
+  # 等倍のSelectedMealを組み立てる（料理が無ければnil）
+  def build_selected(meal_master)
+    SelectedMeal.new(meal_master, DEFAULT_SCALE) if meal_master
+  end
+
+  # 料理×適用可能倍率の全組み合わせを列挙する
+  # 候補が無い場合は[nil]を返し、productの結果から自然に省けるようにする
+  def scaled_candidates(meal_masters)
+    candidates = meal_masters.flat_map do |meal_master|
+      portion_scales_for(meal_master).map { |scale| SelectedMeal.new(meal_master, scale) }
+    end
+    candidates.presence || [ nil ]
   end
 
   # 配分カロリーの残りに最も近づく一品料理の倍率を選ぶ

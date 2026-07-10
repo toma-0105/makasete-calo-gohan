@@ -206,6 +206,38 @@ RSpec.describe MenuGeneratorService do
         expect(selected_ids).not_to include(excluded_lunch_or_dinner_staple.id)
       end
     end
+
+    context 'アレルギー除外で主菜・汁物・一品料理の候補が尽きた場合' do
+      subject(:service) do
+        described_class.new(
+          excluded_meal_master_ids: MealMaster.where(category: [ :main_dish, :soup, :one_dish ]).pluck(:id),
+          target_calories: target_calories
+        )
+      end
+
+      before do
+        # 候補ゼロの汁物を選びに行く分岐も必ず通す
+        allow(service).to receive(:include_soup?).and_return(true)
+      end
+
+      context '目標カロリーが指定されている場合' do
+        let(:target_calories) { 1800 }
+
+        it 'エラーにならず、残っているカテゴリだけで献立を生成する' do
+          result = service.generate
+          expect(result.values.flatten.map(&:category)).to all(be_in(%w[staple side_dish]))
+        end
+      end
+
+      context '目標カロリーが未指定の場合' do
+        let(:target_calories) { nil }
+
+        it 'エラーにならず、選ばれた料理にnilが混ざらない' do
+          result = service.generate
+          expect(result.values.flatten).to all(satisfy { |meal| meal.meal_master.present? })
+        end
+      end
+    end
   end
 
   describe 'ジャンル制約（#105）' do
