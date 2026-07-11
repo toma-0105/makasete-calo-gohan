@@ -19,4 +19,14 @@ RSpec.describe 'seedデータの整合性' do
       expect(missing.map(&:name)).to be_empty
     end
   end
+
+  describe '分量表記（#135）' do
+    # グラムまたは個数単位（1個・1枚など）の表記
+    QUANTITY_PATTERN = /\d+(g|個|枚|本|切れ|尾|パック|食|杯|丁)/
+
+    it 'すべての一品料理に分量表記がある' do
+      missing = MealMaster.one_dish.reject { |meal| meal.name.match?(QUANTITY_PATTERN) }
+      expect(missing.map(&:name)).to be_empty
+    end
+  end
 end
