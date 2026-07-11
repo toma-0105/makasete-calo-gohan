@@ -153,9 +153,11 @@ RSpec.describe MenuGeneratorService do
           expect(scaled_meals).not_to be_empty
         end
 
-        it '1日の合計カロリーが目標の±10%に収まる' do
+        # 主食の増量でカロリーを埋めない設計（#134）のため、高い目標では単発生成の
+        # 下振れを許容する（下振れはMenuCalorieRangeSelectorServiceの再試行が担保する）
+        it '1日の合計カロリーが目標の+10%を超過しない' do
           total = service.generate.values.flatten.sum(&:calories)
-          expect(total).to be_within(320).of(3200)
+          expect(total).to be <= 3200 * 1.1
         end
       end
     end
@@ -312,6 +314,17 @@ RSpec.describe MenuGeneratorService do
           expect(meals.size).to be >= 2
         end
       end
+    end
+  end
+
+  describe '主食の倍率上限（#134）' do
+    it 'カロリーが不足しがちな高い目標でも、主食の倍率は上限以下に収まる' do
+      selected_meals = 10.times.flat_map do
+        described_class.new(target_calories: 3200).generate.values.flatten
+      end
+
+      staples = selected_meals.select { |meal| meal.category == 'staple' }
+      expect(staples.map(&:portion_scale)).to all(be <= described_class::STAPLE_MAX_PORTION_SCALE)
     end
   end
 

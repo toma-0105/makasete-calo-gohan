@@ -29,6 +29,9 @@ class MenuGeneratorService
   }.freeze
   # 倍率を適用しない場合の値（副菜・汁物は常に等倍）
   DEFAULT_SCALE = 1.0
+  # 主食に適用できる倍率の上限（#134）
+  # カロリー調整を主食の増量に頼ると炭水化物過多になるため、不足分は主菜の増量で埋める
+  STAPLE_MAX_PORTION_SCALE = 1.25
 
   def initialize(excluded_meal_master_ids: [], target_calories: nil)
     # 昼・夕は共通プールのため、選出済みIDを記録して重複を避ける
@@ -136,7 +139,8 @@ class MenuGeneratorService
     end
 
     extras_calories = extras.sum(&:calories)
-    candidates = scaled_candidates(staples).product(scaled_candidates([ main ].compact))
+    candidates = scaled_candidates(staples, max_scale: STAPLE_MAX_PORTION_SCALE)
+                 .product(scaled_candidates([ main ].compact))
     candidates.min_by do |pair|
       meals = pair.compact
       diff = (allocated_calories - (extras_calories + meals.sum(&:calories))).abs
@@ -152,9 +156,9 @@ class MenuGeneratorService
 
   # 料理×適用可能倍率の全組み合わせを列挙する
   # 候補が無い場合は[nil]を返し、productの結果から自然に省けるようにする
-  def scaled_candidates(meal_masters)
+  def scaled_candidates(meal_masters, max_scale: nil)
     candidates = meal_masters.flat_map do |meal_master|
-      portion_scales_for(meal_master).map { |scale| SelectedMeal.new(meal_master, scale) }
+      portion_scales_for(meal_master, max_scale: max_scale).map { |scale| SelectedMeal.new(meal_master, scale) }
     end
     candidates.presence || [ nil ]
   end
@@ -168,8 +172,12 @@ class MenuGeneratorService
   end
 
   # その料理に適用できる倍率の候補（分量の変え方の分類による）
-  def portion_scales_for(meal_master)
-    PORTION_SCALES_BY_TYPE.fetch(meal_master.scaling_type)
+  # max_scale指定時はそれ以下の倍率に絞る
+  def portion_scales_for(meal_master, max_scale: nil)
+    scales = PORTION_SCALES_BY_TYPE.fetch(meal_master.scaling_type)
+    return scales unless max_scale
+
+    scales.select { |scale| scale <= max_scale }
   end
 
   # 主役の料理（主菜・一品料理）とジャンルが合う候補に絞り込む
