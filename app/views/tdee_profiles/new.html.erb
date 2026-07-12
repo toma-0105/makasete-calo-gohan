@@ -34,7 +34,7 @@
         <%= f.number_field :height,
             placeholder: "例：165.5",
             step: 0.1,
-            class: "input w-full bg-yellow-50 border-yellow-200" %>
+            class: "input w-full bg-yellow-50 border-yellow-200 placeholder:text-gray-500" %>
       </div>
 
       <div class="mb-4">
@@ -43,14 +43,14 @@
         <%= f.number_field :weight,
             placeholder: "例：50.5",
             step: 0.1,
-            class: "input w-full bg-yellow-50 border-yellow-200" %>
+            class: "input w-full bg-yellow-50 border-yellow-200 placeholder:text-gray-500" %>
       </div>
 
       <div class="mb-4">
         <%= f.label :age, "年齢", class: "block text-sm mb-1" %>
         <%= f.number_field :age,
             placeholder: "例：20",
-            class: "input w-full bg-yellow-50 border-yellow-200" %>
+            class: "input w-full bg-yellow-50 border-yellow-200 placeholder:text-gray-500" %>
       </div>
 
       <div class="mb-4">
@@ -81,7 +81,7 @@
               ["非常に活発に動く", "super_active"]
             ],
             {},
-            class: "select w-full bg-yellow-50 border-yellow-200 has-[option:disabled:checked]:text-gray-400 [&>option:not(:disabled)]:text-black" %>
+            class: "select w-full bg-yellow-50 border-yellow-200 has-[option:disabled:checked]:text-gray-500 [&>option:not(:disabled)]:text-black" %>
       </div>
 
       <div>
