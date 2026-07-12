@@ -10,7 +10,7 @@
         <%= f.label :name, "ユーザーネーム", class: "block text-sm mb-1" %>
         <%= f.text_field :name,
             placeholder: "例：taro_yamada",
-            class: "input w-full bg-yellow-50 border-yellow-200" %>
+            class: "input w-full bg-yellow-50 border-yellow-200 placeholder:text-gray-500" %>
       </div>
 
       <div class="mb-4">
@@ -18,7 +18,7 @@
         <%= f.email_field :email,
             placeholder: "example@mail.com",
             autocomplete: "email",
-            class: "input w-full bg-yellow-50 border-yellow-200" %>
+            class: "input w-full bg-yellow-50 border-yellow-200 placeholder:text-gray-500" %>
       </div>
 
       <div class="mb-4">
@@ -26,7 +26,7 @@
         <%= f.password_field :password,
             placeholder: "6文字以上",
             autocomplete: "new-password",
-            class: "input w-full bg-yellow-50 border-yellow-200" %>
+            class: "input w-full bg-yellow-50 border-yellow-200 placeholder:text-gray-500" %>
       </div>
 
       <div class="mb-6">
@@ -34,7 +34,7 @@
         <%= f.password_field :password_confirmation,
             placeholder: "もう一度入力",
             autocomplete: "new-password",
-            class: "input w-full bg-yellow-50 border-yellow-200" %>
+            class: "input w-full bg-yellow-50 border-yellow-200 placeholder:text-gray-500" %>
       </div>
 
       <div class="mb-3">
