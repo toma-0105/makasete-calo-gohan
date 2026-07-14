@@ -1,7 +1,8 @@
 <%# フラッシュメッセージをトースト形式で画面右上に表示する %>
 <%# notice（成功・緑）は数秒後に自動で消え、alert（エラー・赤）は×ボタンで閉じるまで残す %>
 <% if notice || alert %>
-  <div class="toast toast-top toast-end z-50">
+  <%# top-14でヘッダー（sticky・高さ約48px）に重ならない位置から表示する %>
+  <div class="toast toast-top toast-end top-14 z-50">
     <% if notice %>
       <div class="alert alert-success"
            data-controller="flash"
