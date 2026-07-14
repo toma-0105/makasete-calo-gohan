@@ -20,12 +20,7 @@
   <%# min-h-screenとflexで「ヘッダー・本文・フッター」を縦に並べ、本文(flex-1)が余白を埋めることでフッターを最下部に固定する %>
   <body class="bg-[#FFFEF5] min-h-screen flex flex-col">
     <%= render "shared/header" %>
-  <% if notice %>
-    <p class="notice"><%= notice %></p>
-  <% end %>
-  <% if alert %>
-    <p class="alert"><%= alert %></p>
-  <% end %>
+    <%= render "shared/flash" %>
     <%= yield %>
     <%= render "shared/footer" %>
   </body>

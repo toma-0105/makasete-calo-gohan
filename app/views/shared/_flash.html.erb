@@ -1,0 +1,31 @@
+<%# フラッシュメッセージをトースト形式で画面右上に表示する %>
+<%# notice（成功・緑）は数秒後に自動で消え、alert（エラー・赤）は×ボタンで閉じるまで残す %>
+<% if notice || alert %>
+  <div class="toast toast-top toast-end z-50">
+    <% if notice %>
+      <div class="alert alert-success"
+           data-controller="flash"
+           data-flash-auto-dismiss-value="true"
+           role="status">
+        <%# 色だけに頼らず意味が伝わるよう、成功はチェックマークのアイコンを添える %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span><%= notice %></span>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-error"
+           data-controller="flash"
+           data-flash-auto-dismiss-value="false"
+           role="alert">
+        <%# エラーは読み逃しを防ぐため自動で消さず、×アイコンで意味を補強する %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span><%= alert %></span>
+        <button type="button" class="btn btn-ghost btn-xs" data-action="flash#close" aria-label="閉じる">✕</button>
+      </div>
+    <% end %>
+  </div>
+<% end %>
