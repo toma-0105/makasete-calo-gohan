@@ -22,6 +22,17 @@ class ApplicationController < ActionController::Base
   end
   helper_method :home_path_for
 
+  # アレルギー設定画面から抜けるときの遷移先を返す
+  # TDEE未診断（初回オンボーディング中）: TDEE診断へ進める
+  # TDEE診断済み（あとから設定変更に来た）: 元のホームへ戻す
+  def after_allergen_setup_path_for(user)
+    return new_tdee_profile_path if user.tdee_profiles.none?
+
+    home_path_for(user)
+  end
+  helper_method :after_allergen_setup_path_for
+
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :name ])
   end

@@ -17,8 +17,8 @@ class UserAllergensController < ApplicationController
       end
     end
 
-    # 会員はマイページへ、ゲストはマイページに入れないためゲスト用ホームへ
-    redirect_to home_path_for(current_user), notice: "アレルギー設定を保存しました"
+    # 初回はTDEE診断へ進み、設定変更で来た場合は元のホームへ戻る
+    redirect_to after_allergen_setup_path_for(current_user), notice: "アレルギー設定を保存しました"
   rescue ActiveRecord::ActiveRecordError
     @allergen_masters = AllergenMaster.all
     flash.now[:alert] = "保存に失敗しました"
