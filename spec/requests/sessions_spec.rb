@@ -13,7 +13,7 @@ RSpec.describe "認証後のリダイレクト", type: :request do
   end
 
   describe "会員登録後" do
-    it "TDEE診断画面にリダイレクトされる" do
+    it "アレルギー設定画面にリダイレクトされる" do
       post user_registration_path, params: {
         user: {
           name:                  "新規ユーザー",
@@ -22,7 +22,7 @@ RSpec.describe "認証後のリダイレクト", type: :request do
           password_confirmation: "password123"
         }
       }
-      expect(response).to redirect_to(new_tdee_profile_path)
+      expect(response).to redirect_to(new_user_allergen_path)
     end
   end
 end

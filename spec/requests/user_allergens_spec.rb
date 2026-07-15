@@ -42,8 +42,12 @@ RSpec.describe "UserAllergens", type: :request do
   end
 
   describe "POST /user_allergens" do
-    context "既存の設定を変更する場合" do
-      before { create(:user_allergen, user: user, allergen_master: old_allergen) }
+    context "既存の設定を変更する場合（TDEE診断済み）" do
+      before do
+        # TDEE診断済み＝オンボーディング完了後の設定変更として扱われる
+        create(:tdee_profile, user: user)
+        create(:user_allergen, user: user, allergen_master: old_allergen)
+      end
 
       it "古い設定が削除され新しい設定に置き換わる" do
         post user_allergens_path, params: { allergen_ids: [ other_allergen.id ] }
@@ -53,6 +57,13 @@ RSpec.describe "UserAllergens", type: :request do
       it "マイページへリダイレクトされる" do
         post user_allergens_path, params: { allergen_ids: [ other_allergen.id ] }
         expect(response).to redirect_to(mypage_path)
+      end
+    end
+
+    context "TDEE未診断（初回オンボーディング中）の場合" do
+      it "TDEE診断画面へリダイレクトされる" do
+        post user_allergens_path, params: { allergen_ids: [ old_allergen.id ] }
+        expect(response).to redirect_to(new_tdee_profile_path)
       end
     end
   end

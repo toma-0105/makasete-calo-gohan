@@ -32,7 +32,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :after_allergen_setup_path_for
 
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :name ])
   end
