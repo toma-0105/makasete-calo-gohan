@@ -3,7 +3,11 @@
 <div class="flex-1 flex flex-col">
   <main class="flex-1 px-5 py-10 max-w-sm mx-auto w-full">
 
-    <h1 class="text-[20px] font-bold text-[#2a2810] mb-8"><%= @user.name %>さんのマイページ</h1>
+    <%# 見出しの横にトマトのキャラクターを並べる（装飾目的のため alt は空にする） %>
+    <div class="flex items-center gap-2 mb-8">
+      <%= image_tag "tomato_character.png", alt: "", class: "w-10 h-10" %>
+      <h1 class="text-[20px] font-bold text-[#2a2810]"><%= @user.name %>さんのマイページ</h1>
+    </div>
 
     <%# TDEE診断履歴カード %>
     <div class="card bg-[#FFF8C4] border border-[#EAE070] rounded-xl mb-5">
