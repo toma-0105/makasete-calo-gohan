@@ -6,9 +6,9 @@ RSpec.describe "GuestSessions", type: :request do
       expect { post guest_login_path }.to change(User.where(guest: true), :count).by(1)
     end
 
-    it "ログイン状態になり、TDEE診断画面にリダイレクトされる" do
+    it "ログイン状態になり、アレルギー設定画面にリダイレクトされる" do
       post guest_login_path
-      expect(response).to redirect_to(new_tdee_profile_path)
+      expect(response).to redirect_to(new_user_allergen_path)
 
       # リダイレクト先にアクセスできる＝ログイン済み（未ログインならログイン画面へ飛ばされる）
       follow_redirect!

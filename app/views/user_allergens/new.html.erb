@@ -3,8 +3,8 @@
     <div class="w-full max-w-md">
       <div class="flex flex-col items-center gap-3 mb-6">
         <h1 class="text-3xl font-bold text-center">アレルギーに該当するものを<br>選んでください</h1>
-        <%# 会員はマイページへ、ゲストはゲスト用ホーム（TDEE結果）へ %>
-        <%= link_to "スキップ", home_path_for(current_user), class: "btn btn-outline btn-sm" %>
+        <%# 初回はTDEE診断へ、設定変更時は元のホームへ %>
+        <%= link_to "スキップ", after_allergen_setup_path_for(current_user), class: "btn btn-outline btn-sm" %>
       </div>
 
       <% if flash[:alert] %>
@@ -44,7 +44,7 @@
 
         <div class="w-full space-y-2">
           <%= form.submit "保存", class: "btn btn-primary w-full" %>
-          <%= link_to "アレルギーはないです", home_path_for(current_user), class: "btn btn-outline w-full" %>
+          <%= link_to "アレルギーはないです", after_allergen_setup_path_for(current_user), class: "btn btn-outline w-full" %>
         </div>
       <% end %>
     </div>
