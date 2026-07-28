@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     patch :save, on: :member
   end
 
+  resource :guest_promotion, only: [ :new, :create ], controller: "guest_promotions"
   # 使い方ページ
   get "how_to_use", to: "static_pages#how_to_use", as: :how_to_use
 

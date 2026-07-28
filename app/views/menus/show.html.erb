@@ -87,7 +87,7 @@
         <% end %>
 
         <% if current_user.guest? %>
-          <%= link_to "はじめよう！", new_user_registration_path, class: primary_button_classes("flex-1 text-center") %>
+          <%= link_to "はじめよう！", new_guest_promotion_path, class: primary_button_classes("flex-1 text-center") %>
         <% end %>
       </div>
     </div>
