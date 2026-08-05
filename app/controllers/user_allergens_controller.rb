@@ -22,6 +22,6 @@ class UserAllergensController < ApplicationController
   rescue ActiveRecord::ActiveRecordError
     @allergen_masters = AllergenMaster.all
     flash.now[:alert] = "保存に失敗しました"
-    render :new, status: :unprocessable_entity
+    render :new, status: :unprocessable_content
   end
 end

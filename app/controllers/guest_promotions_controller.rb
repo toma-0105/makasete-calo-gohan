@@ -12,7 +12,7 @@ class GuestPromotionsController < ApplicationController
         bypass_sign_in(@user)
         redirect_to mypage_path, notice: "会員登録が完了しました！"
       else
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
       end
     end
 
