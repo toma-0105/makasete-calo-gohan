@@ -75,7 +75,9 @@ RSpec.describe "GuestPromotions", type: :request do
       before { sign_in member }
 
       it "昇格処理は行われずマイページにリダイレクトされる" do
-        post guest_promotion_path, params: valid_params
+        expect {
+          post guest_promotion_path, params: valid_params
+        }.not_to change { member.reload.email } # 会員のデータが書き換えられないこと
         expect(response).to redirect_to(mypage_path)
       end
     end
