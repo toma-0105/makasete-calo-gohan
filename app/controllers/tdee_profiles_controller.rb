@@ -12,7 +12,7 @@ class TdeeProfilesController < ApplicationController
       TdeeCalculatorService.new(@tdee_profile).calculate
       redirect_to tdee_profile_path(@tdee_profile), notice: "TDEE診断が完了しました"
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
