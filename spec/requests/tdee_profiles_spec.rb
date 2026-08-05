@@ -9,6 +9,13 @@ RSpec.describe "TdeeProfiles", type: :request do
       get "/tdee_profiles/new"
       expect(response).to have_http_status(:success)
     end
+
+    context "ログインしていない場合" do
+      it "ログインページにリダイレクトされる" do
+        get new_tdee_profile_path
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
   end
 
   describe "GET /tdee_profiles/:id（診断結果画面）" do
