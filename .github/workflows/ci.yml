@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: RuboCopでコードスタイルをチェック
+        run: bin/rubocop -f github
+
+  brakeman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Brakemanでセキュリティ脆弱性をスキャン
+        # bin/brakemanは--ensure-latestを強制するため、gem更新チェック(Dependabotの担当)と
+        # コードの脆弱性チェックを切り分けるためbundle execで直接実行する
+        run: bundle exec brakeman --no-pager
+
+  rspec:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        ports: [ "5432:5432" ]
+        env:
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      RAILS_ENV: test
+      # database.ymlのdefaultはDocker Compose用のhost: dbになっているため、
+      # CI上ではDATABASE_URLで上書きしてservice containerのpostgresに接続する
+      DATABASE_URL: postgres://postgres:password@localhost:5432/myapp_test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: yarn
+
+      - name: JSパッケージをインストール
+        run: yarn install --frozen-lockfile
+
+      - name: アセットをビルド（layoutが参照するapplication.js/cssを生成）
+        run: bin/rails assets:precompile
+
+      - name: テスト用DBを準備
+        run: bin/rails db:test:prepare
+
+      - name: RSpecを実行
+        run: bundle exec rspec
