@@ -11,3 +11,5 @@ services:
         sync: false
       - key: RAILS_MASTER_KEY
         sync: false
+      - key: GA_MEASUREMENT_ID
+        sync: false
