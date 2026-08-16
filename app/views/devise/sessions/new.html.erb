@@ -23,6 +23,13 @@
             class: "input w-full bg-yellow-50 border-yellow-200 placeholder:text-gray-500" %>
       </div>
 
+      <% if devise_mapping.rememberable? %>
+        <div class="mb-4 flex items-center gap-2">
+          <%= f.check_box :remember_me, class: "checkbox checkbox-sm" %>
+          <%= f.label :remember_me, "ログイン状態を保持する", class: "text-sm" %>
+        </div>
+      <% end %>
+
       <div class="mb-3">
         <%= f.submit "ログイン",
             class: "btn w-full bg-yellow-400 hover:bg-yellow-500 border-none text-white font-bold" %>
