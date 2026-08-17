@@ -14,10 +14,8 @@ class ApplicationController < ActionController::Base
   # ログイン中ユーザーの「ホーム画面」のパスを返す
   # 会員: マイページ / ゲスト: 最新のTDEE結果（未診断なら診断ページ）
   # ゲストをマイページ以外へ逃がす際の遷移先を一元管理し、リダイレクトループを防ぐ
-  def home_path_for(user)
+  def home_path_for(user, tdee_profile: user.tdee_profiles.last)
     return mypage_path unless user.guest?
-
-    tdee_profile = user.tdee_profiles.last
     tdee_profile ? tdee_profile_path(tdee_profile) : new_tdee_profile_path
   end
   helper_method :home_path_for
@@ -26,9 +24,10 @@ class ApplicationController < ActionController::Base
   # TDEE未診断（初回オンボーディング中）: TDEE診断へ進める
   # TDEE診断済み（あとから設定変更に来た）: 元のホームへ戻す
   def after_allergen_setup_path_for(user)
-    return new_tdee_profile_path if user.tdee_profiles.none?
+    tdee_profile = user.tdee_profiles.last
+    return new_tdee_profile_path unless tdee_profile
 
-    home_path_for(user)
+    home_path_for(user, tdee_profile: tdee_profile)
   end
   helper_method :after_allergen_setup_path_for
 
