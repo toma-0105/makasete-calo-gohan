@@ -21,6 +21,11 @@ Rails.application.routes.draw do
     post :regenerate, on: :member
     # 献立の保存（会員のみ。保存済みフラグを立てて履歴に残す）
     patch :save, on: :member
+
+    # 1食（meal_timing）単位の入れ替え（#164）
+    resources :meals, only: [], param: :meal_timing, constraints: { meal_timing: /breakfast|lunch|dinner/ } do
+      post :regenerate, on: :member
+    end
   end
 
   resource :guest_promotion, only: [ :new, :create ], controller: "guest_promotions"
