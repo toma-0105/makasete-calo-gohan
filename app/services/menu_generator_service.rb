@@ -43,10 +43,18 @@ class MenuGeneratorService
 
   def generate
     {
-      breakfast: generate_breakfast,
-      lunch: generate_lunch_or_dinner(period: :lunch),
-      dinner: generate_lunch_or_dinner(period: :dinner)
+      breakfast: generate_for(:breakfast),
+      lunch: generate_for(:lunch),
+      dinner: generate_for(:dinner)
     }
+  end
+
+  # 対象の1食（meal_timing）分だけ生成する（MealRegenerateServiceから利用）
+  def generate_for(meal_timing)
+    case meal_timing.to_sym
+    when :breakfast then generate_breakfast
+    when :lunch, :dinner then generate_lunch_or_dinner(period: meal_timing.to_sym)
+    end
   end
 
   private

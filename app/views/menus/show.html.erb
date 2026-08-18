@@ -31,7 +31,7 @@
       <% end %>
     </div>
 
-    <%# 朝食・昼食・夕食 %>
+        <%# 朝食・昼食・夕食 %>
     <% [["breakfast", "朝食"], ["lunch", "昼食"], ["dinner", "夕食"]].each do |timing, label| %>
       <div class="mb-4">
         <h2 class="text-[14px] font-bold text-[#2a2810] mb-2"><%= label %></h2>
@@ -52,6 +52,12 @@
             </div>
           <% end %>
         </div>
+
+        <%# 追加：この食事だけ入れ替えるボタン（timingごとに1つ） %>
+        <%= form_with url: regenerate_menu_meal_path(@menu, timing),
+              data: { action: "submit->loading#showLoading" }, class: "mt-2" do |f| %>
+          <%= f.submit "この食事を入れ替える", class: secondary_button_classes("block w-full text-[12px] py-2") %>
+        <% end %>
       </div>
     <% end %>
 
