@@ -33,4 +33,8 @@ Rails.application.routes.draw do
   get "how_to_use", to: "static_pages#how_to_use", as: :how_to_use
 
   root "static_pages#top"
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
