@@ -8,6 +8,7 @@ class User < ApplicationRecord
          has_many :menus
          has_many :user_allergens
          has_many :allergens, through: :user_allergens, source: :allergen_master
+         has_many :favorites, dependent: :destroy
 
          def send_devise_notification(notification, *args)
             devise_mailer.send(notification, self, *args).deliver_later

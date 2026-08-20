@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_08_19_081256) do
+ActiveRecord::Schema[8.0].define(version: 2026_08_20_074219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,6 +19,16 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_19_081256) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category", default: 0, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "meal_master_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meal_master_id"], name: "index_favorites_on_meal_master_id"
+    t.index ["user_id", "meal_master_id"], name: "index_favorites_on_user_id_and_meal_master_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -201,6 +211,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_19_081256) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "favorites", "meal_masters"
+  add_foreign_key "favorites", "users"
   add_foreign_key "meal_ingredients", "allergen_masters"
   add_foreign_key "meal_ingredients", "meal_masters"
   add_foreign_key "meals", "meal_masters"

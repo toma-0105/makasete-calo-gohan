@@ -34,6 +34,12 @@ Rails.application.routes.draw do
 
   root "static_pages#top"
 
+  resources :meal_masters, only: [] do
+    resource :favorite, only: [ :create, :destroy ]
+  end
+
+  resources :favorites, only: [ :index ]
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
