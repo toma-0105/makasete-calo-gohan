@@ -24,13 +24,18 @@ class MealRegenerateService
   def generate_new_meals
     MenuGeneratorService.new(
       excluded_meal_master_ids: excluded_meal_master_ids,
-      target_calories: @tdee_profile.target_calories
+      target_calories: @tdee_profile.target_calories,
+      favorite_meal_master_ids: favorite_meal_master_ids
     ).generate_for(@meal_timing)
   end
 
   # 現在の3食に使われている料理と、アレルギー食材を含む料理を候補から除外する（#164）
   def excluded_meal_master_ids
     @menu.meals.pluck(:meal_master_id) + AllergenExclusionService.new(@tdee_profile.user).excluded_meal_master_ids
+  end
+  # お気に入り登録済みの料理ID（#165）
+  def favorite_meal_master_ids
+    @tdee_profile.user.favorites.pluck(:meal_master_id)
   end
 
   def save_meals!(selected_meals)

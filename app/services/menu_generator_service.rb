@@ -16,6 +16,8 @@ class MenuGeneratorService
   ONE_DISH_SELECTION_PROBABILITY = 0.3
   # 基本形（主食+主菜+副菜）・one_dishに汁物を追加する確率
   SOUP_INCLUSION_PROBABILITY = 0.5
+  # お気に入り登録済みの料理が候補にある場合、優先的に選出する確率（#165）
+  FAVORITE_SELECTION_PROBABILITY = 0.5
   # 昼食（お弁当想定）から除外するスープ系一品料理のキーワード
   LUNCH_EXCLUDED_ONE_DISH_KEYWORDS = %w[ラーメン スープ 汁 うどん].freeze
   # 目標カロリーの朝・昼・夕への配分比率
@@ -33,13 +35,16 @@ class MenuGeneratorService
   # カロリー調整を主食の増量に頼ると炭水化物過多になるため、不足分は主菜の増量で埋める
   STAPLE_MAX_PORTION_SCALE = 1.25
 
-  def initialize(excluded_meal_master_ids: [], target_calories: nil)
+    def initialize(excluded_meal_master_ids: [], target_calories: nil, favorite_meal_master_ids: [])
     # 昼・夕は共通プールのため、選出済みIDを記録して重複を避ける
     @used_meal_master_ids = []
     # アレルギー食材を含む料理など、選出対象から除外するID（#26）
     @excluded_meal_master_ids = excluded_meal_master_ids
     @target_calories = target_calories
+    # お気に入り登録済みの料理ID。主菜・一品料理・副菜・汁物の選出時に優先する（#165）
+    @favorite_meal_master_ids = favorite_meal_master_ids
   end
+
 
   def generate
     {
@@ -215,7 +220,14 @@ class MenuGeneratorService
     rand < SOUP_INCLUSION_PROBABILITY
   end
 
-  def pick_random(meals)
-    meals.to_a.sample
+    def pick_random(meals)
+    candidates = meals.to_a
+    favorite_candidates = candidates.select { |meal| @favorite_meal_master_ids.include?(meal.id) }
+    pool = favorite_candidates.any? && select_favorite? ? favorite_candidates : candidates
+    pool.sample
+  end
+
+  def select_favorite?
+    rand < FAVORITE_SELECTION_PROBABILITY
   end
 end

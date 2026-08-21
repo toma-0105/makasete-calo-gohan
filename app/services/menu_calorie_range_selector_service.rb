@@ -8,6 +8,7 @@ class MenuCalorieRangeSelectorService
     @target_calories = tdee_profile.target_calories
     @min_calories = @target_calories * MIN_CALORIE_RATIO
     @excluded_meal_master_ids = AllergenExclusionService.new(tdee_profile.user).excluded_meal_master_ids
+    @favorite_meal_master_ids = tdee_profile.user.favorites.pluck(:meal_master_id)
   end
 
   def generate
@@ -18,7 +19,8 @@ class MenuCalorieRangeSelectorService
       # 目標カロリーを渡し、生成側で配分・倍率調整を行う
       menu = MenuGeneratorService.new(
         excluded_meal_master_ids: @excluded_meal_master_ids,
-        target_calories: @target_calories
+        target_calories: @target_calories,
+        favorite_meal_master_ids: @favorite_meal_master_ids
       ).generate
       total_calories = total_calories_for(menu)
 

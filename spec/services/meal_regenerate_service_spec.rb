@@ -57,7 +57,7 @@ RSpec.describe MealRegenerateService do
 
       current_ids = menu.meals.pluck(:meal_master_id)
       expect(MenuGeneratorService).to receive(:new)
-        .with(excluded_meal_master_ids: match_array(current_ids + [ 999 ]), target_calories: tdee_profile.target_calories)
+        .with(excluded_meal_master_ids: match_array(current_ids + [ 999 ]), target_calories: tdee_profile.target_calories, favorite_meal_master_ids: [])
         .and_return(instance_double(MenuGeneratorService, generate_for: new_dinner_meals))
 
       service.regenerate!
