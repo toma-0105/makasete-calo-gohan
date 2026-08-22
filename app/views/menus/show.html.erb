@@ -36,7 +36,7 @@
       <div class="mb-4">
         <h2 class="text-[14px] font-bold text-[#2a2810] mb-2"><%= label %></h2>
         <div class="bg-white border border-[#EAE070] rounded-xl divide-y divide-[#F0ECC4]">
-          <% (@meals_by_timing[timing] || []).each do |meal| %>
+                   <% (@meals_by_timing[timing] || []).each do |meal| %>
             <div class="flex justify-between items-center px-4 py-3">
               <p class="text-[14px] text-[#3a3820]">
                 <%# グラム調整の料理は換算後のグラム数で表示する（例: ご飯(225g)） %>
@@ -46,9 +46,20 @@
                   <span class="text-[11px] text-[#b8860b] font-medium"><%= label %></span>
                 <% end %>
               </p>
-              <p class="text-[12px] text-[#9a9570] shrink-0 ml-2">
-                <%= number_with_delimiter(meal.calories.to_i) %> kcal
-              </p>
+              <div class="flex items-center gap-2 shrink-0 ml-2">
+                <p class="text-[12px] text-[#9a9570]">
+                  <%= number_with_delimiter(meal.calories.to_i) %> kcal
+                </p>
+                <%# お気に入り登録・解除（会員のみ表示。ゲストには表示しない） %>
+                <% unless current_user.guest? %>
+                  <% favorited = @favorite_meal_master_ids.include?(meal.meal_master_id) %>
+                                    <%= form_with url: meal_master_favorite_path(meal.meal_master), method: (favorited ? :delete : :post) do |f| %>
+                    <%= f.submit favorited ? "★" : "☆",
+                          class: "p-3 -m-3 bg-transparent border-none cursor-pointer text-[18px] leading-none transition hover:scale-110 active:scale-95 #{favorited ? 'text-[#F9C639] hover:text-[#d4a317]' : 'text-[#9a9570] hover:text-[#F9C639]'}" %>
+                  <% end %>
+                <% end %>
+
+              </div>
             </div>
           <% end %>
         </div>

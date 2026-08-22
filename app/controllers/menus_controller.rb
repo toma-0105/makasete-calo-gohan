@@ -28,6 +28,7 @@ class MenusController < ApplicationController
     @menu = current_user.menus.includes(meals: :meal_master).find(params[:id])
     @meals_by_timing = @menu.meals.group_by(&:meal_timing)
     @tdee_profile = current_user.tdee_profiles.last
+    @favorite_meal_master_ids = current_user.favorites.pluck(:meal_master_id)
   end
 
   # 献立に保存済みフラグを立てて履歴に残す（会員のみ）

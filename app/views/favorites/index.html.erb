@@ -1,0 +1,41 @@
+<% content_for :title, "お気に入り料理 - まかせてカロごはん" %>
+
+<div class="flex-1 flex flex-col">
+  <main class="flex-1 px-5 py-6 max-w-sm mx-auto w-full">
+
+    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">お気に入り料理</h1>
+    <p class="text-[13px] text-[#9a9570] mb-5">お気に入り登録した料理の一覧です</p>
+
+    <% if @favorites.any? %>
+      <div class="bg-white border border-[#EAE070] rounded-xl divide-y divide-[#F0ECC4]">
+        <% @favorites.each do |favorite| %>
+          <div class="flex justify-between items-center px-4 py-3">
+            <p class="text-[14px] text-[#3a3820]">
+              <%= favorite.meal_master.name %>
+            </p>
+            <div class="flex items-center gap-2 shrink-0 ml-2">
+              <p class="text-[12px] text-[#9a9570]">
+                <%= number_with_delimiter(favorite.meal_master.calories) %> kcal
+              </p>
+              <%= form_with url: meal_master_favorite_path(favorite.meal_master), method: :delete do |f| %>
+                              <%= f.submit "★",
+                    class: "p-3 -m-3 bg-transparent border-none cursor-pointer text-[18px] leading-none transition active:scale-95 text-[#F9C639]" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="bg-[#FFF8C4] border border-[#EAE070] rounded-xl p-6 text-center">
+        <p class="text-[14px] text-[#5a5530] mb-1">お気に入りの料理はまだありません</p>
+        <p class="text-[12px] text-[#9a9570]">献立の中で☆を押すと、ここに表示されます</p>
+      </div>
+    <% end %>
+
+    <%# マイページへ戻る %>
+    <div class="mt-6">
+      <%= link_to "マイページに戻る", mypage_path, class: secondary_button_classes("block w-full") %>
+    </div>
+
+  </main>
+</div>
