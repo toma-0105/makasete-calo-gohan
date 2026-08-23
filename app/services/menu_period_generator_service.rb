@@ -20,7 +20,7 @@ class MenuPeriodGeneratorService
     Array.new(@days) do |i|
       menu_hash = MenuCalorieRangeSelectorService.new(
         @tdee_profile,
-        additional_excluded_meal_master_ids: used_meal_master_ids
+        additional_excluded_meal_master_ids: used_meal_master_ids.dup
       ).generate
 
       used_meal_master_ids.concat(menu_hash.values.flatten.map { |selected| selected.meal_master.id })
