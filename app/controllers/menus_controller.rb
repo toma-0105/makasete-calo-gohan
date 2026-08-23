@@ -19,9 +19,14 @@ class MenusController < ApplicationController
       return redirect_to new_tdee_profile_path, alert: "先にTDEE診断を行ってください"
     end
 
-    menu_hash = MenuCalorieRangeSelectorService.new(tdee_profile).generate
-    menu = MenuSaveService.new(current_user, menu_hash).save!
-    redirect_to menu_path(menu)
+    days = params[:days].presence&.to_i || 1
+    menus = MenuPeriodGeneratorService.new(current_user, tdee_profile, days: days).generate!
+    redirect_to period_menus_path(menu_ids: menus.map(&:id).join(","))
+  end
+  # 複数日分の生成結果をまとめて表示する
+  def period
+    menu_ids = params[:menu_ids].to_s.split(",").map(&:to_i)
+    @menus = current_user.menus.where(id: menu_ids).order(:date)
   end
 
   def show

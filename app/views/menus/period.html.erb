@@ -1,0 +1,37 @@
+<% content_for :title, "生成した献立 - まかせてカロごはん" %>
+
+<div class="flex-1 flex flex-col">
+  <main class="flex-1 px-5 py-6 max-w-sm mx-auto w-full">
+
+    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1"><%= @menus.size %>日分の献立を生成しました</h1>
+    <p class="text-[13px] text-[#9a9570] mb-5">日付をタップすると、それぞれの献立の詳細・保存ができます</p>
+
+    <% if @menus.any? %>
+      <div class="flex flex-col gap-3">
+        <% @menus.each do |menu| %>
+          <%= link_to menu_path(menu),
+                class: "block bg-white border border-[#EAE070] rounded-xl px-4 py-3.5 hover:bg-[#FFF8C4] transition-colors" do %>
+            <div class="flex justify-between items-center">
+              <p class="text-[14px] font-medium text-[#3a3820]">
+                <%= menu.date.strftime("%Y年%m月%d日") %>
+              </p>
+              <p class="text-[13px] text-[#9a9570] shrink-0 ml-2">
+                <%= number_with_delimiter(menu.total_calories.to_i) %> kcal
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="bg-[#FFF8C4] border border-[#EAE070] rounded-xl p-6 text-center">
+        <p class="text-[14px] text-[#5a5530]">献立が見つかりませんでした</p>
+      </div>
+    <% end %>
+
+    <div class="mt-6">
+      <%= link_to "マイページに戻る", mypage_path,
+            class: secondary_button_classes("block w-full") %>
+    </div>
+
+  </main>
+</div>

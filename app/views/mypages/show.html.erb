@@ -44,9 +44,16 @@
           </div>
 
           <%= form_with url: menus_path, data: { action: "submit->loading#showLoading" } do |f| %>
-            <%= f.submit "今日の献立を生成する",
+            <div class="mb-3">
+              <label for="days" class="block text-[13px] text-[#7a7550] mb-1">生成する日数</label>
+              <%= f.select :days,
+                  (MenuPeriodGeneratorService::MIN_GENERATION_DAYS..MenuPeriodGeneratorService::MAX_GENERATION_DAYS).map { |d| ["#{d}日分", d] },
+                  { selected: 1 },
+                  class: "select select-bordered w-full bg-[#FFFEF5]" %>
+            </div>
+            <%= f.submit "献立を生成する",
                   class: primary_button_classes("block w-full") %>
-          <% end %>
+            <% end %>
         </div>
       <% end %>
 
