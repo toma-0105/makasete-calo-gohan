@@ -4,10 +4,12 @@ class MenuCalorieRangeSelectorService
   # 再生成を試みる上限回数
   MAX_ATTEMPTS = 10
 
-  def initialize(tdee_profile)
+  def initialize(tdee_profile, additional_excluded_meal_master_ids: [])
     @target_calories = tdee_profile.target_calories
     @min_calories = @target_calories * MIN_CALORIE_RATIO
-    @excluded_meal_master_ids = AllergenExclusionService.new(tdee_profile.user).excluded_meal_master_ids
+    @excluded_meal_master_ids =
+      AllergenExclusionService.new(tdee_profile.user).excluded_meal_master_ids +
+      additional_excluded_meal_master_ids
     @favorite_meal_master_ids = tdee_profile.user.favorites.pluck(:meal_master_id)
   end
 

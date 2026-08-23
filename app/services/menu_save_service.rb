@@ -1,14 +1,15 @@
 class MenuSaveService
-  def initialize(user, menu_hash)
+  def initialize(user, menu_hash, date: Date.today)
     @user      = user
     @menu_hash = menu_hash
+    @date      = date
   end
 
   def save!
     ApplicationRecord.transaction do
       menu = Menu.create!(
         user:           @user,
-        date:           Date.today,
+        date:           @date,
         total_calories: total_calories
       )
       save_meals!(menu)
