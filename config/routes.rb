@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [ :index ]
 
   get "privacy_policy", to: "static_pages#privacy_policy", as: :privacy_policy
+  get "terms_of_service", to: "static_pages#terms_of_service", as: :terms
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
