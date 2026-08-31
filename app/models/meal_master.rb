@@ -16,4 +16,38 @@ class MealMaster < ApplicationRecord
   validates :category, presence: true
   validates :scaling_type, presence: true
   validates :genre, presence: true
+  validate :ingredients_format_is_valid
+  validate :steps_format_is_valid
+
+  private
+
+  # 材料が未設定(空配列)のレコードも許容し、値がある場合のみ形式をチェックする
+  def ingredients_format_is_valid
+    return if ingredients.blank?
+
+    unless ingredients.is_a?(Array)
+      errors.add(:ingredients, "は配列で保存してください")
+      return
+    end
+
+    ingredients.each_with_index do |ingredient, index|
+      if ingredient["name"].blank? || ingredient["amount"].blank?
+        errors.add(:ingredients, "#{index + 1}番目の材料にname・amountが必要です")
+      end
+    end
+  end
+
+  # 手順が未設定(空配列)のレコードも許容し、値がある場合のみ形式をチェックする
+  def steps_format_is_valid
+    return if steps.blank?
+
+    unless steps.is_a?(Array)
+      errors.add(:steps, "は配列で保存してください")
+      return
+    end
+
+    steps.each_with_index do |step, index|
+      errors.add(:steps, "#{index + 1}番目の手順が空です") if step.blank?
+    end
+  end
 end

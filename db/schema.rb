@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_08_20_074219) do
+ActiveRecord::Schema[8.0].define(version: 2026_08_31_075153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -150,6 +150,11 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_20_074219) do
     t.datetime "updated_at", null: false
     t.integer "scaling_type", default: 0, null: false
     t.integer "genre", default: 0, null: false
+    t.decimal "protein"
+    t.decimal "fat"
+    t.decimal "carbohydrate"
+    t.jsonb "ingredients", default: [], null: false
+    t.jsonb "steps", default: [], null: false
   end
 
   create_table "meals", force: :cascade do |t|
