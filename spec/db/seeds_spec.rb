@@ -13,9 +13,13 @@ RSpec.describe 'seedデータの整合性' do
   describe 'アレルゲンの紐づけ' do
     it '味噌・豆腐系の料理にはすべて大豆が紐づいている' do
       soy = AllergenMaster.find_by!(name: '大豆')
-      soy_dishes = MealMaster.includes(:allergen_masters).select { |meal| meal.name.match?(SOY_DISH_PATTERN) }
+      soy_dish_ids = MealMaster.pluck(:id, :name).select { |_id, name| name.match?(SOY_DISH_PATTERN) }.map(&:first)
+      soy_dishes = MealMaster.where(id: soy_dish_ids).includes(:allergen_masters)
 
-      missing = soy_dishes.reject { |meal| meal.allergen_masters.include?(soy) }
+      missing = soy_dishes.reject do |meal|
+        meal.meal_ingredients.to_a # allergen_masters（through）だけだとBulletがmeal_ingredients未使用と誤検知するため明示的に触れる
+        meal.allergen_masters.include?(soy)
+      end
       expect(missing.map(&:name)).to be_empty
     end
   end
