@@ -1,0 +1,532 @@
+{
+  "recipes": [
+    {
+      "name": "鶏むね肉のレモン塩麹グリル(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 150,
+      "protein": 24,
+      "fat": 4,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "100g" },
+        { "name": "塩麹", "amount": "小さじ1(6g)" },
+        { "name": "レモン汁", "amount": "小さじ1(5g)" },
+        { "name": "オリーブオイル", "amount": "小さじ1/2(2g)" },
+        { "name": "黒こしょう", "amount": "少々" },
+        { "name": "ベビーリーフ", "amount": "10g" }
+      ],
+      "steps": [
+        "鶏むね肉をフォークで数か所刺し、塩麹をもみ込んで15分置く",
+        "フライパンにオリーブオイルを熱し、鶏むね肉を中火で焼く",
+        "両面に焼き色がついたら弱火にしてふたをし、中まで火を通す",
+        "仕上げにレモン汁と黒こしょうをふり、器に盛ってベビーリーフを添える"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "豚ヒレ肉のオイスター炒め(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 190,
+      "protein": 24,
+      "fat": 8,
+      "carbohydrate": 8,
+      "ingredients": [
+        { "name": "豚ヒレ肉", "amount": "100g" },
+        { "name": "ピーマン", "amount": "30g" },
+        { "name": "赤パプリカ", "amount": "30g" },
+        { "name": "オイスターソース", "amount": "小さじ2(12g)" },
+        { "name": "醤油", "amount": "小さじ1/2(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" },
+        { "name": "にんにく(みじん切り)", "amount": "3g" }
+      ],
+      "steps": [
+        "豚ヒレ肉は一口大のそぎ切りにする。ピーマン・パプリカは細切りにする",
+        "フライパンにごま油とにんにくを入れ、香りが立つまで弱火で炒める",
+        "豚ヒレ肉を加えて中火で炒め、色が変わったらピーマン・パプリカを加える",
+        "オイスターソースと醤油を加え、全体に絡めながら炒め合わせる"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "鮭とブロッコリーのハーブ蒸し(100g+50g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 190,
+      "protein": 24,
+      "fat": 8,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "生鮭", "amount": "100g" },
+        { "name": "ブロッコリー", "amount": "50g" },
+        { "name": "塩", "amount": "少々" },
+        { "name": "白ワイン", "amount": "小さじ2(10g)" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" },
+        { "name": "ドライハーブ", "amount": "少々" }
+      ],
+      "steps": [
+        "鮭は塩をふって5分置き、出てきた水気をふき取る",
+        "ブロッコリーは小房に分ける",
+        "耐熱皿に鮭とブロッコリーをのせ、白ワインをふってラップをかけ、電子レンジ(600W)で4分加熱する",
+        "オリーブオイルとハーブをかけて仕上げる"
+      ],
+      "allergens": [ "さけ" ]
+    },
+    {
+      "name": "豆腐と鶏ひき肉の和風つくね(120g・3個)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "japanese",
+      "calories": 220,
+      "protein": 15,
+      "fat": 14,
+      "carbohydrate": 8,
+      "ingredients": [
+        { "name": "木綿豆腐", "amount": "60g" },
+        { "name": "鶏ひき肉", "amount": "60g" },
+        { "name": "長ねぎ(みじん切り)", "amount": "15g" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "生姜(すりおろし)", "amount": "2g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "木綿豆腐はキッチンペーパーで包んで軽く水切りする",
+        "ボウルに豆腐・鶏ひき肉・長ねぎ・片栗粉・生姜を入れてよく練り混ぜ、3等分にして小判形に成形する",
+        "フライパンに油を熱し、つくねを両面焼き色がつくまで焼く",
+        "ふたをして弱火で中まで火を通したら、醤油とみりんを加えて煮からめる"
+      ],
+      "allergens": [ "大豆", "鶏肉" ]
+    },
+    {
+      "name": "牛肉と彩り野菜のオイスター炒め(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 200,
+      "protein": 19,
+      "fat": 11,
+      "carbohydrate": 7,
+      "ingredients": [
+        { "name": "牛もも肉(赤身・薄切り)", "amount": "80g" },
+        { "name": "パプリカ(赤・黄)", "amount": "40g" },
+        { "name": "しめじ", "amount": "30g" },
+        { "name": "オイスターソース", "amount": "小さじ2(12g)" },
+        { "name": "醤油", "amount": "小さじ1/2(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "牛もも肉は食べやすい大きさに切る。パプリカは細切り、しめじは小房に分ける",
+        "フライパンにごま油を熱し、牛肉を中火で炒めて色が変わったら取り出す",
+        "同じフライパンでパプリカとしめじを炒め、しんなりしたら牛肉を戻す",
+        "オイスターソースと醤油を加えて全体に絡める"
+      ],
+      "allergens": [ "牛肉" ]
+    },
+    {
+      "name": "たらと白菜のレモンバター蒸し(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 130,
+      "protein": 18,
+      "fat": 4,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "生たら", "amount": "100g" },
+        { "name": "白菜", "amount": "60g" },
+        { "name": "バター", "amount": "5g" },
+        { "name": "レモン汁", "amount": "小さじ1(5g)" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "酒", "amount": "小さじ1(5g)" }
+      ],
+      "steps": [
+        "たらは塩をふって5分置き、水気をふき取る。白菜はざく切りにする",
+        "耐熱皿に白菜を敷き、たらをのせて酒をふる",
+        "ラップをして電子レンジ(600W)で4〜5分加熱する",
+        "熱いうちにバターとレモン汁をのせ、こしょうをふって余熱で溶かす"
+      ],
+      "allergens": [ "乳" ]
+    },
+    {
+      "name": "厚揚げと小松菜のごま味噌炒め(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 210,
+      "protein": 11,
+      "fat": 15,
+      "carbohydrate": 7,
+      "ingredients": [
+        { "name": "厚揚げ", "amount": "80g" },
+        { "name": "小松菜", "amount": "60g" },
+        { "name": "味噌", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "すりごま", "amount": "小さじ1(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "厚揚げは一口大に切り、小松菜は3cm幅に切る",
+        "フライパンにごま油を熱し、厚揚げを両面焼き色がつくまで焼く",
+        "小松菜を加えてしんなりするまで炒める",
+        "味噌・みりん・すりごまを混ぜ合わせて加え、全体に絡める"
+      ],
+      "allergens": [ "大豆", "ごま" ]
+    },
+    {
+      "name": "えびとブロッコリーのガーリック炒め(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 130,
+      "protein": 16,
+      "fat": 4,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "むきえび", "amount": "80g" },
+        { "name": "ブロッコリー", "amount": "50g" },
+        { "name": "にんにく(薄切り)", "amount": "5g" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "白ワイン", "amount": "小さじ1(5g)" }
+      ],
+      "steps": [
+        "えびは背わたを取り、塩水で軽く洗って水気をふき取る。ブロッコリーは小房に分けて下ゆでする",
+        "フライパンにオリーブオイルとにんにくを入れ、弱火で香りを出す",
+        "えびを加えて中火で炒め、色が変わったらブロッコリーを加える",
+        "白ワインをふり、塩・こしょうで味を調える"
+      ],
+      "allergens": [ "えび" ]
+    },
+    {
+      "name": "鶏むね肉と卵のスタミナ丼(350g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 600,
+      "protein": 31,
+      "fat": 11,
+      "carbohydrate": 91,
+      "ingredients": [
+        { "name": "ご飯", "amount": "200g" },
+        { "name": "鶏むね肉", "amount": "80g" },
+        { "name": "卵", "amount": "1個(50g)" },
+        { "name": "玉ねぎ", "amount": "40g" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "みりん", "amount": "小さじ2(14g)" },
+        { "name": "砂糖", "amount": "小さじ2(6g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" },
+        { "name": "万能ねぎ", "amount": "少々" }
+      ],
+      "steps": [
+        "鶏むね肉はそぎ切り、玉ねぎは薄切りにする",
+        "フライパンに油を熱し、玉ねぎを炒めてしんなりしたら鶏むね肉を加えて焼く",
+        "醤油・みりん・砂糖を混ぜたタレを加え、鶏肉に火が通るまで煮絡める",
+        "溶き卵を回し入れ、半熟になったら火を止める",
+        "どんぶりにご飯を盛り、具をのせて万能ねぎを散らす"
+      ],
+      "allergens": [ "鶏肉", "卵" ]
+    },
+    {
+      "name": "豆腐と野菜のヘルシーキーマカレー(350g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 490,
+      "protein": 21,
+      "fat": 15,
+      "carbohydrate": 67,
+      "ingredients": [
+        { "name": "ご飯", "amount": "150g" },
+        { "name": "木綿豆腐", "amount": "100g" },
+        { "name": "鶏ひき肉", "amount": "50g" },
+        { "name": "玉ねぎ", "amount": "50g" },
+        { "name": "にんじん", "amount": "30g" },
+        { "name": "カレー粉", "amount": "小さじ2(4g)" },
+        { "name": "トマト缶(カット)", "amount": "50g" },
+        { "name": "コンソメ", "amount": "小さじ1/2(2g)" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "豆腐はキッチンペーパーで水切りし、粗くほぐす。玉ねぎ・にんじんはみじん切りにする",
+        "鍋にオリーブオイルを熱し、玉ねぎ・にんじんを炒める",
+        "鶏ひき肉を加えて色が変わるまで炒め、豆腐・トマト缶・コンソメを加えて煮込む",
+        "水分が飛んだらカレー粉を加えて混ぜ合わせる",
+        "器にご飯を盛り、キーマカレーをかける"
+      ],
+      "allergens": [ "大豆", "鶏肉" ]
+    },
+    {
+      "name": "サバ缶と野菜の味噌煮込みうどん(400g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "japanese",
+      "calories": 350,
+      "protein": 18,
+      "fat": 7,
+      "carbohydrate": 50,
+      "ingredients": [
+        { "name": "うどん(ゆで)", "amount": "200g" },
+        { "name": "サバ缶(水煮)", "amount": "50g" },
+        { "name": "大根", "amount": "40g" },
+        { "name": "長ねぎ", "amount": "20g" },
+        { "name": "味噌", "amount": "小さじ2(12g)" },
+        { "name": "和風だし", "amount": "200ml(顆粒だし2g)" },
+        { "name": "生姜(すりおろし)", "amount": "2g" }
+      ],
+      "steps": [
+        "大根はいちょう切り、長ねぎは斜め切りにする",
+        "鍋にだし汁を入れて大根を煮る。柔らかくなったらうどんと長ねぎを加える",
+        "サバ缶を汁ごと加えて温める",
+        "味噌を溶き入れ、仕上げに生姜を加える"
+      ],
+      "allergens": [ "小麦", "さば", "大豆" ]
+    },
+    {
+      "name": "きのこと鶏むねの和風パスタ(300g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 430,
+      "protein": 25,
+      "fat": 11,
+      "carbohydrate": 56,
+      "ingredients": [
+        { "name": "スパゲッティ(乾)", "amount": "70g" },
+        { "name": "鶏むね肉", "amount": "60g" },
+        { "name": "しめじ・えのき", "amount": "合わせて60g" },
+        { "name": "にんにく", "amount": "3g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "バター", "amount": "小さじ1(5g)" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" },
+        { "name": "刻み海苔", "amount": "少々" }
+      ],
+      "steps": [
+        "スパゲッティは表示時間通りに茹でる。鶏むね肉は薄いそぎ切り、しめじ・えのきは石づきを取ってほぐす",
+        "フライパンにオリーブオイルとにんにくを熱し、鶏むね肉を炒める",
+        "火が通ったらしめじ・えのきを加えてさらに炒める",
+        "茹で上がったスパゲッティを加え、醤油とバターを絡めて味を調える",
+        "器に盛り、刻み海苔をのせる"
+      ],
+      "allergens": [ "小麦", "鶏肉", "乳" ]
+    },
+    {
+      "name": "ブロッコリーと卵の白だし和え(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 100,
+      "protein": 9,
+      "fat": 6,
+      "carbohydrate": 3,
+      "ingredients": [
+        { "name": "ブロッコリー", "amount": "50g" },
+        { "name": "卵", "amount": "1個(50g)" },
+        { "name": "白だし", "amount": "小さじ1(6g)" },
+        { "name": "白ごま", "amount": "少々(1g)" }
+      ],
+      "steps": [
+        "ブロッコリーは小房に分けて塩ゆでする。卵は固ゆでにして粗く刻む",
+        "ボウルにブロッコリーと卵を入れ、白だしを加えて和える",
+        "器に盛り、白ごまをふる"
+      ],
+      "allergens": [ "卵", "ごま" ]
+    },
+    {
+      "name": "こんにゃくのピリ辛きんぴら(60g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 50,
+      "protein": 1,
+      "fat": 2,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "こんにゃく", "amount": "80g" },
+        { "name": "にんじん", "amount": "15g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "一味唐辛子", "amount": "少々" },
+        { "name": "ごま油", "amount": "小さじ1/2(2g)" }
+      ],
+      "steps": [
+        "こんにゃくは短冊切りにし、下茹でして臭みを取る。にんじんは細切りにする",
+        "フライパンにごま油を熱し、こんにゃくとにんじんを炒める",
+        "醤油・みりんを加えて汁気がなくなるまで炒め煮にする",
+        "仕上げに一味唐辛子をふる"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "蒸し鶏とキャベツの梅肉和え(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 60,
+      "protein": 10,
+      "fat": 1,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "40g" },
+        { "name": "酒", "amount": "少々(3g)" },
+        { "name": "キャベツ", "amount": "40g" },
+        { "name": "梅干し", "amount": "1個(8g)" },
+        { "name": "醤油", "amount": "少々(2g)" },
+        { "name": "かつお節", "amount": "少々" }
+      ],
+      "steps": [
+        "鶏むね肉に酒をふりレンジで加熱し蒸し鶏にして裂く",
+        "キャベツをせん切りにし塩ゆでする",
+        "梅干しの種を取りたたき醤油と混ぜる",
+        "鶏肉・キャベツ・梅肉ダレを和えかつお節をのせる"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "アボカドと豆腐の白和え風サラダ(70g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 90,
+      "protein": 3,
+      "fat": 7,
+      "carbohydrate": 5,
+      "ingredients": [
+        { "name": "アボカド", "amount": "30g" },
+        { "name": "絹豆腐", "amount": "40g" },
+        { "name": "ミニトマト", "amount": "20g" },
+        { "name": "白だし", "amount": "小さじ1(6g)" },
+        { "name": "白ごま", "amount": "少々(1g)" }
+      ],
+      "steps": [
+        "アボカドは1cm角、ミニトマトは半分に切る",
+        "絹豆腐は水切りし滑らかにする",
+        "白だしを豆腐に混ぜアボカドとミニトマトを和える",
+        "白ごまをふる"
+      ],
+      "allergens": [ "大豆", "ごま" ]
+    },
+    {
+      "name": "具だくさん豚汁風スープ(鶏むね肉と根菜)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "soup",
+      "scaling_type": "fixed",
+      "genre": "japanese",
+      "calories": 70,
+      "protein": 8,
+      "fat": 1,
+      "carbohydrate": 5,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "30g" },
+        { "name": "大根", "amount": "20g" },
+        { "name": "にんじん", "amount": "15g" },
+        { "name": "ごぼう", "amount": "15g" },
+        { "name": "味噌", "amount": "小さじ1(6g)" },
+        { "name": "和風だし", "amount": "200ml(顆粒だし2g)" },
+        { "name": "長ねぎ", "amount": "5g" }
+      ],
+      "steps": [
+        "鶏むね肉はそぎ切りにする。大根・にんじんはいちょう切り、ごぼうはささがきにする",
+        "だし汁で鶏肉と根菜を柔らかく煮る",
+        "味噌を溶き入れ長ねぎを加える"
+      ],
+      "allergens": [ "鶏肉", "大豆" ]
+    },
+    {
+      "name": "卵とわかめの中華スープ",
+      "meal_timing": "lunch_or_dinner",
+      "category": "soup",
+      "scaling_type": "fixed",
+      "genre": "chinese",
+      "calories": 60,
+      "protein": 3,
+      "fat": 4,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "卵", "amount": "1/2個(25g)" },
+        { "name": "乾燥わかめ", "amount": "2g" },
+        { "name": "鶏がらスープの素", "amount": "小さじ1(3g)" },
+        { "name": "ごま油", "amount": "少々(1g)" },
+        { "name": "水", "amount": "200ml" }
+      ],
+      "steps": [
+        "水と鶏がらスープの素を煮立てる",
+        "わかめを加えて戻す",
+        "溶き卵を回し入れふんわり固まったら火を止める",
+        "ごま油を垂らす"
+      ],
+      "allergens": [ "卵" ]
+    },
+    {
+      "name": "豆乳味噌汁(豆腐とえのき)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "soup",
+      "scaling_type": "fixed",
+      "genre": "japanese",
+      "calories": 80,
+      "protein": 7,
+      "fat": 4,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "絹豆腐", "amount": "40g" },
+        { "name": "えのき", "amount": "20g" },
+        { "name": "無調整豆乳", "amount": "100ml" },
+        { "name": "味噌", "amount": "小さじ1(6g)" },
+        { "name": "和風だし(顆粒)", "amount": "1g" }
+      ],
+      "steps": [
+        "えのきをほぐし豆腐は角切りにする",
+        "豆乳とだし、えのきを煮立たせないよう温める",
+        "豆腐を加え温まったら味噌を溶き入れる"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "オートミールの鮭とほうれん草リゾット風",
+      "meal_timing": "breakfast",
+      "category": "main_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 230,
+      "protein": 16,
+      "fat": 7,
+      "carbohydrate": 27,
+      "ingredients": [
+        { "name": "オートミール", "amount": "30g" },
+        { "name": "焼き鮭フレーク", "amount": "30g" },
+        { "name": "ほうれん草(ゆで)", "amount": "30g" },
+        { "name": "牛乳", "amount": "100ml" },
+        { "name": "コンソメ", "amount": "小さじ1/2(2g)" },
+        { "name": "粉チーズ", "amount": "小さじ1(2g)" }
+      ],
+      "steps": [
+        "牛乳とコンソメを鍋で温める",
+        "オートミールを加え弱火で2〜3分煮る",
+        "鮭フレークとほうれん草を加えさっと煮る",
+        "粉チーズをふる"
+      ],
+      "allergens": [ "さけ", "乳" ]
+    }
+  ]
+}
