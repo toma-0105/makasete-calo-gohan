@@ -1,0 +1,356 @@
+{
+  "recipes": [
+    {
+      "name": "ほうれん草のお浸し(70g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 20,
+      "protein": 2,
+      "fat": 0,
+      "carbohydrate": 3,
+      "ingredients": [
+        { "name": "ほうれん草", "amount": "80g" },
+        { "name": "醤油", "amount": "小さじ1/2(3g)" },
+        { "name": "かつお節", "amount": "少々" }
+      ],
+      "steps": [
+        "鍋に湯を沸かし、ほうれん草を根元から入れて色よく茹でる",
+        "冷水にとって冷まし、水気をしっかり絞る",
+        "食べやすい長さに切り、醤油をかけてかつお節をのせる"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "ひじきの煮物(50g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 55,
+      "protein": 2,
+      "fat": 3,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "乾燥ひじき", "amount": "5g" },
+        { "name": "にんじん", "amount": "15g" },
+        { "name": "こんにゃく", "amount": "10g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "サラダ油", "amount": "小さじ1/2(2g)" }
+      ],
+      "steps": [
+        "ひじきは水で戻し、水気を切る。にんじん・こんにゃくは細切りにする",
+        "鍋に油を熱し、ひじき・にんじん・こんにゃくを炒める",
+        "醤油・みりんと水を加え、汁気がなくなるまで煮る"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "きんぴらごぼう(50g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 65,
+      "protein": 1,
+      "fat": 4,
+      "carbohydrate": 7,
+      "ingredients": [
+        { "name": "ごぼう", "amount": "40g" },
+        { "name": "にんじん", "amount": "10g" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "一味唐辛子", "amount": "少々" }
+      ],
+      "steps": [
+        "ごぼうはささがきにして水にさらす。にんじんは細切りにする",
+        "フライパンにごま油を熱し、ごぼう・にんじんを炒める",
+        "醤油・みりんを加え、汁気がなくなるまで炒め煮にし、仕上げに一味唐辛子をふる"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "冷やし豆腐1/4丁(75g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 55,
+      "protein": 5,
+      "fat": 3,
+      "carbohydrate": 1,
+      "ingredients": [],
+      "steps": [],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "切り干し大根の煮物(50g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 50,
+      "protein": 2,
+      "fat": 0,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "乾燥切り干し大根", "amount": "8g" },
+        { "name": "にんじん", "amount": "10g" },
+        { "name": "こんにゃく", "amount": "10g" },
+        { "name": "和風だし", "amount": "50ml(顆粒だし0.5g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" }
+      ],
+      "steps": [
+        "切り干し大根は水で戻し、水気を絞って食べやすく切る",
+        "鍋にだし汁と切り干し大根・にんじん・こんにゃくを入れて煮る",
+        "醤油・みりんで味付けし、汁気がなくなるまで煮詰める"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "なすの煮浸し(70g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 40,
+      "protein": 1,
+      "fat": 2,
+      "carbohydrate": 5,
+      "ingredients": [
+        { "name": "なす", "amount": "70g" },
+        { "name": "和風だし", "amount": "80ml(顆粒だし1g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "なすは乱切りにする",
+        "フライパンに油を熱し、なすを焼き色がつくまで炒める",
+        "だし汁・醤油・みりんを加えてさっと煮て、味を含ませる"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "れんこんのきんぴら(50g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 60,
+      "protein": 1,
+      "fat": 3,
+      "carbohydrate": 8,
+      "ingredients": [
+        { "name": "れんこん", "amount": "50g" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "白ごま", "amount": "少々" }
+      ],
+      "steps": [
+        "れんこんは薄いいちょう切りにして水にさらす",
+        "フライパンにごま油を熱し、れんこんを炒める",
+        "醤油・みりんを加え、汁気がなくなるまで炒め煮にし、白ごまをふる"
+      ],
+      "allergens": [ "ごま" ]
+    },
+    {
+      "name": "かぼちゃの煮物(70g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 65,
+      "protein": 1,
+      "fat": 0,
+      "carbohydrate": 15,
+      "ingredients": [
+        { "name": "かぼちゃ", "amount": "70g" },
+        { "name": "和風だし", "amount": "80ml(顆粒だし1g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" }
+      ],
+      "steps": [
+        "かぼちゃは一口大に切る",
+        "鍋にだし汁とかぼちゃを入れ、柔らかくなるまで煮る",
+        "醤油・みりん・砂糖を加え、さらに煮含める"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "切り昆布の煮物(40g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 35,
+      "protein": 1,
+      "fat": 2,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "切り昆布", "amount": "15g" },
+        { "name": "にんじん", "amount": "10g" },
+        { "name": "こんにゃく", "amount": "10g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "サラダ油", "amount": "小さじ1/2(2g)" }
+      ],
+      "steps": [
+        "切り昆布は水で戻す。にんじん・こんにゃくは細切りにする",
+        "鍋に油を熱し、材料を炒める",
+        "醤油・みりんを加え、汁気がなくなるまで煮る"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "大根サラダ(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "neutral",
+      "calories": 30,
+      "protein": 1,
+      "fat": 0,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "大根", "amount": "70g" },
+        { "name": "かいわれ大根", "amount": "5g" },
+        { "name": "ポン酢", "amount": "小さじ2(12g)" },
+        { "name": "かつお節", "amount": "少々" }
+      ],
+      "steps": [
+        "大根は皮をむいて千切りにする",
+        "かいわれ大根は根を落とす",
+        "大根とかいわれ大根を盛り、ポン酢をかけてかつお節をのせる"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "なめこおろし(60g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 18,
+      "protein": 1,
+      "fat": 0,
+      "carbohydrate": 3,
+      "ingredients": [
+        { "name": "なめこ", "amount": "30g" },
+        { "name": "大根おろし", "amount": "30g" },
+        { "name": "ポン酢", "amount": "小さじ1(6g)" }
+      ],
+      "steps": [
+        "鍋に湯を沸かし、なめこをさっとゆでてぬめりを軽く取る",
+        "水気を切って大根おろしと和える",
+        "ポン酢をかける"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "小松菜の炒め物(60g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 40,
+      "protein": 1,
+      "fat": 3,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "小松菜", "amount": "60g" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" },
+        { "name": "醤油", "amount": "小さじ1/2(3g)" }
+      ],
+      "steps": [
+        "小松菜は3cm幅に切る",
+        "フライパンに油を熱し、茎の部分から先に炒める",
+        "葉を加えてさっと炒め、醤油で味を調える"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "春雨サラダ(70g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 75,
+      "protein": 2,
+      "fat": 2,
+      "carbohydrate": 13,
+      "ingredients": [
+        { "name": "春雨(乾燥)", "amount": "15g" },
+        { "name": "きゅうり", "amount": "20g" },
+        { "name": "ハム", "amount": "10g" },
+        { "name": "酢", "amount": "小さじ1(5g)" },
+        { "name": "醤油", "amount": "小さじ1/2(3g)" },
+        { "name": "ごま油", "amount": "小さじ1/2(2g)" },
+        { "name": "砂糖", "amount": "小さじ1/2(1.5g)" }
+      ],
+      "steps": [
+        "春雨は熱湯で戻し、食べやすく切る",
+        "きゅうり・ハムは細切りにする",
+        "酢・醤油・ごま油・砂糖を混ぜたタレで全体を和える"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "茶碗蒸し1個",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "japanese",
+      "calories": 90,
+      "protein": 8,
+      "fat": 5,
+      "carbohydrate": 3,
+      "ingredients": [
+        { "name": "卵", "amount": "1個(50g)" },
+        { "name": "和風だし", "amount": "100ml(顆粒だし1g)" },
+        { "name": "醤油", "amount": "少々" },
+        { "name": "塩", "amount": "少々" },
+        { "name": "かまぼこ", "amount": "10g" },
+        { "name": "椎茸", "amount": "5g" },
+        { "name": "みつば", "amount": "少々" }
+      ],
+      "steps": [
+        "卵をだし汁・醤油・塩と混ぜ、こしてなめらかにする",
+        "器にかまぼこ・椎茸を入れ、卵液を注ぐ",
+        "蒸し器で弱火〜中火で15分ほど、すが立たないように蒸す",
+        "仕上げにみつばをのせる"
+      ],
+      "allergens": [ "卵" ]
+    },
+    {
+      "name": "もやしのナムル(50g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 15,
+      "protein": 1,
+      "fat": 1,
+      "carbohydrate": 1,
+      "ingredients": [
+        { "name": "もやし", "amount": "50g" },
+        { "name": "ごま油", "amount": "少々" },
+        { "name": "醤油", "amount": "少々" },
+        { "name": "白ごま", "amount": "少々" },
+        { "name": "おろしにんにく", "amount": "少々" }
+      ],
+      "steps": [
+        "鍋に湯を沸かし、もやしをさっと茹でる",
+        "ざるに上げて水気をしっかり切る",
+        "ごま油・醤油・にんにく・白ごまで和える"
+      ],
+      "allergens": []
+    }
+  ]
+}

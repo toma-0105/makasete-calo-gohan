@@ -1,0 +1,575 @@
+{
+  "recipes": [
+    {
+      "name": "親子丼(350g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 580,
+      "protein": 27,
+      "fat": 11,
+      "carbohydrate": 90,
+      "ingredients": [
+        { "name": "ご飯", "amount": "220g" },
+        { "name": "鶏もも肉", "amount": "70g" },
+        { "name": "卵", "amount": "1個(50g)" },
+        { "name": "玉ねぎ", "amount": "40g" },
+        { "name": "和風だし", "amount": "60ml" },
+        { "name": "醤油", "amount": "大さじ1(18g)" },
+        { "name": "みりん", "amount": "大さじ1(18g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" }
+      ],
+      "steps": [
+        "鶏肉は一口大に切り、玉ねぎは薄切りにする",
+        "鍋にだし・醤油・みりん・砂糖を煮立て、鶏肉と玉ねぎを煮る",
+        "溶き卵を回し入れ、半熟になったら火を止める",
+        "どんぶりにご飯を盛り、具をのせる"
+      ],
+      "allergens": [ "卵", "鶏肉" ]
+    },
+    {
+      "name": "牛丼(350g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 650,
+      "protein": 20,
+      "fat": 24,
+      "carbohydrate": 88,
+      "ingredients": [
+        { "name": "ご飯", "amount": "220g" },
+        { "name": "牛バラ薄切り肉", "amount": "80g" },
+        { "name": "玉ねぎ", "amount": "50g" },
+        { "name": "醤油", "amount": "大さじ1(18g)" },
+        { "name": "みりん", "amount": "大さじ1(18g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" },
+        { "name": "和風だし", "amount": "80ml" }
+      ],
+      "steps": [
+        "牛肉と玉ねぎを食べやすく切る",
+        "鍋にだし・醤油・みりん・砂糖を煮立て、玉ねぎを煮る",
+        "牛肉を加えてさっと煮る",
+        "どんぶりにご飯を盛り、具をのせる"
+      ],
+      "allergens": [ "牛肉" ]
+    },
+    {
+      "name": "豚丼(350g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 620,
+      "protein": 16,
+      "fat": 26,
+      "carbohydrate": 82,
+      "ingredients": [
+        { "name": "ご飯", "amount": "220g" },
+        { "name": "豚バラ薄切り肉", "amount": "80g" },
+        { "name": "醤油", "amount": "大さじ1(18g)" },
+        { "name": "みりん", "amount": "大さじ1(18g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" }
+      ],
+      "steps": [
+        "豚肉は食べやすく切る",
+        "フライパンで豚肉を焼く",
+        "醤油・みりん・砂糖を加えて煮絡める",
+        "どんぶりにご飯を盛り、豚肉をのせる"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "鶏そぼろ丼(300g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 540,
+      "protein": 17,
+      "fat": 13,
+      "carbohydrate": 87,
+      "ingredients": [
+        { "name": "ご飯", "amount": "200g" },
+        { "name": "鶏ひき肉", "amount": "70g" },
+        { "name": "醤油", "amount": "大さじ1(18g)" },
+        { "name": "みりん", "amount": "大さじ1(18g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" },
+        { "name": "生姜(すりおろし)", "amount": "少々" }
+      ],
+      "steps": [
+        "フライパンで鶏ひき肉をポロポロになるまで炒める",
+        "醤油・みりん・砂糖・生姜を加えて汁気がなくなるまで炒め煮にする",
+        "どんぶりにご飯を盛り、そぼろをのせる"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "カレーライス(400g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 650,
+      "protein": 8,
+      "fat": 13,
+      "carbohydrate": 120,
+      "ingredients": [
+        { "name": "ご飯", "amount": "220g" },
+        { "name": "玉ねぎ", "amount": "60g" },
+        { "name": "にんじん", "amount": "30g" },
+        { "name": "じゃがいも", "amount": "60g" },
+        { "name": "カレールー", "amount": "30g" },
+        { "name": "水", "amount": "150ml" }
+      ],
+      "steps": [
+        "玉ねぎ・にんじん・じゃがいもは一口大に切る",
+        "鍋で野菜を炒め、水を加えて柔らかくなるまで煮る",
+        "火を止めてカレールーを溶かし入れ、とろみがつくまで煮込む",
+        "ご飯にかける"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "キーマカレー(380g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 600,
+      "protein": 18,
+      "fat": 14,
+      "carbohydrate": 95,
+      "ingredients": [
+        { "name": "ご飯", "amount": "180g" },
+        { "name": "ひき肉", "amount": "70g" },
+        { "name": "玉ねぎ", "amount": "50g" },
+        { "name": "にんじん", "amount": "20g" },
+        { "name": "カレー粉", "amount": "小さじ2(4g)" },
+        { "name": "トマト缶(カット)", "amount": "60g" },
+        { "name": "コンソメ", "amount": "小さじ1(3g)" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "玉ねぎ・にんじんはみじん切りにする",
+        "鍋にオリーブオイルを熱し、野菜を炒める",
+        "ひき肉を加えて炒め、トマト缶・カレー粉・コンソメを加えて煮込む",
+        "ご飯にかける"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "ナポリタン(300g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 550,
+      "protein": 16,
+      "fat": 14,
+      "carbohydrate": 90,
+      "ingredients": [
+        { "name": "スパゲッティ(乾)", "amount": "90g" },
+        { "name": "ウインナー", "amount": "30g" },
+        { "name": "ピーマン", "amount": "30g" },
+        { "name": "玉ねぎ", "amount": "30g" },
+        { "name": "ケチャップ", "amount": "大さじ3(45g)" },
+        { "name": "バター", "amount": "5g" }
+      ],
+      "steps": [
+        "スパゲッティは表示時間通りに茹でる",
+        "フライパンでウインナー・ピーマン・玉ねぎを炒める",
+        "茹でたスパゲッティとケチャップを加えて炒め合わせ、バターを絡める"
+      ],
+      "allergens": [ "小麦" ]
+    },
+    {
+      "name": "ペペロンチーノ(250g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 480,
+      "protein": 12,
+      "fat": 14,
+      "carbohydrate": 68,
+      "ingredients": [
+        { "name": "スパゲッティ(乾)", "amount": "90g" },
+        { "name": "にんにく", "amount": "5g" },
+        { "name": "唐辛子", "amount": "少々" },
+        { "name": "オリーブオイル", "amount": "大さじ1(12g)" },
+        { "name": "塩", "amount": "少々" },
+        { "name": "パセリ", "amount": "少々" }
+      ],
+      "steps": [
+        "スパゲッティは表示時間通りに茹でる",
+        "フライパンにオリーブオイル・にんにく・唐辛子を弱火で熱し、香りを出す",
+        "茹で上がった麺と絡め、塩で味を調えパセリを散らす"
+      ],
+      "allergens": [ "小麦" ]
+    },
+    {
+      "name": "天ぷらうどん(400g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "japanese",
+      "calories": 480,
+      "protein": 12,
+      "fat": 12,
+      "carbohydrate": 77,
+      "ingredients": [
+        { "name": "うどん(ゆで)", "amount": "240g" },
+        { "name": "えび天ぷら", "amount": "1本(30g)" },
+        { "name": "和風だし", "amount": "300ml(顆粒だし3g)" },
+        { "name": "醤油", "amount": "大さじ1(18g)" },
+        { "name": "みりん", "amount": "大さじ1(18g)" }
+      ],
+      "steps": [
+        "鍋にだし汁・醤油・みりんを煮立てる",
+        "うどんを加えて温める",
+        "どんぶりに盛り、えび天をのせる"
+      ],
+      "allergens": [ "小麦", "えび" ]
+    },
+    {
+      "name": "チャーハン(300g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "chinese",
+      "calories": 600,
+      "protein": 14,
+      "fat": 20,
+      "carbohydrate": 90,
+      "ingredients": [
+        { "name": "ご飯", "amount": "250g" },
+        { "name": "卵", "amount": "1個(50g)" },
+        { "name": "長ねぎ", "amount": "20g" },
+        { "name": "ハム", "amount": "20g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "サラダ油", "amount": "大さじ1(12g)" }
+      ],
+      "steps": [
+        "長ねぎとハムはみじん切りにする",
+        "フライパンに油を熱し、溶き卵を炒めてご飯を加える",
+        "長ねぎ・ハムを加えて炒め合わせ、醤油と塩こしょうで味を調える"
+      ],
+      "allergens": [ "卵" ]
+    },
+    {
+      "name": "オムライス(350g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 650,
+      "protein": 20,
+      "fat": 22,
+      "carbohydrate": 90,
+      "ingredients": [
+        { "name": "ご飯", "amount": "200g" },
+        { "name": "鶏むね肉", "amount": "40g" },
+        { "name": "玉ねぎ", "amount": "30g" },
+        { "name": "ケチャップ", "amount": "大さじ2(30g)" },
+        { "name": "卵", "amount": "2個(100g)" },
+        { "name": "バター", "amount": "5g" },
+        { "name": "塩・こしょう", "amount": "少々" }
+      ],
+      "steps": [
+        "バターで鶏肉・玉ねぎを炒め、塩・こしょうで下味をつける",
+        "ご飯とケチャップを加えて炒め合わせケチャップライスを作る",
+        "卵を溶き、フライパンで薄く焼く",
+        "ケチャップライスを卵で包み、ケチャップをかける"
+      ],
+      "allergens": [ "卵" ]
+    },
+    {
+      "name": "ハヤシライス(350g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 600,
+      "protein": 16,
+      "fat": 18,
+      "carbohydrate": 85,
+      "ingredients": [
+        { "name": "ご飯", "amount": "200g" },
+        { "name": "牛こま切れ肉", "amount": "70g" },
+        { "name": "玉ねぎ", "amount": "50g" },
+        { "name": "ハヤシルー", "amount": "30g" },
+        { "name": "水", "amount": "100ml" }
+      ],
+      "steps": [
+        "牛肉と玉ねぎを炒める",
+        "水を加えて煮込み、火を止めてハヤシルーを溶かし入れる",
+        "とろみがつくまで煮込み、ご飯にかける"
+      ],
+      "allergens": [ "牛肉" ]
+    },
+    {
+      "name": "麻婆豆腐丼(350g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "chinese",
+      "calories": 580,
+      "protein": 16,
+      "fat": 13,
+      "carbohydrate": 100,
+      "ingredients": [
+        { "name": "ご飯", "amount": "220g" },
+        { "name": "木綿豆腐", "amount": "120g" },
+        { "name": "ひき肉", "amount": "30g" },
+        { "name": "長ねぎ", "amount": "15g" },
+        { "name": "豆板醤", "amount": "少々" },
+        { "name": "味噌", "amount": "小さじ1(6g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "豆腐はさいの目に切る",
+        "フライパンにごま油を熱しひき肉と豆板醤を炒め、長ねぎを加える",
+        "味噌・醤油・豆腐を加え、水溶き片栗粉でとろみをつける",
+        "ご飯にかける"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "ツナとキャベツのトマトソースオートミール(200g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 270,
+      "protein": 16,
+      "fat": 8,
+      "carbohydrate": 33,
+      "ingredients": [
+        { "name": "オートミール", "amount": "40g" },
+        { "name": "ツナ缶", "amount": "30g" },
+        { "name": "キャベツ", "amount": "40g" },
+        { "name": "トマト缶(カット)", "amount": "60g" },
+        { "name": "コンソメ", "amount": "小さじ1/2(2g)" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "フライパンにオリーブオイルを熱し、キャベツを炒める",
+        "ツナ・トマト缶・コンソメを加えて煮る",
+        "オートミールを加え、水分を吸わせながら煮る"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "キャベツのお好み焼き(200g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "japanese",
+      "calories": 400,
+      "protein": 17,
+      "fat": 16,
+      "carbohydrate": 50,
+      "ingredients": [
+        { "name": "小麦粉", "amount": "60g" },
+        { "name": "キャベツ", "amount": "100g" },
+        { "name": "卵", "amount": "1個(50g)" },
+        { "name": "豚バラ薄切り肉", "amount": "40g" },
+        { "name": "和風だし", "amount": "60ml" },
+        { "name": "ソース", "amount": "大さじ1(18g)" },
+        { "name": "マヨネーズ", "amount": "小さじ2(8g)" },
+        { "name": "青のり", "amount": "少々" }
+      ],
+      "steps": [
+        "キャベツはせん切りにする",
+        "小麦粉・だし汁・卵・キャベツを混ぜて生地を作る",
+        "フライパンで両面を焼き、豚肉を途中でのせて焼く",
+        "ソース・マヨネーズ・青のりをかける"
+      ],
+      "allergens": [ "小麦", "卵" ]
+    },
+    {
+      "name": "ビビンバ(350g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "chinese",
+      "calories": 580,
+      "protein": 22,
+      "fat": 16,
+      "carbohydrate": 82,
+      "ingredients": [
+        { "name": "ご飯", "amount": "220g" },
+        { "name": "牛こま切れ肉", "amount": "50g" },
+        { "name": "もやし", "amount": "30g" },
+        { "name": "ほうれん草", "amount": "20g" },
+        { "name": "にんじん", "amount": "20g" },
+        { "name": "コチュジャン", "amount": "小さじ2(12g)" },
+        { "name": "卵", "amount": "1個(50g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" }
+      ],
+      "steps": [
+        "牛肉は醤油で下味をつけて炒める",
+        "もやし・ほうれん草・にんじんはそれぞれ茹でて、ごま油と塩で和える",
+        "卵を目玉焼きにする",
+        "ご飯に具材と目玉焼きをのせ、コチュジャンを添える"
+      ],
+      "allergens": [ "牛肉", "卵" ]
+    },
+    {
+      "name": "しらすと青じそのスパゲッティ(250g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 480,
+      "protein": 14,
+      "fat": 14,
+      "carbohydrate": 72,
+      "ingredients": [
+        { "name": "スパゲッティ(乾)", "amount": "90g" },
+        { "name": "しらす", "amount": "20g" },
+        { "name": "青じそ", "amount": "3枚" },
+        { "name": "オリーブオイル", "amount": "大さじ1(12g)" },
+        { "name": "醤油", "amount": "少々" },
+        { "name": "にんにく", "amount": "少々" }
+      ],
+      "steps": [
+        "スパゲッティは表示時間通りに茹でる",
+        "青じそはせん切りにする",
+        "茹でた麺ににんにく・オリーブオイル・しらす・醤油を絡め、青じそを散らす"
+      ],
+      "allergens": [ "小麦" ]
+    },
+    {
+      "name": "いわし缶の和風スパゲッティ(300g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 550,
+      "protein": 20,
+      "fat": 18,
+      "carbohydrate": 75,
+      "ingredients": [
+        { "name": "スパゲッティ(乾)", "amount": "100g" },
+        { "name": "いわし缶(水煮)", "amount": "50g" },
+        { "name": "玉ねぎ", "amount": "30g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "オリーブオイル", "amount": "大さじ1(12g)" },
+        { "name": "大葉", "amount": "少々" }
+      ],
+      "steps": [
+        "スパゲッティは表示時間通りに茹でる",
+        "フライパンにオリーブオイルを熱し玉ねぎを炒める",
+        "いわし缶を汁ごと加え、茹でた麺と醤油を絡める。大葉を散らす"
+      ],
+      "allergens": [ "小麦" ]
+    },
+    {
+      "name": "たらことえのきのパスタ(300g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 520,
+      "protein": 18,
+      "fat": 14,
+      "carbohydrate": 77,
+      "ingredients": [
+        { "name": "スパゲッティ(乾)", "amount": "100g" },
+        { "name": "たらこ", "amount": "30g" },
+        { "name": "えのき", "amount": "40g" },
+        { "name": "バター", "amount": "10g" },
+        { "name": "醤油", "amount": "少々" },
+        { "name": "刻み海苔", "amount": "少々" }
+      ],
+      "steps": [
+        "スパゲッティは表示時間通りに茹でる",
+        "えのきは石づきを取ってほぐし、バターで炒める",
+        "たらこをほぐして加え、茹でた麺と和えて醤油で味を調える。海苔をのせる"
+      ],
+      "allergens": [ "小麦" ]
+    },
+    {
+      "name": "オートミールオムライス(250g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 320,
+      "protein": 22,
+      "fat": 8,
+      "carbohydrate": 33,
+      "ingredients": [
+        { "name": "オートミール", "amount": "40g" },
+        { "name": "鶏むね肉", "amount": "40g" },
+        { "name": "玉ねぎ", "amount": "20g" },
+        { "name": "ケチャップ", "amount": "大さじ1(15g)" },
+        { "name": "卵", "amount": "1個(50g)" },
+        { "name": "塩・こしょう", "amount": "少々" }
+      ],
+      "steps": [
+        "鶏肉・玉ねぎを炒め、塩・こしょうで下味をつける",
+        "オートミールと水少々・ケチャップを加えて混ぜご飯風にする",
+        "卵を溶き、薄焼き卵を作る",
+        "オートミールご飯を卵で包み、ケチャップをかける"
+      ],
+      "allergens": [ "卵" ]
+    },
+    {
+      "name": "オートミール中華粥(300g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "chinese",
+      "calories": 220,
+      "protein": 4,
+      "fat": 2,
+      "carbohydrate": 46,
+      "ingredients": [
+        { "name": "オートミール", "amount": "30g" },
+        { "name": "鶏がらスープの素", "amount": "小さじ1(3g)" },
+        { "name": "水", "amount": "250ml" },
+        { "name": "長ねぎ", "amount": "少々" },
+        { "name": "ごま油", "amount": "少々" }
+      ],
+      "steps": [
+        "鍋に水と鶏がらスープの素を煮立てる",
+        "オートミールを加え、とろみが出るまで弱火で煮る",
+        "長ねぎを散らし、ごま油をたらす"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "オートミールと鶏胸肉の中華粥(300g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "one_dish",
+      "scaling_type": "fixed",
+      "genre": "chinese",
+      "calories": 250,
+      "protein": 13,
+      "fat": 3,
+      "carbohydrate": 40,
+      "ingredients": [
+        { "name": "オートミール", "amount": "30g" },
+        { "name": "鶏むね肉", "amount": "40g" },
+        { "name": "鶏がらスープの素", "amount": "小さじ1(3g)" },
+        { "name": "水", "amount": "250ml" },
+        { "name": "長ねぎ", "amount": "少々" },
+        { "name": "ごま油", "amount": "少々" }
+      ],
+      "steps": [
+        "鶏むね肉は小さく切る",
+        "鍋に水と鶏がらスープの素、鶏肉を入れて煮る",
+        "オートミールを加え、とろみが出るまで弱火で煮て、長ねぎとごま油を加える"
+      ],
+      "allergens": [ "鶏肉" ]
+    }
+  ]
+}
