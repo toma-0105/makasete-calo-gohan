@@ -30,8 +30,10 @@ class MealMasterImportService
 
   # 既存のMealMasterにPFC・材料・手順をバックフィルする（名前で既存レコードを特定する）
   # アレルゲン紐付け(meal_ingredients)はseeds.rb作成時点で登録済みのため更新しない
+  # 「ご飯(100g)」等は朝食用・昼夕用で同名の別レコードが存在するため、
+  # meal_timingも条件に含めないと誤って別のレコードを更新してしまう
   def backfill(recipe)
-    meal_master = MealMaster.find_by!(name: recipe["name"])
+    meal_master = MealMaster.find_by!(name: recipe["name"], meal_timing: recipe["meal_timing"])
     meal_master.update!(
       protein: recipe["protein"],
       fat: recipe["fat"],
