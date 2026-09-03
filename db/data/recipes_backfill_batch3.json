@@ -21,7 +21,7 @@
       "scaling_type": "gram_scalable",
       "genre": "neutral",
       "calories": 234,
-      "protein": 5,
+      "protein": 4,
       "fat": 0,
       "carbohydrate": 56,
       "ingredients": [],
@@ -51,7 +51,7 @@
       "calories": 390,
       "protein": 6,
       "fat": 1,
-      "carbohydrate": 90,
+      "carbohydrate": 93,
       "ingredients": [],
       "steps": [],
       "allergens": []
