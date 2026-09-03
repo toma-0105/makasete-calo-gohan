@@ -66,4 +66,50 @@ RSpec.describe MealMasterImportService do
       end
     end
   end
+
+  describe "#backfill" do
+    let!(:meal_master) { create(:meal_master, name: "鶏むね肉のレモン塩麹グリル(100g)", calories: 150) }
+
+    let(:backfill_recipe) do
+      {
+        "name" => "鶏むね肉のレモン塩麹グリル(100g)",
+        "protein" => 24,
+        "fat" => 4,
+        "carbohydrate" => 2,
+        "ingredients" => [ { "name" => "鶏むね肉", "amount" => "100g" } ],
+        "steps" => [ "鶏むね肉を焼く" ]
+      }
+    end
+
+    it "既存レコードのPFC・材料・手順が更新される" do
+      service.backfill(backfill_recipe)
+      expect(meal_master.reload).to have_attributes(
+        protein: 24,
+        fat: 4,
+        carbohydrate: 2,
+        ingredients: [ { "name" => "鶏むね肉", "amount" => "100g" } ],
+        steps: [ "鶏むね肉を焼く" ]
+      )
+    end
+
+    it "MealMasterの件数は増えない" do
+      expect { service.backfill(backfill_recipe) }.not_to change(MealMaster, :count)
+    end
+
+    context "既にアレルゲンが紐づいている場合" do
+      before { create(:meal_ingredient, meal_master: meal_master, allergen_master: create(:allergen_master, name: "鶏肉")) }
+
+      it "MealIngredientの件数は変わらない（バックフィルはアレルゲンに触れないため）" do
+        expect { service.backfill(backfill_recipe) }.not_to change(MealIngredient, :count)
+      end
+    end
+
+    context "該当する名前のレコードが存在しない場合" do
+      let(:backfill_recipe) { super().merge("name" => "存在しない料理") }
+
+      it "RecordNotFoundが発生する" do
+        expect { service.backfill(backfill_recipe) }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
 end
