@@ -1,0 +1,469 @@
+{
+  "recipes": [
+    {
+      "name": "豚の生姜焼き(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 252,
+      "protein": 19,
+      "fat": 18,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "豚ロース薄切り肉", "amount": "100g" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "みりん", "amount": "小さじ2(14g)" },
+        { "name": "生姜(すりおろし)", "amount": "小さじ1(5g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "豚肉に醤油・みりん・生姜を合わせたタレを揉み込み10分置く",
+        "フライパンに油を熱し、汁気を切った豚肉を焼く",
+        "残ったタレを加えて煮絡める"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "豚しゃぶサラダ(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 180,
+      "protein": 22,
+      "fat": 9,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "豚もも薄切り肉", "amount": "100g" },
+        { "name": "レタス", "amount": "30g" },
+        { "name": "ミニトマト", "amount": "20g" },
+        { "name": "ポン酢", "amount": "小さじ2(12g)" }
+      ],
+      "steps": [
+        "鍋に湯を沸かし、豚肉を1枚ずつ広げて色が変わるまでゆでる",
+        "冷水にとって冷まし、水気を切る",
+        "レタス・ミニトマトと共に盛り、ポン酢をかける"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "豚肉と野菜の味噌炒め(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 230,
+      "protein": 16,
+      "fat": 14,
+      "carbohydrate": 8,
+      "ingredients": [
+        { "name": "豚こま切れ肉", "amount": "80g" },
+        { "name": "キャベツ", "amount": "30g" },
+        { "name": "ピーマン", "amount": "15g" },
+        { "name": "味噌", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "豚肉と野菜は一口大に切る",
+        "フライパンにごま油を熱し豚肉を炒める",
+        "野菜を加えてさらに炒め、味噌とみりんで味付けする"
+      ],
+      "allergens": [ "大豆", "豚肉" ]
+    },
+    {
+      "name": "酢豚(150g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 280,
+      "protein": 16,
+      "fat": 16,
+      "carbohydrate": 16,
+      "ingredients": [
+        { "name": "豚肩ロース肉", "amount": "90g" },
+        { "name": "玉ねぎ", "amount": "20g" },
+        { "name": "ピーマン", "amount": "15g" },
+        { "name": "にんじん", "amount": "15g" },
+        { "name": "片栗粉", "amount": "小さじ2(6g)" },
+        { "name": "揚げ油", "amount": "適量" },
+        { "name": "酢", "amount": "大さじ1(15g)" },
+        { "name": "ケチャップ", "amount": "大さじ1(15g)" },
+        { "name": "砂糖", "amount": "小さじ2(6g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" }
+      ],
+      "steps": [
+        "豚肉は一口大に切り片栗粉をまぶして揚げる",
+        "玉ねぎ・ピーマン・にんじんを一口大に切って炒める",
+        "酢・ケチャップ・砂糖・醤油を混ぜたタレを加え、豚肉と絡める"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "ポークソテー(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 250,
+      "protein": 19,
+      "fat": 19,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "豚ロース肉", "amount": "100g" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "小麦粉", "amount": "小さじ1(3g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" },
+        { "name": "バター", "amount": "5g" }
+      ],
+      "steps": [
+        "豚肉は筋切りをして塩こしょうをふり、小麦粉を薄くまぶす",
+        "フライパンに油を熱し両面をこんがり焼く",
+        "仕上げにバターを絡める"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "豚肉と白菜の重ね煮(150g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 190,
+      "protein": 10,
+      "fat": 17,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "豚バラ薄切り肉", "amount": "70g" },
+        { "name": "白菜", "amount": "60g" },
+        { "name": "和風だし", "amount": "100ml(顆粒だし1g)" },
+        { "name": "塩", "amount": "少々" }
+      ],
+      "steps": [
+        "白菜と豚肉を交互に重ねて鍋に敷き詰める",
+        "だし汁を加えてふたをし、白菜がしんなりするまで煮る",
+        "食べやすく切り分け、塩で味を調える"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "豚キムチ(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 230,
+      "protein": 10,
+      "fat": 20,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "豚バラ薄切り肉", "amount": "70g" },
+        { "name": "白菜キムチ", "amount": "40g" },
+        { "name": "にら", "amount": "10g" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" },
+        { "name": "醤油", "amount": "少々" }
+      ],
+      "steps": [
+        "豚肉は一口大に切る",
+        "フライパンにごま油を熱し豚肉を炒める",
+        "キムチとにらを加えてさらに炒め、醤油で味を調える"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "豚肉の梅しそ巻き(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 210,
+      "protein": 17,
+      "fat": 14,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "豚ロース薄切り肉", "amount": "100g" },
+        { "name": "梅干し", "amount": "2個(16g)" },
+        { "name": "大葉", "amount": "4枚" },
+        { "name": "小麦粉", "amount": "少々" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "梅干しは種を取ってたたく",
+        "豚肉を広げて大葉と梅肉をのせて巻き、小麦粉を薄くまぶす",
+        "フライパンに油を熱し転がしながら焼く"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "豚ヒレ肉のソテー(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 150,
+      "protein": 22,
+      "fat": 5,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "豚ヒレ肉", "amount": "100g" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "小麦粉", "amount": "小さじ1(3g)" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "豚ヒレ肉は塩こしょうをふり、小麦粉を薄くまぶす",
+        "フライパンにオリーブオイルを熱し、両面をこんがり焼く"
+      ],
+      "allergens": [ "豚肉" ]
+    },
+    {
+      "name": "もやしのとんぺい焼き(150g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 260,
+      "protein": 14,
+      "fat": 19,
+      "carbohydrate": 7,
+      "ingredients": [
+        { "name": "豚バラ薄切り肉", "amount": "50g" },
+        { "name": "もやし", "amount": "60g" },
+        { "name": "キャベツ", "amount": "30g" },
+        { "name": "卵", "amount": "1個(50g)" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "ソース", "amount": "小さじ2(12g)" }
+      ],
+      "steps": [
+        "豚肉ともやし・キャベツを炒め、塩こしょうで味付けする",
+        "フライパンに溶き卵を薄く広げ、半熟のうちに炒めた具を包む",
+        "器に盛りソースをかける"
+      ],
+      "allergens": [ "卵", "豚肉" ]
+    },
+    {
+      "name": "牛肉と野菜のチンジャオロース(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 240,
+      "protein": 19,
+      "fat": 13,
+      "carbohydrate": 9,
+      "ingredients": [
+        { "name": "牛もも肉(細切り)", "amount": "80g" },
+        { "name": "ピーマン", "amount": "30g" },
+        { "name": "たけのこ(水煮)", "amount": "20g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "オイスターソース", "amount": "小さじ1(6g)" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "牛肉は細切りにし片栗粉をまぶす。ピーマン・たけのこは細切りにする",
+        "フライパンにごま油を熱し牛肉を炒める",
+        "野菜を加えて炒め、醤油とオイスターソースで味付けする"
+      ],
+      "allergens": [ "牛肉" ]
+    },
+    {
+      "name": "牛肉のしぐれ煮(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 190,
+      "protein": 15,
+      "fat": 11,
+      "carbohydrate": 7,
+      "ingredients": [
+        { "name": "牛こま切れ肉", "amount": "70g" },
+        { "name": "生姜(せん切り)", "amount": "5g" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "みりん", "amount": "小さじ2(14g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" }
+      ],
+      "steps": [
+        "牛肉は食べやすい大きさに切る",
+        "鍋に醤油・みりん・砂糖・生姜を煮立て、牛肉を加える",
+        "汁気がなくなるまで煮詰める"
+      ],
+      "allergens": [ "牛肉" ]
+    },
+    {
+      "name": "ローストビーフ(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 150,
+      "protein": 18,
+      "fat": 8,
+      "carbohydrate": 0,
+      "ingredients": [
+        { "name": "牛もも肉(ブロック)", "amount": "80g" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "牛肉は室温に戻し、塩こしょうをすり込む",
+        "フライパンにオリーブオイルを熱し、全面に焼き色をつける",
+        "アルミホイルで包み、予熱で中まで火を通す",
+        "粗熱を取り、薄く切る"
+      ],
+      "allergens": [ "牛肉" ]
+    },
+    {
+      "name": "牛肉とごぼうの炒め煮(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 220,
+      "protein": 14,
+      "fat": 15,
+      "carbohydrate": 9,
+      "ingredients": [
+        { "name": "牛こま切れ肉", "amount": "70g" },
+        { "name": "ごぼう", "amount": "40g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "ごぼうはささがきにし、水にさらす",
+        "フライパンにごま油を熱し牛肉を炒める",
+        "ごぼうを加えて炒め、醤油・みりん・砂糖で味付けする"
+      ],
+      "allergens": [ "牛肉" ]
+    },
+    {
+      "name": "和風ハンバーグ 大根おろし添え(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 250,
+      "protein": 17,
+      "fat": 17,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "合いびき肉", "amount": "100g" },
+        { "name": "玉ねぎ(みじん切り)", "amount": "20g" },
+        { "name": "パン粉", "amount": "大さじ1(5g)" },
+        { "name": "卵", "amount": "少々" },
+        { "name": "大根おろし", "amount": "30g" },
+        { "name": "ポン酢", "amount": "小さじ2(12g)" }
+      ],
+      "steps": [
+        "玉ねぎをみじん切りにして炒め、冷ましておく",
+        "ひき肉・玉ねぎ・パン粉・卵を混ぜてよくこね、小判形に成形する",
+        "フライパンで両面を焼き、中まで火を通す",
+        "大根おろしをのせ、ポン酢をかける"
+      ],
+      "allergens": [ "牛肉" ]
+    },
+    {
+      "name": "鮭の塩焼き1切れ(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "japanese",
+      "calories": 137,
+      "protein": 20,
+      "fat": 6,
+      "carbohydrate": 0,
+      "ingredients": [],
+      "steps": [],
+      "allergens": [ "さけ" ]
+    },
+    {
+      "name": "鯖の味噌煮1切れ(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "japanese",
+      "calories": 211,
+      "protein": 16,
+      "fat": 14,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "鯖", "amount": "1切れ(80g)" },
+        { "name": "味噌", "amount": "小さじ2(12g)" },
+        { "name": "みりん", "amount": "大さじ1(18g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" },
+        { "name": "生姜(薄切り)", "amount": "少々" },
+        { "name": "水", "amount": "100ml" }
+      ],
+      "steps": [
+        "鍋に水・みりん・砂糖・生姜を煮立て、鯖を皮目を上にして入れる",
+        "落し蓋をして中火で煮る",
+        "味噌を溶き入れ、さらに煮詰める"
+      ],
+      "allergens": [ "さば", "大豆" ]
+    },
+    {
+      "name": "ぶりの照り焼き1切れ(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "japanese",
+      "calories": 178,
+      "protein": 17,
+      "fat": 10,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "ぶり", "amount": "1切れ(80g)" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "みりん", "amount": "小さじ2(14g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" }
+      ],
+      "steps": [
+        "ぶりに軽く塩をふり10分置き、水気を拭く",
+        "フライパンで両面を焼く",
+        "醤油・みりん・砂糖を混ぜたタレを加え、煮絡める"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "さんまの塩焼き1尾(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "japanese",
+      "calories": 277,
+      "protein": 18,
+      "fat": 23,
+      "carbohydrate": 0,
+      "ingredients": [],
+      "steps": [],
+      "allergens": []
+    },
+    {
+      "name": "たらのムニエル1切れ(90g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "western",
+      "calories": 120,
+      "protein": 17,
+      "fat": 5,
+      "carbohydrate": 0,
+      "ingredients": [
+        { "name": "たら", "amount": "1切れ(90g)" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "小麦粉", "amount": "小さじ1(3g)" },
+        { "name": "バター", "amount": "5g" }
+      ],
+      "steps": [
+        "たらは塩こしょうをふり、小麦粉を薄くまぶす",
+        "フライパンにバターを熱し、両面をこんがり焼く"
+      ],
+      "allergens": []
+    }
+  ]
+}

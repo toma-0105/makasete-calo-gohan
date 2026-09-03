@@ -1,0 +1,479 @@
+{
+  "recipes": [
+    {
+      "name": "えびのチリソース(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 120,
+      "protein": 14,
+      "fat": 5,
+      "carbohydrate": 5,
+      "ingredients": [
+        { "name": "むきえび", "amount": "80g" },
+        { "name": "ケチャップ", "amount": "大さじ1(15g)" },
+        { "name": "豆板醤", "amount": "少々" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "えびは片栗粉をまぶす",
+        "フライパンにごま油を熱しえびを炒める",
+        "ケチャップと豆板醤を加えて炒め合わせる"
+      ],
+      "allergens": [ "えび" ]
+    },
+    {
+      "name": "ぶり大根(150g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 230,
+      "protein": 16,
+      "fat": 13,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "ぶり", "amount": "80g" },
+        { "name": "大根", "amount": "60g" },
+        { "name": "醤油", "amount": "大さじ1(18g)" },
+        { "name": "みりん", "amount": "大さじ1(18g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" },
+        { "name": "和風だし", "amount": "100ml(顆粒だし1g)" }
+      ],
+      "steps": [
+        "ぶりは霜降りして臭みを取る。大根は厚めの輪切りにする",
+        "鍋にだし汁と大根を入れて柔らかくなるまで煮る",
+        "ぶりと醤油・みりん・砂糖を加えて煮絡める"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "あじの南蛮漬け(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 170,
+      "protein": 16,
+      "fat": 7,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "あじ", "amount": "80g" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "玉ねぎ", "amount": "20g" },
+        { "name": "にんじん", "amount": "10g" },
+        { "name": "酢", "amount": "大さじ1(15g)" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "砂糖", "amount": "小さじ2(6g)" },
+        { "name": "揚げ油", "amount": "適量" }
+      ],
+      "steps": [
+        "あじは片栗粉をまぶし、170℃の油で揚げる。玉ねぎ・にんじんは薄切りにする",
+        "酢・醤油・砂糖を混ぜた南蛮だれを作る",
+        "揚げたあじと野菜をだれに漬け込む"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "かじきのソテー(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 160,
+      "protein": 20,
+      "fat": 7,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "かじき", "amount": "100g" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "小麦粉", "amount": "小さじ1(3g)" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "かじきは塩こしょうをふり、小麦粉を薄くまぶす",
+        "フライパンにオリーブオイルを熱し、両面をこんがり焼く"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "いわしの梅煮(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 150,
+      "protein": 14,
+      "fat": 8,
+      "carbohydrate": 5,
+      "ingredients": [
+        { "name": "いわし", "amount": "80g" },
+        { "name": "梅干し", "amount": "1個(8g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ2(14g)" },
+        { "name": "水", "amount": "100ml" },
+        { "name": "生姜(薄切り)", "amount": "少々" }
+      ],
+      "steps": [
+        "いわしはうろこと内臓を取り除く",
+        "鍋に水・みりん・醤油・梅干し・生姜を煮立て、いわしを入れる",
+        "落し蓋をして中火で煮る"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "厚揚げの照り焼き(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 150,
+      "protein": 9,
+      "fat": 10,
+      "carbohydrate": 7,
+      "ingredients": [
+        { "name": "厚揚げ", "amount": "100g" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "みりん", "amount": "小さじ2(14g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "厚揚げは一口大に切る",
+        "フライパンに油を熱し厚揚げを焼く",
+        "醤油・みりん・砂糖を混ぜたタレを加え、煮絡める"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "麻婆豆腐(200g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 220,
+      "protein": 11,
+      "fat": 14,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "木綿豆腐", "amount": "150g" },
+        { "name": "長ねぎ", "amount": "15g" },
+        { "name": "豆板醤", "amount": "少々" },
+        { "name": "味噌", "amount": "小さじ1(6g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "豆腐はさいの目に切る",
+        "フライパンにごま油と豆板醤を熱し、長ねぎを炒める",
+        "味噌・醤油・豆腐を加え、水溶き片栗粉でとろみをつける"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "豆腐ハンバーグ1個(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "japanese",
+      "calories": 180,
+      "protein": 10,
+      "fat": 10,
+      "carbohydrate": 12,
+      "ingredients": [
+        { "name": "木綿豆腐", "amount": "100g" },
+        { "name": "玉ねぎ(みじん切り)", "amount": "15g" },
+        { "name": "片栗粉", "amount": "小さじ2(6g)" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" },
+        { "name": "大根おろし", "amount": "20g" },
+        { "name": "ポン酢", "amount": "小さじ1(6g)" }
+      ],
+      "steps": [
+        "豆腐は水切りする",
+        "豆腐・玉ねぎ・片栗粉・塩こしょうを混ぜてこね、小判形に成形する",
+        "フライパンに油を熱し両面を焼く",
+        "大根おろしとポン酢を添える"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "高野豆腐の煮物(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 110,
+      "protein": 9,
+      "fat": 6,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "高野豆腐", "amount": "15g" },
+        { "name": "和風だし", "amount": "100ml(顆粒だし1g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" }
+      ],
+      "steps": [
+        "高野豆腐はぬるま湯で戻し、水気を絞って一口大に切る",
+        "鍋にだし汁・醤油・みりん・砂糖を煮立て、高野豆腐を加える",
+        "弱火で汁を含ませるように煮る"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "厚揚げと野菜のチャンプルー(150g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 210,
+      "protein": 11,
+      "fat": 15,
+      "carbohydrate": 8,
+      "ingredients": [
+        { "name": "厚揚げ", "amount": "80g" },
+        { "name": "もやし", "amount": "30g" },
+        { "name": "にら", "amount": "20g" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "厚揚げは一口大に切る",
+        "フライパンにごま油を熱し厚揚げを焼く",
+        "もやし・にらを加えて炒め、塩こしょうと醤油で味付けする"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "厚揚げと野菜の味噌炒め(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 170,
+      "protein": 8,
+      "fat": 12,
+      "carbohydrate": 7,
+      "ingredients": [
+        { "name": "厚揚げ", "amount": "70g" },
+        { "name": "キャベツ", "amount": "30g" },
+        { "name": "ピーマン", "amount": "15g" },
+        { "name": "味噌", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "厚揚げは一口大に切る。キャベツ・ピーマンは食べやすく切る",
+        "フライパンにごま油を熱し厚揚げを焼く",
+        "野菜を加えて炒め、味噌とみりんで味付けする"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "厚揚げのみそマヨネーズ焼き(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 200,
+      "protein": 9,
+      "fat": 14,
+      "carbohydrate": 7,
+      "ingredients": [
+        { "name": "厚揚げ", "amount": "100g" },
+        { "name": "味噌", "amount": "小さじ1(6g)" },
+        { "name": "マヨネーズ", "amount": "小さじ2(8g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" }
+      ],
+      "steps": [
+        "厚揚げは食べやすい大きさに切る",
+        "味噌・マヨネーズ・みりんを混ぜてタレを作る",
+        "厚揚げにタレを塗り、オーブントースターで焼き色がつくまで焼く"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "なすと豆腐のオイスター炒め(150g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 180,
+      "protein": 10,
+      "fat": 12,
+      "carbohydrate": 9,
+      "ingredients": [
+        { "name": "木綿豆腐", "amount": "100g" },
+        { "name": "なす", "amount": "40g" },
+        { "name": "オイスターソース", "amount": "小さじ2(12g)" },
+        { "name": "醤油", "amount": "小さじ1/2(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "豆腐は水切りし食べやすく切る。なすは乱切りにする",
+        "フライパンにごま油を熱し、なすを炒める",
+        "豆腐を加えて焼き、オイスターソースと醤油で味付けする"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "麻婆春雨(150g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 200,
+      "protein": 8,
+      "fat": 8,
+      "carbohydrate": 22,
+      "ingredients": [
+        { "name": "春雨(乾燥)", "amount": "20g" },
+        { "name": "ひき肉", "amount": "30g" },
+        { "name": "長ねぎ", "amount": "15g" },
+        { "name": "豆板醤", "amount": "少々" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "鶏がらスープの素", "amount": "小さじ1(3g)" },
+        { "name": "水", "amount": "100ml" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "春雨は熱湯で戻して食べやすく切る",
+        "フライパンにごま油を熱しひき肉と豆板醤を炒める",
+        "長ねぎ・水・鶏がらスープの素・醤油を加えて煮立て、春雨を加えて煮絡める"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "鶏ひき肉の和風ハンバーグ(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 190,
+      "protein": 18,
+      "fat": 10,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "鶏ひき肉", "amount": "100g" },
+        { "name": "玉ねぎ(みじん切り)", "amount": "20g" },
+        { "name": "パン粉", "amount": "大さじ1(5g)" },
+        { "name": "卵", "amount": "少々" },
+        { "name": "大根おろし", "amount": "20g" },
+        { "name": "ポン酢", "amount": "小さじ1(6g)" }
+      ],
+      "steps": [
+        "玉ねぎをみじん切りにして炒め、冷ましておく",
+        "鶏ひき肉・玉ねぎ・パン粉・卵を混ぜてよくこね、小判形に成形する",
+        "フライパンで両面を焼き、中まで火を通す",
+        "大根おろしをのせ、ポン酢をかける"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "豆腐とひき肉のそぼろ煮(150g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 180,
+      "protein": 13,
+      "fat": 10,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "木綿豆腐", "amount": "100g" },
+        { "name": "ひき肉", "amount": "30g" },
+        { "name": "和風だし", "amount": "100ml(顆粒だし1g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" }
+      ],
+      "steps": [
+        "豆腐は食べやすく切る",
+        "鍋にひき肉を炒め、だし汁・醤油・みりんを加えて煮立てる",
+        "豆腐を加えて煮て、水溶き片栗粉でとろみをつける"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "れんこんと鶏ひき肉の挟み焼き(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 200,
+      "protein": 18,
+      "fat": 10,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "鶏ひき肉", "amount": "80g" },
+        { "name": "れんこん", "amount": "60g" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "れんこんは薄い輪切りにし、片面に片栗粉をまぶす",
+        "鶏ひき肉をれんこんで挟む",
+        "フライパンに油を熱し両面を焼き、醤油とみりんを絡める"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "白身魚の蒸し物(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 110,
+      "protein": 19,
+      "fat": 4,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "白身魚(たら等)", "amount": "100g" },
+        { "name": "酒", "amount": "小さじ1(5g)" },
+        { "name": "塩", "amount": "少々" },
+        { "name": "長ねぎ(せん切り)", "amount": "少々" },
+        { "name": "生姜(せん切り)", "amount": "少々" },
+        { "name": "ごま油", "amount": "少々" }
+      ],
+      "steps": [
+        "白身魚に塩をふり酒をかけ、耐熱皿に入れる",
+        "長ねぎと生姜をのせ、ラップをして電子レンジで加熱する",
+        "仕上げにごま油をかける"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "鶏団子の照り焼き(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 210,
+      "protein": 19,
+      "fat": 10,
+      "carbohydrate": 9,
+      "ingredients": [
+        { "name": "鶏ひき肉", "amount": "100g" },
+        { "name": "長ねぎ(みじん切り)", "amount": "15g" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "生姜(すりおろし)", "amount": "少々" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "鶏ひき肉・長ねぎ・片栗粉・生姜を混ぜ、丸く成形する",
+        "フライパンに油を熱し転がしながら焼く",
+        "醤油とみりんを加えて煮絡める"
+      ],
+      "allergens": [ "鶏肉" ]
+    }
+  ]
+}

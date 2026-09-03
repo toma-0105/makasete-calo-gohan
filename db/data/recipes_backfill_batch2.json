@@ -1,0 +1,260 @@
+{
+  "recipes": [
+    {
+      "name": "大根の浅漬け(40g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 12,
+      "protein": 0,
+      "fat": 0,
+      "carbohydrate": 3,
+      "ingredients": [],
+      "steps": [],
+      "allergens": []
+    },
+    {
+      "name": "もずく酢(40g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 8,
+      "protein": 0,
+      "fat": 0,
+      "carbohydrate": 2,
+      "ingredients": [],
+      "steps": [],
+      "allergens": []
+    },
+    {
+      "name": "オクラの和え物(50g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 20,
+      "protein": 1,
+      "fat": 0,
+      "carbohydrate": 4,
+      "ingredients": [],
+      "steps": [],
+      "allergens": []
+    },
+    {
+      "name": "ミニトマト3個(45g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "neutral",
+      "calories": 7,
+      "protein": 0,
+      "fat": 0,
+      "carbohydrate": 2,
+      "ingredients": [],
+      "steps": [],
+      "allergens": []
+    },
+    {
+      "name": "トマトとレタスのサラダ(100g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "neutral",
+      "calories": 20,
+      "protein": 1,
+      "fat": 0,
+      "carbohydrate": 4,
+      "ingredients": [],
+      "steps": [],
+      "allergens": []
+    },
+    {
+      "name": "焼きなす(70g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 35,
+      "protein": 1,
+      "fat": 0,
+      "carbohydrate": 8,
+      "ingredients": [
+        { "name": "なす", "amount": "1本(70g)" },
+        { "name": "しょうが(すりおろし)", "amount": "少々" },
+        { "name": "醤油", "amount": "少々" },
+        { "name": "かつお節", "amount": "少々" }
+      ],
+      "steps": [
+        "なすはヘタを取り、皮ごと魚焼きグリルで皮が真っ黒になるまで焼く",
+        "熱いうちに皮をむき、食べやすい大きさに裂く",
+        "器に盛り、しょうが・醤油・かつお節をのせる"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "キャベツの千切り(50g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "neutral",
+      "calories": 12,
+      "protein": 1,
+      "fat": 0,
+      "carbohydrate": 2,
+      "ingredients": [],
+      "steps": [],
+      "allergens": []
+    },
+    {
+      "name": "ツナサラダ(60g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "neutral",
+      "calories": 90,
+      "protein": 5,
+      "fat": 7,
+      "carbohydrate": 2,
+      "ingredients": [],
+      "steps": [],
+      "allergens": []
+    },
+    {
+      "name": "バナナ1本(100g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "western",
+      "calories": 86,
+      "protein": 1,
+      "fat": 0,
+      "carbohydrate": 21,
+      "ingredients": [],
+      "steps": [],
+      "allergens": [ "バナナ" ]
+    },
+    {
+      "name": "ヨーグルト プレーン(100g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 62,
+      "protein": 4,
+      "fat": 3,
+      "carbohydrate": 5,
+      "ingredients": [],
+      "steps": [],
+      "allergens": [ "乳" ]
+    },
+    {
+      "name": "りんご1/2個(125g)",
+      "meal_timing": "breakfast",
+      "category": "side_dish",
+      "scaling_type": "unit_scalable",
+      "genre": "western",
+      "calories": 66,
+      "protein": 0,
+      "fat": 0,
+      "carbohydrate": 17,
+      "ingredients": [],
+      "steps": [],
+      "allergens": [ "りんご" ]
+    },
+    {
+      "name": "味噌汁(豆腐とわかめ)",
+      "meal_timing": "breakfast",
+      "category": "soup",
+      "scaling_type": "fixed",
+      "genre": "japanese",
+      "calories": 45,
+      "protein": 3,
+      "fat": 2,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "木綿豆腐", "amount": "30g" },
+        { "name": "乾燥わかめ", "amount": "2g" },
+        { "name": "味噌", "amount": "小さじ1(6g)" },
+        { "name": "和風だし", "amount": "150ml(顆粒だし1.5g)" }
+      ],
+      "steps": [
+        "鍋にだし汁を入れて温める",
+        "豆腐とわかめを加えて温める",
+        "煮立たせないうちに味噌を溶き入れる"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "味噌汁(なめこ)",
+      "meal_timing": "breakfast",
+      "category": "soup",
+      "scaling_type": "fixed",
+      "genre": "japanese",
+      "calories": 40,
+      "protein": 2,
+      "fat": 1,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "なめこ", "amount": "30g" },
+        { "name": "味噌", "amount": "小さじ1(6g)" },
+        { "name": "和風だし", "amount": "150ml(顆粒だし1.5g)" },
+        { "name": "長ねぎ", "amount": "少々" }
+      ],
+      "steps": [
+        "鍋にだし汁となめこを入れて温める",
+        "煮立たせないうちに味噌を溶き入れる",
+        "長ねぎを散らす"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "コンソメスープ",
+      "meal_timing": "breakfast",
+      "category": "soup",
+      "scaling_type": "fixed",
+      "genre": "western",
+      "calories": 35,
+      "protein": 1,
+      "fat": 0,
+      "carbohydrate": 8,
+      "ingredients": [
+        { "name": "玉ねぎ", "amount": "20g" },
+        { "name": "にんじん", "amount": "10g" },
+        { "name": "コンソメ", "amount": "小さじ1(3g)" },
+        { "name": "水", "amount": "150ml" }
+      ],
+      "steps": [
+        "玉ねぎ・にんじんを薄切りにする",
+        "鍋に水とコンソメ、野菜を入れて柔らかくなるまで煮る"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "中華風卵スープ",
+      "meal_timing": "breakfast",
+      "category": "soup",
+      "scaling_type": "fixed",
+      "genre": "chinese",
+      "calories": 60,
+      "protein": 3,
+      "fat": 4,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "卵", "amount": "1/2個(25g)" },
+        { "name": "鶏がらスープの素", "amount": "小さじ1(3g)" },
+        { "name": "片栗粉", "amount": "小さじ1/2(1.5g)" },
+        { "name": "水", "amount": "150ml" },
+        { "name": "ごま油", "amount": "少々" }
+      ],
+      "steps": [
+        "鍋に水と鶏がらスープの素を煮立てる",
+        "水溶き片栗粉でとろみをつける",
+        "溶き卵を細く流し入れる",
+        "ごま油を垂らす"
+      ],
+      "allergens": [ "卵" ]
+    }
+  ]
+}

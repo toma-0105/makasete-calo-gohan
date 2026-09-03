@@ -1,0 +1,481 @@
+{
+  "recipes": [
+    {
+      "name": "鶏胸肉のハニーマスタードチャーシュー(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 165,
+      "protein": 24,
+      "fat": 3,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "100g" },
+        { "name": "はちみつ", "amount": "小さじ1(7g)" },
+        { "name": "粒マスタード", "amount": "小さじ1(5g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "酒", "amount": "小さじ1(5g)" }
+      ],
+      "steps": [
+        "鶏むね肉はフォークで数か所刺し、酒をもみ込む",
+        "はちみつ・粒マスタード・醤油を混ぜてタレを作る",
+        "フライパンで鶏むね肉を焼き、火が通ったらタレを絡めて煮詰める"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "エビチリ風鶏胸肉(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 170,
+      "protein": 24,
+      "fat": 5,
+      "carbohydrate": 9,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "100g" },
+        { "name": "ケチャップ", "amount": "大さじ1(15g)" },
+        { "name": "豆板醤", "amount": "少々" },
+        { "name": "にんにく(みじん切り)", "amount": "3g" },
+        { "name": "生姜(みじん切り)", "amount": "3g" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "鶏むね肉に片栗粉をまぶす",
+        "フライパンにごま油とにんにく・生姜を熱し、鶏むね肉を焼く",
+        "ケチャップと豆板醤を加えて炒め合わせる"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉とブロッコリーの甘酢炒め(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 190,
+      "protein": 22,
+      "fat": 6,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "90g" },
+        { "name": "ブロッコリー", "amount": "30g" },
+        { "name": "酢", "amount": "小さじ2(10g)" },
+        { "name": "砂糖", "amount": "小さじ2(6g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "鶏むね肉は一口大に切り片栗粉をまぶす。ブロッコリーは小房に分けて下ゆでする",
+        "フライパンに油を熱し鶏むね肉を焼く",
+        "酢・砂糖・醤油を混ぜたタレとブロッコリーを加えて炒め合わせる"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉とピーマンの南蛮漬け(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 180,
+      "protein": 22,
+      "fat": 6,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "90g" },
+        { "name": "ピーマン", "amount": "30g" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "酢", "amount": "大さじ1(15g)" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "砂糖", "amount": "小さじ2(6g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "鶏むね肉は一口大に切り片栗粉をまぶす。ピーマンは細切りにする",
+        "フライパンに油を熱し鶏むね肉を揚げ焼きにする",
+        "酢・醤油・砂糖を混ぜた南蛮だれとピーマンを加えて漬け込む"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉の塩麹焼き(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 130,
+      "protein": 24,
+      "fat": 2,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "100g" },
+        { "name": "塩麹", "amount": "小さじ1(6g)" }
+      ],
+      "steps": [
+        "鶏むね肉に塩麹をもみ込み15分以上置く",
+        "フライパンまたは魚焼きグリルで両面を焼く"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉のチーズ焼き(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 195,
+      "protein": 26,
+      "fat": 9,
+      "carbohydrate": 1,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "100g" },
+        { "name": "スライスチーズ", "amount": "1枚(18g)" },
+        { "name": "塩・こしょう", "amount": "少々" }
+      ],
+      "steps": [
+        "鶏むね肉は塩こしょうをふる",
+        "フライパンで焼き、火が通ったらチーズをのせてふたをし溶かす"
+      ],
+      "allergens": [ "乳", "鶏肉" ]
+    },
+    {
+      "name": "蒸し鶏とキャベツのごまだれ(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 175,
+      "protein": 21,
+      "fat": 7,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "80g" },
+        { "name": "酒", "amount": "少々" },
+        { "name": "キャベツ", "amount": "40g" },
+        { "name": "すりごま", "amount": "小さじ2(6g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" }
+      ],
+      "steps": [
+        "鶏むね肉は酒をふり耐熱皿に入れ、電子レンジで加熱して蒸し鶏にし、手で裂く",
+        "キャベツはせん切りにしてさっと塩ゆでする",
+        "すりごま・醤油・砂糖を混ぜたタレを作り、鶏肉とキャベツにかける"
+      ],
+      "allergens": [ "ごま", "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉の照り焼き(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 175,
+      "protein": 24,
+      "fat": 6,
+      "carbohydrate": 7,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "100g" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "みりん", "amount": "小さじ2(14g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "フライパンに油を熱し鶏むね肉を両面焼く",
+        "醤油・みりん・砂糖を混ぜたタレを加え、煮絡める"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉の唐揚げ(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 290,
+      "protein": 24,
+      "fat": 16,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "100g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "酒", "amount": "小さじ1(5g)" },
+        { "name": "生姜(すりおろし)", "amount": "少々" },
+        { "name": "片栗粉", "amount": "大さじ1(9g)" },
+        { "name": "揚げ油", "amount": "適量" }
+      ],
+      "steps": [
+        "鶏むね肉を一口大に切り、醤油・酒・生姜に15分ほど漬け込む",
+        "汁気を切り片栗粉をまぶす",
+        "170℃の油できつね色になるまで揚げる"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉とアスパラのバター醤油炒め(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 195,
+      "protein": 24,
+      "fat": 8,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "90g" },
+        { "name": "アスパラガス", "amount": "30g" },
+        { "name": "バター", "amount": "5g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" }
+      ],
+      "steps": [
+        "鶏むね肉は一口大に切る。アスパラは斜め切りにする",
+        "フライパンにバターを熱し、鶏むね肉を焼く",
+        "アスパラを加えて炒め、醤油で味を調える"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉のレモンクリーム煮(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 210,
+      "protein": 22,
+      "fat": 12,
+      "carbohydrate": 5,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "90g" },
+        { "name": "玉ねぎ", "amount": "20g" },
+        { "name": "生クリーム", "amount": "30g" },
+        { "name": "レモン汁", "amount": "小さじ1(5g)" },
+        { "name": "コンソメ", "amount": "小さじ1/2(2g)" },
+        { "name": "塩・こしょう", "amount": "少々" }
+      ],
+      "steps": [
+        "鶏むね肉は一口大に切る。玉ねぎは薄切りにする",
+        "フライパンで鶏むね肉と玉ねぎを炒める",
+        "生クリームとコンソメを加えて煮込み、仕上げにレモン汁を加えて塩・こしょうで味を調える"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉となすのトマト煮(150g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 180,
+      "protein": 22,
+      "fat": 6,
+      "carbohydrate": 9,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "90g" },
+        { "name": "なす", "amount": "40g" },
+        { "name": "トマト缶(カット)", "amount": "60g" },
+        { "name": "にんにく", "amount": "3g" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" },
+        { "name": "コンソメ", "amount": "小さじ1/2(2g)" }
+      ],
+      "steps": [
+        "鶏むね肉となすは一口大に切る",
+        "オリーブオイルとにんにくで鶏むね肉となすを炒める",
+        "トマト缶とコンソメを加えて煮込む"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "サラダチキン プレーン(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "neutral",
+      "calories": 116,
+      "protein": 24,
+      "fat": 2,
+      "carbohydrate": 0,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "100g" },
+        { "name": "塩", "amount": "小さじ1/4(1.5g)" },
+        { "name": "砂糖", "amount": "小さじ1/4(1g)" }
+      ],
+      "steps": [
+        "鶏むね肉に塩・砂糖をすり込み30分以上置く",
+        "耐熱袋に入れて空気を抜き、沸騰を止めた鍋に入れてふたをし、余熱で20分ほど火を通す",
+        "粗熱を取り、薄く切る"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉と長ねぎの甘辛炒め(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 200,
+      "protein": 23,
+      "fat": 8,
+      "carbohydrate": 8,
+      "ingredients": [
+        { "name": "鶏むね肉", "amount": "90g" },
+        { "name": "長ねぎ", "amount": "30g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "鶏むね肉は一口大に切る。長ねぎは斜め切りにする",
+        "フライパンにごま油を熱し鶏むね肉を焼く",
+        "長ねぎを加え、醤油・みりん・砂糖で味付けする"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏胸肉と蓮根のつくね(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 190,
+      "protein": 22,
+      "fat": 8,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "鶏むねひき肉", "amount": "90g" },
+        { "name": "れんこん", "amount": "30g" },
+        { "name": "片栗粉", "amount": "小さじ1(3g)" },
+        { "name": "生姜(すりおろし)", "amount": "少々" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" },
+        { "name": "サラダ油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "れんこんは粗みじん切りにする",
+        "鶏むねひき肉・れんこん・片栗粉・生姜を混ぜ、小判形に成形する",
+        "フライパンに油を熱し両面焼き、醤油とみりんを絡めて仕上げる"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏の照り焼き(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 203,
+      "protein": 17,
+      "fat": 11,
+      "carbohydrate": 8,
+      "ingredients": [
+        { "name": "鶏もも肉", "amount": "100g" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "みりん", "amount": "小さじ2(14g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" }
+      ],
+      "steps": [
+        "鶏もも肉は余分な脂を取り、フォークで数か所刺す",
+        "フライパンで皮目から焼く",
+        "醤油・みりん・砂糖を混ぜたタレを加え、煮絡める"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "チキン南蛮(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 320,
+      "protein": 17,
+      "fat": 22,
+      "carbohydrate": 13,
+      "ingredients": [
+        { "name": "鶏もも肉", "amount": "100g" },
+        { "name": "卵", "amount": "小さじ2(10g)" },
+        { "name": "小麦粉", "amount": "小さじ2(6g)" },
+        { "name": "揚げ油", "amount": "適量" },
+        { "name": "酢", "amount": "小さじ2(10g)" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "砂糖", "amount": "小さじ2(6g)" },
+        { "name": "マヨネーズ", "amount": "小さじ2(8g)" }
+      ],
+      "steps": [
+        "鶏もも肉に小麦粉、次に溶き卵をまぶす",
+        "170℃の油で揚げる",
+        "酢・醤油・砂糖を煮立てた甘酢だれにくぐらせ、マヨネーズを添える"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏もも肉のグリル(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 210,
+      "protein": 17,
+      "fat": 15,
+      "carbohydrate": 0,
+      "ingredients": [],
+      "steps": [],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "鶏もも肉と根菜の煮物(150g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 220,
+      "protein": 16,
+      "fat": 11,
+      "carbohydrate": 13,
+      "ingredients": [
+        { "name": "鶏もも肉", "amount": "80g" },
+        { "name": "大根", "amount": "30g" },
+        { "name": "にんじん", "amount": "20g" },
+        { "name": "れんこん", "amount": "20g" },
+        { "name": "和風だし", "amount": "100ml(顆粒だし1g)" },
+        { "name": "醤油", "amount": "小さじ2(12g)" },
+        { "name": "みりん", "amount": "小さじ2(14g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" }
+      ],
+      "steps": [
+        "鶏もも肉と大根・にんじん・れんこんは一口大に切る",
+        "鍋で鶏もも肉を炒め、根菜を加えてさらに炒める",
+        "だし汁・醤油・みりん・砂糖を加えて柔らかくなるまで煮る"
+      ],
+      "allergens": [ "鶏肉" ]
+    },
+    {
+      "name": "タンドリーチキン(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "main_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 200,
+      "protein": 17,
+      "fat": 13,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "鶏もも肉", "amount": "100g" },
+        { "name": "プレーンヨーグルト", "amount": "大さじ1(15g)" },
+        { "name": "カレー粉", "amount": "小さじ1(2g)" },
+        { "name": "トマトケチャップ", "amount": "小さじ1(5g)" },
+        { "name": "おろしにんにく", "amount": "少々" },
+        { "name": "おろし生姜", "amount": "少々" }
+      ],
+      "steps": [
+        "鶏もも肉をプレーンヨーグルト・カレー粉・トマトケチャップ・おろしにんにく・おろし生姜に30分〜一晩漬け込む",
+        "魚焼きグリルまたはオーブンで焼く"
+      ],
+      "allergens": [ "鶏肉" ]
+    }
+  ]
+}
