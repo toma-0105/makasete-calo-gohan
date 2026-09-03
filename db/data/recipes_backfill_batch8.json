@@ -1,0 +1,329 @@
+{
+  "recipes": [
+    {
+      "name": "もやしとわかめのサラダ(60g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "neutral",
+      "calories": 20,
+      "protein": 1,
+      "fat": 1,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "もやし", "amount": "40g" },
+        { "name": "乾燥わかめ", "amount": "2g" },
+        { "name": "ごま油", "amount": "少々" },
+        { "name": "酢", "amount": "小さじ1(5g)" },
+        { "name": "醤油", "amount": "少々" }
+      ],
+      "steps": [
+        "鍋に湯を沸かし、もやしをさっと茹でて冷ます",
+        "わかめは水で戻す",
+        "もやしとわかめを合わせ、ごま油・酢・醤油で和える"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "キノコのマリネ(50g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 30,
+      "protein": 1,
+      "fat": 2,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "きのこ(しめじ・えのき等)", "amount": "50g" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" },
+        { "name": "酢", "amount": "小さじ1(5g)" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "にんにく", "amount": "少々" }
+      ],
+      "steps": [
+        "きのこは石づきを取ってほぐす",
+        "フライパンでオリーブオイルとにんにくを熱し、きのこをさっと炒める",
+        "酢と塩こしょうを加えて和え、冷やす"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "えのきのチャプチェ(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 100,
+      "protein": 2,
+      "fat": 5,
+      "carbohydrate": 14,
+      "ingredients": [
+        { "name": "えのき", "amount": "50g" },
+        { "name": "春雨(乾燥)", "amount": "10g" },
+        { "name": "にんじん", "amount": "15g" },
+        { "name": "ピーマン", "amount": "10g" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" }
+      ],
+      "steps": [
+        "えのきは石づきを取ってほぐす。にんじん・ピーマンは細切りにする。春雨は熱湯で戻す",
+        "フライパンにごま油を熱し、野菜ときのこを炒める",
+        "春雨を加え、醤油と砂糖で味付けする"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "パプリカのピクルス(40g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 15,
+      "protein": 0,
+      "fat": 0,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "パプリカ", "amount": "40g" },
+        { "name": "酢", "amount": "大さじ1(15g)" },
+        { "name": "砂糖", "amount": "小さじ1(3g)" },
+        { "name": "塩", "amount": "少々" },
+        { "name": "水", "amount": "大さじ1(15g)" }
+      ],
+      "steps": [
+        "パプリカは細切りにする",
+        "酢・砂糖・塩・水を混ぜてピクルス液を作る",
+        "パプリカを漬け込み、冷蔵庫で30分以上置く"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "大根と厚揚げの煮物(120g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "japanese",
+      "calories": 80,
+      "protein": 4,
+      "fat": 4,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "大根", "amount": "80g" },
+        { "name": "厚揚げ", "amount": "30g" },
+        { "name": "和風だし", "amount": "100ml(顆粒だし1g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" },
+        { "name": "みりん", "amount": "小さじ1(7g)" }
+      ],
+      "steps": [
+        "大根は厚めのいちょう切り、厚揚げは一口大に切る",
+        "鍋にだし汁と大根を入れて柔らかくなるまで煮る",
+        "厚揚げと醤油・みりんを加えてさらに煮る"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "豆腐チヂミ(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "chinese",
+      "calories": 150,
+      "protein": 8,
+      "fat": 7,
+      "carbohydrate": 15,
+      "ingredients": [
+        { "name": "木綿豆腐", "amount": "60g" },
+        { "name": "小麦粉", "amount": "大さじ2(18g)" },
+        { "name": "卵", "amount": "少々" },
+        { "name": "にら", "amount": "15g" },
+        { "name": "ごま油", "amount": "小さじ1(4g)" },
+        { "name": "醤油", "amount": "小さじ1(6g)" }
+      ],
+      "steps": [
+        "豆腐は崩し、小麦粉・卵と混ぜる",
+        "にらを加えて混ぜ合わせる",
+        "フライパンにごま油を熱し、両面をこんがり焼く。醤油だれを添える"
+      ],
+      "allergens": [ "大豆" ]
+    },
+    {
+      "name": "野菜サラダ(100g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "neutral",
+      "calories": 45,
+      "protein": 1,
+      "fat": 2,
+      "carbohydrate": 7,
+      "ingredients": [],
+      "steps": [],
+      "allergens": []
+    },
+    {
+      "name": "ポテトサラダ(60g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 85,
+      "protein": 2,
+      "fat": 4,
+      "carbohydrate": 10,
+      "ingredients": [
+        { "name": "じゃがいも", "amount": "50g" },
+        { "name": "きゅうり", "amount": "10g" },
+        { "name": "ハム", "amount": "5g" },
+        { "name": "マヨネーズ", "amount": "小さじ2(8g)" },
+        { "name": "塩・こしょう", "amount": "少々" }
+      ],
+      "steps": [
+        "じゃがいもは皮をむいて一口大に切り、柔らかくなるまで茹でる",
+        "茹で上がったらつぶし、粗熱を取る",
+        "きゅうり・ハムとマヨネーズを加えて和え、塩こしょうで味を調える"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "コールスロー(70g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 60,
+      "protein": 1,
+      "fat": 4,
+      "carbohydrate": 5,
+      "ingredients": [
+        { "name": "キャベツ", "amount": "60g" },
+        { "name": "にんじん", "amount": "10g" },
+        { "name": "マヨネーズ", "amount": "小さじ2(8g)" },
+        { "name": "酢", "amount": "小さじ1(5g)" },
+        { "name": "塩", "amount": "少々" }
+      ],
+      "steps": [
+        "キャベツ・にんじんはせん切りにし、塩をふって10分置き、水気を絞る",
+        "マヨネーズと酢を混ぜて和える"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "カプレーゼ(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 110,
+      "protein": 6,
+      "fat": 8,
+      "carbohydrate": 2,
+      "ingredients": [
+        { "name": "トマト", "amount": "40g" },
+        { "name": "モッツァレラチーズ", "amount": "30g" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" },
+        { "name": "バジル", "amount": "少々" },
+        { "name": "塩・こしょう", "amount": "少々" }
+      ],
+      "steps": [
+        "トマトとモッツァレラチーズを薄切りにする",
+        "交互に並べて盛り付ける",
+        "オリーブオイルをかけ、バジル・塩こしょうをふる"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "マッシュポテト(80g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 95,
+      "protein": 2,
+      "fat": 4,
+      "carbohydrate": 13,
+      "ingredients": [
+        { "name": "じゃがいも", "amount": "80g" },
+        { "name": "牛乳", "amount": "大さじ1(15g)" },
+        { "name": "バター", "amount": "5g" },
+        { "name": "塩・こしょう", "amount": "少々" }
+      ],
+      "steps": [
+        "じゃがいもは皮をむいて一口大に切り、柔らかくなるまで茹でる",
+        "熱いうちにつぶす",
+        "牛乳とバターを加えて混ぜ、塩こしょうで味を調える"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "ブロッコリーのガーリック炒め(70g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 55,
+      "protein": 3,
+      "fat": 3,
+      "carbohydrate": 4,
+      "ingredients": [
+        { "name": "ブロッコリー", "amount": "70g" },
+        { "name": "にんにく(薄切り)", "amount": "3g" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" },
+        { "name": "塩・こしょう", "amount": "少々" }
+      ],
+      "steps": [
+        "ブロッコリーは小房に分けて下ゆでする",
+        "フライパンにオリーブオイルとにんにくを熱し、香りを出す",
+        "ブロッコリーを加えて炒め、塩こしょうで味を調える"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "キャロットラペ(60g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 50,
+      "protein": 1,
+      "fat": 3,
+      "carbohydrate": 6,
+      "ingredients": [
+        { "name": "にんじん", "amount": "60g" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" },
+        { "name": "酢", "amount": "小さじ1(5g)" },
+        { "name": "砂糖", "amount": "小さじ1/2(1.5g)" },
+        { "name": "塩・こしょう", "amount": "少々" }
+      ],
+      "steps": [
+        "にんじんはせん切りまたはピーラーで細切りにする",
+        "オリーブオイル・酢・砂糖・塩こしょうを混ぜたドレッシングを作る",
+        "にんじんと和え、冷蔵庫で味を馴染ませる"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "ズッキーニのソテー(70g)",
+      "meal_timing": "lunch_or_dinner",
+      "category": "side_dish",
+      "scaling_type": "gram_scalable",
+      "genre": "western",
+      "calories": 45,
+      "protein": 1,
+      "fat": 3,
+      "carbohydrate": 3,
+      "ingredients": [
+        { "name": "ズッキーニ", "amount": "70g" },
+        { "name": "オリーブオイル", "amount": "小さじ1(4g)" },
+        { "name": "塩・こしょう", "amount": "少々" },
+        { "name": "にんにく", "amount": "少々" }
+      ],
+      "steps": [
+        "ズッキーニは輪切りにする",
+        "フライパンにオリーブオイルとにんにくを熱し、ズッキーニを並べる",
+        "両面に焼き色がつくまで焼き、塩こしょうで味を調える"
+      ],
+      "allergens": []
+    }
+  ]
+}
