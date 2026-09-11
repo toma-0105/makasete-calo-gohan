@@ -10,6 +10,7 @@ class TdeeProfilesController < ApplicationController
     @tdee_profile.user = current_user
     if @tdee_profile.save
       TdeeCalculatorService.new(@tdee_profile).calculate
+      WeightRecordUpsertService.new(current_user, weight: @tdee_profile.weight, recorded_on: Date.current).call
       redirect_to tdee_profile_path(@tdee_profile), notice: "TDEE診断が完了しました"
     else
       render :new, status: :unprocessable_content
