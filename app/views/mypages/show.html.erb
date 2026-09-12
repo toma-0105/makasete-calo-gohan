@@ -51,10 +51,15 @@
                   { selected: 1 },
                   class: "select select-bordered w-full bg-[#FFFEF5]" %>
             </div>
-            <%= f.submit "献立を生成する",
-                  class: primary_button_classes("block w-full") %>
-            <% end %>
+          <%= f.submit "献立を生成する",
+            class: primary_button_classes("block w-full") %>
+          <% end %>
         </div>
+      <% end %>
+      <%# 体重記録ボタン（TDEE診断済みのユーザーのみ表示） %>
+      <% if @tdee_profile %>
+        <%= link_to "体重を記録する", weight_records_path,
+              class: secondary_button_classes("block w-full") %>
       <% end %>
 
       <%# 各種設定・履歴へのリンク %>
