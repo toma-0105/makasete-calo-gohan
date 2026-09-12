@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   resources :tdee_profiles, only: [ :new, :create, :show ]
   resources :user_allergens, only: [ :new, :create ]
+  resources :weight_records, only: [ :index, :create ]
   resources :menus, only: [ :index, :create, :show ] do
     # 献立の再生成（既存の献立を削除して新しい献立を作り直す）
     post :regenerate, on: :member

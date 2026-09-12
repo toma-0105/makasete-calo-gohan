@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_08_31_075153) do
+ActiveRecord::Schema[8.0].define(version: 2026_09_11_131046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -216,6 +216,16 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_31_075153) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "weight_records", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.decimal "weight", null: false
+    t.date "recorded_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "recorded_on"], name: "index_weight_records_on_user_id_and_recorded_on", unique: true
+    t.index ["user_id"], name: "index_weight_records_on_user_id"
+  end
+
   add_foreign_key "favorites", "meal_masters"
   add_foreign_key "favorites", "users"
   add_foreign_key "meal_ingredients", "allergen_masters"
@@ -226,4 +236,5 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_31_075153) do
   add_foreign_key "tdee_profiles", "users"
   add_foreign_key "user_allergens", "allergen_masters"
   add_foreign_key "user_allergens", "users"
+  add_foreign_key "weight_records", "users"
 end

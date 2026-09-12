@@ -97,6 +97,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chartkick (5.2.1)
     childprocess (5.1.0)
       logger (~> 1.5)
     concurrent-ruby (1.3.8)
@@ -143,6 +144,8 @@ GEM
       fugit (>= 1.11.0)
       railties (>= 6.1.0)
       thor (>= 1.0.0)
+    groupdate (6.8.0)
+      activesupport (>= 7.2)
     httparty (0.24.2)
       csv
       mini_mime (>= 1.0.0)
@@ -413,6 +416,7 @@ DEPENDENCIES
   brakeman
   bullet
   capybara
+  chartkick
   cssbundling-rails
   debug
   devise (~> 4.9)
@@ -420,6 +424,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   good_job
+  groupdate
   jbuilder
   jsbundling-rails
   letter_opener_web
@@ -463,6 +468,7 @@ CHECKSUMS
   bullet (8.1.3) sha256=c8163c527324fe1180775be48719875726891622f0a73784658b2992acf3c7cb
   bundler (4.0.12) sha256=7f8b757d28dfb636e7b24fba2344ac6dd13b5b24f4b46d62573d483f211825ac
   capybara (3.40.0) sha256=42dba720578ea1ca65fd7a41d163dd368502c191804558f6e0f71b391054aeef
+  chartkick (5.2.1) sha256=2848d7de87189f30f28d077eb0bbdebc8a1f0f6f81de1ded95008fe564369949
   childprocess (5.1.0) sha256=9a8d484be2fd4096a0e90a0cd3e449a05bc3aa33f8ac9e4d6dcef6ac1455b6ec
   concurrent-ruby (1.3.8) sha256=b2f1be836e968ccc78ccfce277ea79c72a88633f22306782c16ff23fb415d1e1
   connection_pool (3.0.2) sha256=33fff5ba71a12d2aa26cb72b1db8bba2a1a01823559fb01d29eb74c286e62e0a
@@ -484,6 +490,7 @@ CHECKSUMS
   fugit (1.13.0) sha256=a4f093fce740da52f216740a5041e2a594ea763cdb89e8b2754ca4399634ab18
   globalid (1.4.0) sha256=037f12fbf1d9d7a014d501c2d5c77356fd4ddd96d7a7991d6700bba96706f427
   good_job (4.19.2) sha256=73f4ea0595a29d28b9d9c0bf23361cc7434542b4d286f59b803819110c26e4b0
+  groupdate (6.8.0) sha256=16f90ea18ca981c38e41e592416480b28353aa5e5cc3e7cb13a68b8fb5d40510
   httparty (0.24.2) sha256=8fca6a54aa0c4aa4303a0fd33e5e2156175d6a5334f714263b458abd7fda9c38
   i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc
