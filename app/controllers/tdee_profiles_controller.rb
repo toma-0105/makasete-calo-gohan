@@ -2,7 +2,9 @@ class TdeeProfilesController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @tdee_profile = TdeeProfile.new
+    # 前回の診断内容を引き継ぐため、直近のTDEE記録を取得して初期値にする
+    last_profile = current_user.tdee_profiles.order(created_at: :desc).first
+    @tdee_profile = TdeeProfile.new(last_profile&.slice(:height, :weight, :age, :gender, :activity_level))
   end
 
   def create
