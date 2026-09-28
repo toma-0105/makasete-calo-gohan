@@ -5,6 +5,7 @@ class UserAllergensController < ApplicationController
     @allergen_masters = AllergenMaster.all
     @user_allergen = current_user.user_allergens.build
     @selected_allergen_ids = current_user.user_allergens.pluck(:allergen_master_id)
+    @allergen_setup_redirect_path = after_allergen_setup_path_for(current_user)
   end
 
   def create
@@ -21,6 +22,7 @@ class UserAllergensController < ApplicationController
     redirect_to after_allergen_setup_path_for(current_user), notice: "アレルギー設定を保存しました"
   rescue ActiveRecord::ActiveRecordError
     @allergen_masters = AllergenMaster.all
+    @allergen_setup_redirect_path = after_allergen_setup_path_for(current_user)
     flash.now[:alert] = "保存に失敗しました"
     render :new, status: :unprocessable_content
   end
