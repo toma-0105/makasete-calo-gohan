@@ -123,7 +123,7 @@
     <div class="mt-6 flex flex-col gap-3" data-controller="loading">
       <%# ローディングオーバーレイ %>
       <div data-loading-target="overlay"
-           class="hidden fixed inset-0 bg-[#FFFEF5]/90 flex flex-col items-center justify-center z-50">
+          class="hidden fixed inset-0 bg-[#FFFEF5]/90 flex flex-col items-center justify-center z-50">
         <div class="w-12 h-12 border-4 border-[#EAE070] border-t-[#F9C639] rounded-full animate-spin mb-4"></div>
         <p class="text-[15px] font-semibold text-[#3a3820]">献立を生成しています...</p>
         <p class="text-[12px] text-[#9a9570] mt-1">少しお待ちください</p>
@@ -143,7 +143,7 @@
         <% end %>
       <% end %>
 
-      <%# 再生成ボタンと新規登録CTA（ゲストのみ）を横並びで表示%>
+      <%# 再生成ボタンと新規登録CTA（ゲストのみ）を横並びで表示 %>
       <div class="flex gap-3">
         <%= form_with url: regenerate_menu_path(@menu), data: { action: "submit->loading#showLoading" }, class: "flex-1" do |f| %>
           <%= f.submit "献立を再生成する",
