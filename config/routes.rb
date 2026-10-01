@@ -57,7 +57,7 @@ Rails.application.routes.draw do
 
   get "privacy_policy", to: "static_pages#privacy_policy", as: :privacy_policy
   get "terms_of_service", to: "static_pages#terms_of_service", as: :terms
-
+  get "contact", to: "static_pages#contact", as: :contact
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
