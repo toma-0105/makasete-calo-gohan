@@ -1,0 +1,26 @@
+<% content_for :title, "お問い合わせ - まかせてカロごはん" %>
+
+<div class="flex-1 flex flex-col">
+  <main class="flex-1 px-5 py-6 max-w-sm mx-auto w-full">
+
+    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">お問い合わせ</h1>
+    <p class="text-[13px] text-[#9a9570] mb-6">不具合報告やご要望など、お気軽にお寄せください。</p>
+
+    <p class="text-[13px] text-[#7a7550] leading-[1.6] mb-6">
+      いただいた内容は、今後のサービス改善の参考にさせていただきます。<br>
+      下記のフォームよりお問い合わせください。
+    </p>
+
+    <%# 外部サイトのため、新しいタブで開く（noopenerでタブナビング対策） %>
+    <%= link_to "お問い合わせフォームを開く",
+          StaticPagesController::GOOGLE_FORM_URL,
+          target: "_blank", rel: "noopener noreferrer",
+          class: primary_button_classes("block w-full text-center") %>
+
+    <div class="mt-4">
+      <%= link_to "トップページに戻る", root_path,
+            class: secondary_button_classes("block w-full") %>
+    </div>
+
+  </main>
+</div>
