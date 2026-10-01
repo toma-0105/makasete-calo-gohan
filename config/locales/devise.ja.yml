@@ -1,5 +1,8 @@
 ja:
   devise:
+    mailer:
+      reset_password_instructions:
+        subject: "パスワード再設定のご案内"
     sessions:
       signed_in: "ログインしました"
       signed_out: "ログアウトしました"
