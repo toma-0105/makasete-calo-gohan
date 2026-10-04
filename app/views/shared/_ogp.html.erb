@@ -1,0 +1,18 @@
+<%# OGP・Twitterカード用のmetaタグ。SNSでURL共有した際のタイトル・説明・画像を指定する(#163) %>
+<%
+  # ページ側でcontent_for(:title)があればそれを、なければサイト名を使う
+  ogp_title = content_for(:title) || "まかせてカロごはん"
+  ogp_description = "TDEEとアレルギー条件から献立を自動で提案します。"
+  # SNSのクローラーは相対パスの画像を取得できないため、絶対URLにする
+  ogp_image = "#{request.base_url}/ogp.png"
+%>
+<meta property="og:site_name" content="まかせてカロごはん">
+<meta property="og:type" content="website">
+<meta property="og:title" content="<%= ogp_title %>">
+<meta property="og:description" content="<%= ogp_description %>">
+<meta property="og:url" content="<%= request.original_url %>">
+<meta property="og:image" content="<%= ogp_image %>">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<%= ogp_title %>">
+<meta name="twitter:description" content="<%= ogp_description %>">
+<meta name="twitter:image" content="<%= ogp_image %>">
