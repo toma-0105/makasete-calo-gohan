@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     match "(*path)", to: redirect { |_params, req| "https://#{canonical_host}#{req.fullpath}" }, via: :all
   end
 
-  devise_for :users, controllers: { registrations: "users/registrations" }
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    omniauth_callbacks: "users/omniauth_callbacks"  # Googleから戻ってきた時の受け口
+  }
+
   # ゲストログイン（アカウント自動生成＋ログイン）
   post "guest_login", to: "guest_sessions#create", as: :guest_login
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
