@@ -36,6 +36,12 @@
       </div>
 
     <% end %>
+    <%# メール以外の手段：Googleアカウントでログイン %>
+    <div class="divider text-sm text-gray-500">または</div>
+
+    <div class="mb-3">
+      <%= render "shared/google_login_button", label: "Googleでログイン" %>
+    </div>
 
     <%# アカウント登録せずに試せるゲストログイン %>
     <div class="mb-3">
