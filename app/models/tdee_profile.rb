@@ -9,6 +9,8 @@ class TdeeProfile < ApplicationRecord
     very_active: 3,
     super_active: 4
   }
+  # 作成の経緯：手動のTDEE診断か、体重記録による自動再計算か
+  enum :source, { diagnosis: 0, weight_sync: 1 }
 
   validates :height, presence: true, numericality: { greater_than: 0 }
   validates :weight, presence: true, numericality: { greater_than: 0 }
