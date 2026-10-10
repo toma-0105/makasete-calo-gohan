@@ -38,6 +38,11 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   # request specでsign_inヘルパーを使えるようにする
   config.include Devise::Test::IntegrationHelpers, type: :request
+  # Rails 8ではルーティングが初回アクセスまで読み込まれない（遅延読み込み）。
+  # Deviseのsign_inはルーティング由来のmappingを参照するため、テスト開始前に読み込んでおく
+  # （CIはeager_loadが有効なので影響を受けないが、ローカルでは実行順によって失敗する）
+  config.before(:suite) { Rails.application.reload_routes_unless_loaded }
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
