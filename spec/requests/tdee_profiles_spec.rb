@@ -51,4 +51,29 @@ RSpec.describe "TdeeProfiles", type: :request do
       end
     end
   end
+
+  describe "POST /tdee_profiles（手動のTDEE診断）" do
+    let(:params) do
+      { tdee_profile: { height: 170, weight: 65, age: 30, gender: "male", activity_level: "lightly_active" } }
+    end
+
+    before { sign_in user }
+
+    it "手動診断のプロフィール（diagnosis）が1件増える" do
+      expect { post tdee_profiles_path, params: params }
+        .to change { user.tdee_profiles.diagnosis.count }.by(1)
+    end
+
+    it "体重連動のプロフィール（weight_sync）は増えない" do
+      expect { post tdee_profiles_path, params: params }
+        .not_to change { user.tdee_profiles.weight_sync.count }
+    end
+
+    # source を勝手に書き換えて送られても、手動診断のままになること
+    it "paramsにsourceを混ぜても無視される" do
+      tampered = { tdee_profile: params[:tdee_profile].merge(source: "weight_sync") }
+      post tdee_profiles_path, params: tampered
+      expect(user.tdee_profiles.last).to be_diagnosis
+    end
+  end
 end
