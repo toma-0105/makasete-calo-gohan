@@ -86,6 +86,63 @@ RSpec.describe "Mypages", type: :request do
       end
     end
 
+    context "TDEE診断のリマインド" do
+      let(:user) { create(:user) }
+      # 日数はサービスの定数を基準にする
+      let(:interval) { TdeeReminderService::REMINDER_INTERVAL_DAYS }
+
+      before { sign_in user }
+
+    context "最後の手動診断から期間が経過している場合" do
+        before { create(:tdee_profile, user: user, tdee: 2200, created_at: interval.days.ago) }
+
+        it "再診断を促すモーダルが経過日数つきで表示される" do
+          get mypage_path
+          assert_select "#tdee-reminder-modal", text: /#{interval}日/
+        end
+
+        it "モーダルに再診断フォームへのリンクがある" do
+          get mypage_path
+          assert_select "#tdee-reminder-modal a[href=?]", new_tdee_profile_path
+        end
+
+        it "閉じた状態をサーバーに持たないため、開くたびに毎回表示される" do
+          2.times do
+            get mypage_path
+            assert_select "#tdee-reminder-modal"
+          end
+        end
+      end
+
+      context "最後の手動診断から期間が経っていない場合" do
+        before { create(:tdee_profile, user: user, tdee: 2200, created_at: (interval - 1).days.ago) }
+
+        it "モーダルは表示されない" do
+          get mypage_path
+          assert_select "#tdee-reminder-modal", count: 0
+        end
+      end
+
+      context "未診断の場合" do
+        it "モーダルは表示されない" do
+          get mypage_path
+          assert_select "#tdee-reminder-modal", count: 0
+        end
+      end
+
+      context "古い手動診断のあとに体重記録の自動再計算があった場合" do
+        before do
+          create(:tdee_profile, user: user, tdee: 2200, created_at: (interval + 1).days.ago)
+          create(:tdee_profile, user: user, tdee: 2200, source: :weight_sync, created_at: 1.day.ago)
+        end
+
+        it "自動再計算は数えず、モーダルが表示される" do
+          get mypage_path
+          assert_select "#tdee-reminder-modal"
+        end
+      end
+    end
+
     context "ログインしていない場合" do
       before { get mypage_path }
 

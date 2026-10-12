@@ -20,7 +20,7 @@ class WeightRecordSaveService
 
   new_profile = @user.tdee_profiles.create!(
     last_profile.attributes.slice("height", "age", "gender", "activity_level")
-                            .merge(weight: @weight)
+                            .merge(weight: @weight, source: :weight_sync)
   )
   TdeeCalculatorService.new(new_profile).calculate
   end

@@ -5,6 +5,7 @@ class MypagesController < ApplicationController
   def show
     @user = current_user
     @tdee_profile = current_user.tdee_profiles.last
+    @tdee_reminder = TdeeReminderService.new(current_user)
   end
 
   private
