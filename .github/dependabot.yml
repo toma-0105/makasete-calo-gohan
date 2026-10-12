@@ -3,10 +3,21 @@ updates:
 - package-ecosystem: bundler
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
+    day: monday
   open-pull-requests-limit: 10
+  groups:
+    # minor/patchは1本のPRにまとめて、確認の回数を減らす
+    minor-and-patch:
+      update-types:
+      - minor
+      - patch
+      # railsは動作確認が必要なため、グループに混ぜず単独PRにする
+      exclude-patterns:
+      - rails
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
+    day: monday
   open-pull-requests-limit: 10
