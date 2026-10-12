@@ -93,12 +93,12 @@ RSpec.describe "Mypages", type: :request do
 
       before { sign_in user }
 
-    context "最後の手動診断から期間が経過している場合" do
+      context "最後の手動診断から期間が経過している場合" do
         before { create(:tdee_profile, user: user, tdee: 2200, created_at: interval.days.ago) }
 
-        it "再診断を促すモーダルが経過日数つきで表示される" do
+        it "再診断を促すモーダルが表示される" do
           get mypage_path
-          assert_select "#tdee-reminder-modal", text: /#{interval}日/
+          assert_select "#tdee-reminder-modal", text: /1ヶ月以上/
         end
 
         it "モーダルに再診断フォームへのリンクがある" do
