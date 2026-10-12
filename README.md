@@ -349,6 +349,13 @@ URL https://menew.jp/
 | whenever | cronベースで定期実行を簡単に設定できるため（本リリースで検討） |
 | Google Analytics | 本番環境でのユーザー行動計測・改善に活用するため。 |
 
+### 10-2. 依存関係の更新ルール（Dependabot）
+- Dependabotが毎週月曜に、gemとGitHub Actionsの更新PRを作成する
+- 毎週、PRを確認し、CI（RuboCop・Brakeman・RSpec）が全て通過していればマージする
+- minor/patchの更新は1本のPRにまとまる。majorとrailsの更新は単独PRで届くため、リリースノートを確認してからマージする
+- 競合したPRは `@dependabot rebase` とコメントして作り直してもらう
+- 自動マージは、ブランチ保護（必須チェック）を設定してから検討する
+
 ## 画面遷移図
 [卒業制作/MVP.figma](https://www.figma.com/design/2IupXekaNEZpDr9Bkh7gzp/%E7%84%A1%E9%A1%8C?node-id=0-1&p=f&t=Deo6UxFG2HF0FgiY-0)
 
