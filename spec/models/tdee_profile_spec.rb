@@ -76,4 +76,10 @@ RSpec.describe TdeeProfile, type: :model do
       end
     end
   end
+
+  describe "source" do
+    it "デフォルトは手動診断（diagnosis）になる" do
+      expect(TdeeProfile.new.source).to eq "diagnosis"
+    end
+  end
 end

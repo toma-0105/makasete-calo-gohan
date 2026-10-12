@@ -71,4 +71,9 @@
         class: secondary_button_classes("block w-full") %>
     </div>
   </main>
+
+  <%# TDEE診断から一定期間が経過していたら、再診断を促すモーダルを表示する %>
+  <% if @tdee_reminder.needed? %>
+    <%= render "tdee_reminder_modal", days: @tdee_reminder.days_since_diagnosis %>
+  <% end %>
 </div>

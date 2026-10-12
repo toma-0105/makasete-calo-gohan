@@ -1,0 +1,30 @@
+<%# TDEE再診断のリマインドモーダル（最後の手動診断から一定期間が経過したときに表示） %>
+<%# ×・背景クリック・Escで閉じても、再診断するまでマイページを開くたびに再表示される %>
+<%# data-turbo-temporary：Turboのページキャッシュにモーダルを残さない（戻る操作での表示崩れ防止） %>
+<dialog id="tdee-reminder-modal"
+        class="modal"
+        data-controller="modal"
+        data-turbo-temporary
+        aria-labelledby="tdee-reminder-title">
+  <div class="modal-box bg-[#FFFEF5] max-w-sm">
+    <%# method="dialog" のフォームは、JSなしで <dialog> を閉じる標準機能 %>
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="閉じる">✕</button>
+    </form>
+
+    <h2 id="tdee-reminder-title" class="text-[18px] font-bold text-[#2a2810] mb-3">TDEEを見直しませんか？</h2>
+    <p class="text-[13px] text-[#7a7550] leading-[1.7] mb-5">
+      前回のTDEE診断から<span class="font-bold text-[#3a3820]"><%= days %>日</span>が経ちました。<br>
+      体重や活動量が変わっていると、献立のカロリーが今の体に合わなくなります。<br>
+      最新の状態に合わせて、再診断しましょう。
+    </p>
+
+    <%= link_to "TDEEを再診断する", new_tdee_profile_path,
+          class: primary_button_classes("block w-full") %>
+  </div>
+
+  <%# 背景をクリックしても閉じる（daisyUIのmodal-backdrop） %>
+  <form method="dialog" class="modal-backdrop">
+    <button aria-label="閉じる">閉じる</button>
+  </form>
+</dialog>
