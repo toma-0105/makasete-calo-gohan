@@ -1,4 +1,7 @@
 class TdeeCalculatorService
+    # 目標カロリーの係数(TDEEに対する割合。無理なく体重を落とすための値)
+    TARGET_CALORIE_RATIO = 0.85
+
     # 活動レベルの係数
     ACTIVITY_MULTIPLIERS = {
     sedentary:        1.2,
@@ -15,7 +18,7 @@ class TdeeCalculatorService
     def calculate
         bmr             = calculate_bmr
         tdee            = (bmr * activity_multiplier).round(2)
-        target_calories = (tdee * 0.85).round(2)
+        target_calories = (tdee * TARGET_CALORIE_RATIO).round(2)
 
         @profile.update!(
             tdee:            tdee,
