@@ -23,7 +23,9 @@ RSpec.describe "TdeeProfiles", type: :request do
     before { sign_in user }
 
     context "自分の診断結果の場合" do
-      let(:tdee_profile) { create(:tdee_profile, user: user, tdee: 2500) }
+      # 期待値は計算式から作らず固定値にする（2500 * 0.85 = 2125）。
+      # 係数が間違っていても通ってしまうテストになるのを防ぐため
+      let(:tdee_profile) { create(:tdee_profile, user: user, tdee: 2500, target_calories: 2125) }
 
       before { get tdee_profile_path(tdee_profile) }
 
@@ -35,9 +37,33 @@ RSpec.describe "TdeeProfiles", type: :request do
         expect(response.body).to include("2,500")
       end
 
+      it "見出しが「目標カロリー」になっている" do
+        expect(response.body).to include("あなたの1日の目標カロリー")
+      end
+
+      # 画面で最も大きい数字（text-6xl）が、TDEEではなく目標カロリーであること
+      it "最も大きく表示される数字は目標カロリーである" do
+        assert_select "p.text-6xl", text: "2,125"
+      end
+
       it "献立を生成するボタンが表示される" do
         expect(response.body).to include("献立を生成する")
         expect(response.body).to include(menus_path)
+      end
+    end
+
+    context "目標カロリーの係数を変更した場合" do
+      let(:tdee_profile) { create(:tdee_profile, user: user, tdee: 2500, target_calories: 2250) }
+
+      before do
+        # 画面の割合表示が定数から生成されていれば、係数を差し替えると表示も追従する。
+        # 画面に「85%」を直書きしていると、ここで失敗する
+        stub_const("TdeeCalculatorService::TARGET_CALORIE_RATIO", 0.9)
+        get tdee_profile_path(tdee_profile)
+      end
+
+      it "画面の割合表示が係数に追従する" do
+        expect(response.body).to include("90%")
       end
     end
 
