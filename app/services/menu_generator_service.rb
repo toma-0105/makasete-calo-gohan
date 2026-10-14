@@ -35,7 +35,7 @@ class MenuGeneratorService
   # カロリー調整を主食の増量に頼ると炭水化物過多になるため、不足分は主菜の増量で埋める
   STAPLE_MAX_PORTION_SCALE = 1.25
 
-    def initialize(excluded_meal_master_ids: [], target_calories: nil, favorite_meal_master_ids: [])
+  def initialize(excluded_meal_master_ids: [], target_calories: nil, favorite_meal_master_ids: [])
     # 昼・夕は共通プールのため、選出済みIDを記録して重複を避ける
     @used_meal_master_ids = []
     # アレルギー食材を含む料理など、選出対象から除外するID（#26）
@@ -220,7 +220,7 @@ class MenuGeneratorService
     rand < SOUP_INCLUSION_PROBABILITY
   end
 
-    def pick_random(meals)
+  def pick_random(meals)
     candidates = meals.to_a
     favorite_candidates = candidates.select { |meal| @favorite_meal_master_ids.include?(meal.id) }
     pool = favorite_candidates.any? && select_favorite? ? favorite_candidates : candidates
