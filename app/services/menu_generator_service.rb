@@ -43,7 +43,7 @@ class MenuGeneratorService
     @target_calories = target_calories
     # お気に入り登録済みの料理ID。主菜・一品料理・副菜・汁物の選出時に優先する（#165）
     @favorite_meal_master_ids = favorite_meal_master_ids
-  end
+    end
 
 
   def generate
@@ -220,7 +220,7 @@ class MenuGeneratorService
     rand < SOUP_INCLUSION_PROBABILITY
   end
 
-    def pick_random(meals)
+  def pick_random(meals)
     candidates = meals.to_a
     favorite_candidates = candidates.select { |meal| @favorite_meal_master_ids.include?(meal.id) }
     pool = favorite_candidates.any? && select_favorite? ? favorite_candidates : candidates
