@@ -10,7 +10,7 @@ gem "sprockets-rails"
 gem "pg", "~> 1.7"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 
