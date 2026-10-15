@@ -7,11 +7,14 @@ updates:
     day: monday
   open-pull-requests-limit: 10
   groups:
-    # minor/patchは1本のPRにまとめて、確認の回数を減らす
-    minor-and-patch:
+    # patchは自動マージ対象として別PRにまとめる
+    patch:
+      update-types:
+      - patch
+    # minorは人が確認するPR
+    minor:
       update-types:
       - minor
-      - patch
       # railsは動作確認が必要なため、グループに混ぜず単独PRにする
       exclude-patterns:
       - rails

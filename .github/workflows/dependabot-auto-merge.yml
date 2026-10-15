@@ -1,0 +1,33 @@
+# Dependabotのパッチ更新PRを、CI通過後に自動マージする
+name: Dependabot auto-merge
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+# デフォルトでは権限なし。必要な権限はジョブ側で個別に付与する
+permissions: {}
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    # Dependabot以外が作ったPRでは動かさない（安全のための条件）
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      # 更新の種類（patch / minor / major）を取得する
+      - name: Dependabotのメタデータを取得
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # patchのときだけ「CIが通ったら自動でマージ」を予約する
+      - name: パッチ更新を自動マージ予約
+        if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        run: gh pr merge --merge --auto "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
