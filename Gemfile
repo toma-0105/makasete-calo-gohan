@@ -28,6 +28,8 @@ gem "jbuilder"
 # gem "redis", ">= 4.0.1"
 gem "resend"
 gem "good_job"
+gem "sentry-ruby"
+gem "sentry-rails"
 gem "chartkick"
 gem "groupdate"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
