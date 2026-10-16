@@ -217,4 +217,17 @@ RSpec.describe "Menus", type: :request do
         end
       end
     end
+  describe "POST /menus/:id/regenerate" do
+    context "会員としてログインしている場合" do
+      let(:user)       { create(:user) }
+      let(:other_menu) { create(:menu) }
+
+      before { sign_in user }
+
+      it "他人の献立は再生成できず404になる" do
+        post regenerate_menu_path(other_menu)
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
 end
