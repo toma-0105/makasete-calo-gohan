@@ -8,9 +8,6 @@ Rails.application.routes.draw do
   # ヘルスチェックはRenderの死活監視が使うため、下のリダイレクトより先に定義してリダイレクト対象から除外する
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # 【一時的・確認後に削除】Sentryの動作確認用。アクセスすると必ず例外を投げる(#257)
-  get "sentry_test", to: ->(_env) { raise "Sentry動作確認(本番)" }
-
   # onrender.comへのアクセスはすべて独自ドメインへ301(恒久的)リダイレクトする
   constraints(host: onrender_host) do
     match "(*path)", to: redirect { |_params, req| "https://#{canonical_host}#{req.fullpath}" }, via: :all
