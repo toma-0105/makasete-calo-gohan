@@ -14,9 +14,9 @@
     <%= yield :head %>
     <%# アイコン関連 %>
     <%= favicon_link_tag "favicon-32x32.png", type: "image/png" %>
+    <%= favicon_link_tag "apple-touch-icon.png", rel: "apple-touch-icon", type: "image/png", sizes: "180x180" %>
     <%# PWA未対応のため一時的に無効化（ホーム画面追加で既定の「Myapp」表示になるのを避ける） %>
     <%# link rel="manifest" href="/manifest.json" %>
-    <%# link rel="apple-touch-icon" href="/icon.png" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
