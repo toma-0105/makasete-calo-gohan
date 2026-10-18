@@ -27,7 +27,10 @@
         <div class="card-body p-5 gap-2">
           <p class="text-[14px] font-bold text-[#2a2810]">体重推移</p>
           <%= line_chart @chart_data, colors: [ "#F9C639" ], xtitle: "日付", ytitle: "体重(kg)",
-              min: @chart_range[:min], max: @chart_range[:max] %>
+              min: @chart_range[:min], max: @chart_range[:max],
+              library: { scales: { x: { time: { unit: "day", displayFormats: { day: "M/d" } } },
+                                   y: { ticks: { stepSize: WeightChartRangeService::STEP_KG,
+                                        maxTicksLimit: WeightChartRangeService::MAX_TICKS } } } } %>
         </div>
       </div>
     <% end %>
