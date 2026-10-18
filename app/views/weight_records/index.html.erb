@@ -41,7 +41,7 @@
         <div class="card-body p-5 gap-2">
           <p class="text-[14px] font-bold text-[#2a2810]">記録履歴</p>
           <ul class="text-[13px] text-[#7a7550]">
-            <% @weight_records.reverse_each do |record| %>
+            <% @weight_records.each do |record| %>
               <li class="flex justify-between border-b border-[#EAE070] py-1">
                 <span><%= record.recorded_on.strftime("%Y/%m/%d") %></span>
                 <span class="font-bold text-[#3a3820]"><%= record.weight %>kg</span>

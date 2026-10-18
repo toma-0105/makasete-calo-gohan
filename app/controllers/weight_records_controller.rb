@@ -2,9 +2,12 @@ class WeightRecordsController < ApplicationController
   before_action :authenticate_user!
   before_action :reject_guest_user
 
+  # 一覧に表示する直近の記録件数
+  RECENT_RECORDS_LIMIT = 10
+
   def index
     @weight_record = current_user.weight_records.new
-    @weight_records = current_user.weight_records.order(:recorded_on)
+    @weight_records = current_user.weight_records.order(recorded_on: :desc).limit(RECENT_RECORDS_LIMIT)
     @chart_data = current_user.weight_records.group_by_day(:recorded_on).average(:weight)
     @chart_range = WeightChartRangeService.new(@chart_data.values).call
   end
