@@ -61,7 +61,8 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "makasete-calo-gohan.onrender.com", protocol: "https" }
+  # メール内のリンクは旧ドメイン（onrender.com）ではなく独自ドメインにする（routes.rb の canonical_host と同じ値）
+  config.action_mailer.default_url_options = { host: "makasete-calo-gohan.toma15.com", protocol: "https" }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {
