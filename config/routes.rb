@@ -13,11 +13,17 @@ Rails.application.routes.draw do
     match "(*path)", to: redirect { |_params, req| "https://#{canonical_host}#{req.fullpath}" }, via: :all
   end
 
-  devise_for :users, controllers: {
-    registrations: "users/registrations",
-    omniauth_callbacks: "users/omniauth_callbacks"  # Googleから戻ってきた時の受け口
+  devise_for :users,
+              skip: [ :registrations ],
+              controllers: {
+                omniauth_callbacks: "users/omniauth_callbacks"  # Googleから戻ってきた時の受け口
   }
 
+  # 新規登録（画面表示 と 登録処理）だけを残す。編集・更新・退会のルートは定義しない
+  devise_scope :user do
+    get  "users/sign_up", to: "users/registrations#new",    as: :new_user_registration
+    post "users",         to: "users/registrations#create", as: :user_registration
+  end
   # ゲストログイン（アカウント自動生成＋ログイン）
   post "guest_login", to: "guest_sessions#create", as: :guest_login
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
