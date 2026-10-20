@@ -1,0 +1,38 @@
+<%# 1日分の献立を開閉式で表示する（日付をタップすると朝・昼・夕の全品とカロリーが展開される） %>
+<details class="group bg-white border border-[#EAE070] rounded-xl">
+  <summary class="flex justify-between items-center px-4 py-3.5 cursor-pointer select-none list-none rounded-xl group-open:rounded-b-none hover:bg-[#FFF8C4] transition-colors">
+    <span class="flex items-center gap-2 text-[14px] font-medium text-[#3a3820]">
+      <%# 開くと▶が90度回って▼になる（show.html.erbのレシピ開閉と同じ書き方） %>
+      <span class="inline-block text-[11px] text-[#b8860b] transition-transform group-open:rotate-90">▶</span>
+      <%= menu.date.strftime("%Y年%m月%d日") %>
+    </span>
+    <span class="text-[13px] text-[#9a9570] shrink-0 ml-2">
+      <%= number_with_delimiter(menu.total_calories.to_i) %> kcal
+    </span>
+  </summary>
+
+  <div class="px-4 pb-4 border-t border-[#F0ECC4]">
+    <% meals_grouped_by_timing(menu).each do |label, meals| %>
+      <h2 class="text-[13px] font-bold text-[#2a2810] mt-3 mb-1"><%= label %></h2>
+      <ul class="divide-y divide-[#F0ECC4]">
+        <% meals.each do |meal| %>
+          <li class="flex justify-between items-start gap-2 py-1.5">
+            <span class="text-[14px] text-[#3a3820]">
+              <%# グラム調整は換算後のグラム数、個数調整は「×2」ラベルで表示する %>
+              <%= meal_display_name(meal) %>
+              <% if (scale_label = meal_scale_label(meal)) %>
+                <span class="text-[11px] text-[#b8860b] font-medium"><%= scale_label %></span>
+              <% end %>
+            </span>
+            <%# 倍率反映済みのmeal.caloriesを使う（meal_master.caloriesは基準値で倍率が反映されない） %>
+            <span class="text-[13px] text-[#3a3820] shrink-0">
+              <%= number_with_delimiter(meal.calories.to_i) %> <span class="text-[11px] text-[#9a9570]">kcal</span>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= link_to "詳細・保存へ", menu_path(menu), class: secondary_button_classes("block w-full mt-4") %>
+  </div>
+</details>

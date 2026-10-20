@@ -62,6 +62,55 @@ RSpec.describe "Menus", type: :request do
     end
   end
 
+  describe "GET /menus/period（期間一覧）" do
+    let(:user) { create(:user) }
+
+    before { sign_in user }
+
+    context "献立がある場合" do
+      let(:menu) { create(:menu, user: user, date: Date.new(2026, 7, 1)) }
+
+      before do
+        rice = create(:meal_master, name: "ご飯(150g)", category: :staple)
+        salmon = create(:meal_master, name: "焼き鮭1切れ(80g)", category: :main_dish)
+        create(:meal, menu: menu, meal_master: rice, meal_timing: :breakfast, calories: 234)
+        create(:meal, menu: menu, meal_master: salmon, meal_timing: :dinner, calories: 137)
+      end
+
+      it "日付と合計カロリーが表示される" do
+        get period_menus_path(menu_ids: menu.id)
+        expect(response.body).to include("2026年07月01日")
+        expect(response.body).to include("2,000")
+      end
+
+      it "アコーディオンの中に食事ごとの料理名とカロリーが表示される" do
+        get period_menus_path(menu_ids: menu.id)
+        expect(response.body).to include("朝食", "夕食", "ご飯(150g)", "焼き鮭1切れ(80g)", "234", "137")
+      end
+
+      it "詳細・保存ページへのリンクが表示される" do
+        get period_menus_path(menu_ids: menu.id)
+        expect(response.body).to include(%(href="#{menu_path(menu)}"))
+      end
+    end
+
+    it "複数日分でもN+1が発生しない（発生するとBulletが例外を出してテストが失敗する）" do
+      menus = create_list(:menu, 3, user: user)
+      menus.each { |menu| create(:meal, menu: menu) }
+
+      get period_menus_path(menu_ids: menus.map(&:id).join(","))
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "他人の献立は表示されず、見つからないメッセージが出る" do
+      other_menu = create(:menu, date: Date.new(2026, 6, 20))
+
+      get period_menus_path(menu_ids: other_menu.id)
+      expect(response.body).not_to include("2026年06月20日")
+      expect(response.body).to include("献立が見つかりませんでした")
+    end
+  end
+
   describe "PATCH /menus/:id/save" do
     context "会員としてログインしている場合" do
       let(:user)  { create(:user, guest: false) }
