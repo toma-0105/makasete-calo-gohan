@@ -26,7 +26,7 @@ class MenusController < ApplicationController
   # 複数日分の生成結果をまとめて表示する
   def period
     menu_ids = params[:menu_ids].to_s.split(",").map(&:to_i)
-    @menus = current_user.menus.where(id: menu_ids).order(:date)
+    @menus = current_user.menus.includes(meals: :meal_master).where(id: menu_ids).order(:date)
   end
 
   def show
