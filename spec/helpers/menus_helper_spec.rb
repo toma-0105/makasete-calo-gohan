@@ -40,4 +40,55 @@ RSpec.describe MenusHelper, type: :helper do
       expect(helper.meal_scale_label(meal)).to be_nil
     end
   end
+
+  describe '#meals_grouped_by_timing' do
+    let(:menu) { create(:menu) }
+
+    # 指定した食事タイミング・カテゴリの料理を献立に追加する
+    def add_meal(timing, category, name)
+      master = create(:meal_master, name: name, category: category)
+      create(:meal, menu: menu, meal_master: master, meal_timing: timing)
+    end
+
+    # コントローラーと同じく、meals・meal_masterを先読みした献立を返す
+    # （先読みしないとBulletがN+1を検知してテストが失敗する）
+    def preloaded_menu
+      Menu.includes(meals: :meal_master).find(menu.id)
+    end
+
+    it '朝食・昼食・夕食の順にラベル付きで返す' do
+      add_meal(:dinner, :main_dish, '夕の主菜')
+      add_meal(:breakfast, :main_dish, '朝の主菜')
+      add_meal(:lunch, :main_dish, '昼の主菜')
+
+      labels = helper.meals_grouped_by_timing(preloaded_menu).map(&:first)
+      expect(labels).to eq(%w[朝食 昼食 夕食])
+    end
+
+    it '同じ食事の中ではカテゴリの表示順（主食→主菜→副菜→汁物）に並べる' do
+      add_meal(:breakfast, :soup, '汁物')
+      add_meal(:breakfast, :side_dish, '副菜')
+      add_meal(:breakfast, :main_dish, '主菜')
+      add_meal(:breakfast, :staple, '主食')
+
+      _label, meals = helper.meals_grouped_by_timing(preloaded_menu).first
+      expect(meals.map { |meal| meal.meal_master.name }).to eq(%w[主食 主菜 副菜 汁物])
+    end
+
+    it '一品料理は副菜・汁物より前に並ぶ（enumの定義順では末尾になるため）' do
+      add_meal(:lunch, :soup, '汁物')
+      add_meal(:lunch, :side_dish, '副菜')
+      add_meal(:lunch, :one_dish, '一品料理')
+
+      _label, meals = helper.meals_grouped_by_timing(preloaded_menu).first
+      expect(meals.map { |meal| meal.meal_master.name }).to eq(%w[一品料理 副菜 汁物])
+    end
+
+    it '料理がない食事は含めない' do
+      add_meal(:lunch, :main_dish, '昼の主菜')
+
+      labels = helper.meals_grouped_by_timing(preloaded_menu).map(&:first)
+      expect(labels).to eq(%w[昼食])
+    end
+  end
 end
