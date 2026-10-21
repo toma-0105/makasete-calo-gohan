@@ -4,6 +4,7 @@ services:
     runtime: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bin/rails server -p $PORT -e production"
+    healthCheckPath: /up
     envVars:
       - key: RAILS_ENV
         value: production
