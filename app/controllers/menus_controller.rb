@@ -44,8 +44,11 @@ class MenusController < ApplicationController
     end
 
     menu = current_user.menus.find(params[:id])
-    menu.update!(saved: true)
-    redirect_to menu_path(menu), notice: "献立を保存しました"
+    result = MenuHistorySaveService.new(current_user, menu).save!
+    # 置き換えが起きたときだけ通知を足す
+    notice = "献立を保存しました"
+    notice += "。同じ日付の保存済み献立を置き換えました" if result.replaced_count.positive?
+    redirect_to menu_path(menu), notice: notice
   end
 
   # 既存の献立を削除して新しい献立を生成し直す

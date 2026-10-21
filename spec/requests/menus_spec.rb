@@ -133,6 +133,17 @@ RSpec.describe "Menus", type: :request do
         expect(flash[:notice]).to eq("献立を保存しました")
       end
 
+      it "同じ日付の保存済み献立がある場合は置き換えの通知が出る" do
+        create(:menu, :saved, user: user, date: menu.date)
+        patch save_menu_path(menu)
+        expect(flash[:notice]).to eq("献立を保存しました。同じ日付の保存済み献立を置き換えました")
+      end
+
+      it "同じ日付の保存済み献立がない場合は置き換えの通知は出ない" do
+        patch save_menu_path(menu)
+        expect(flash[:notice]).to eq("献立を保存しました")
+      end
+
       it "他人の献立は保存できず404になる" do
         other_menu = create(:menu)
         patch save_menu_path(other_menu)
