@@ -1,5 +1,11 @@
 ja:
   activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "は使用できません"
     models:
       user: "ユーザー"
       tdee_profile: "プロフィール"

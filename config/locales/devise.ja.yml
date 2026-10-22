@@ -16,7 +16,6 @@ ja:
       updated: "パスワードを変更しました"
     errors:
       messages:
-        not_found: "メールアドレスが見つかりません"
         invalid: "メールアドレスまたはパスワードが違います"
         not_saved:
           one: "エラーが1件あります"
