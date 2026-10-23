@@ -47,8 +47,8 @@ Rails.application.routes.draw do
       get :period
     end
 
-    # 1食（meal_timing）単位の入れ替え（#164）
-    resources :meals, only: [], param: :meal_timing, constraints: { meal_timing: /breakfast|lunch|dinner/ } do
+    # 1品（meal）単位の入れ替え（#327。旧: 1食単位 #164）
+    resources :meals, only: [] do
       post :regenerate, on: :member
     end
   end

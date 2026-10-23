@@ -51,14 +51,28 @@
                   <p class="text-[15px] text-[#3a3820]">
                     <%= number_with_delimiter(meal.calories.to_i) %> <span class="text-[11px] font-normal text-[#9a9570]">kcal</span>
                   </p>
-                  <%# お気に入り登録・解除（会員のみ表示。ゲストには表示しない） %>
-                  <% unless current_user.guest? %>
-                    <% favorited = @favorite_meal_master_ids.include?(meal.meal_master_id) %>
-                    <%= form_with url: meal_master_favorite_path(meal.meal_master), method: (favorited ? :delete : :post) do |f| %>
-                      <%= f.submit favorited ? "★" : "☆",
-                            class: "p-3 -m-3 bg-transparent border-none cursor-pointer text-[18px] leading-none transition hover:scale-110 active:scale-95 #{favorited ? 'text-[#F9C639] hover:text-[#d4a317]' : 'text-[#9a9570] hover:text-[#F9C639]'}" %>
+                  <%# ★と入れ替えマークは、押せる範囲が重ならないよう間隔を広げてまとめる %>
+                  <div class="flex items-center gap-5">
+                    <%# お気に入り登録・解除（会員のみ表示。ゲストには表示しない） %>
+                    <% unless current_user.guest? %>
+                      <% favorited = @favorite_meal_master_ids.include?(meal.meal_master_id) %>
+                      <%= form_with url: meal_master_favorite_path(meal.meal_master), method: (favorited ? :delete : :post) do |f| %>
+                        <%= f.submit favorited ? "★" : "☆",
+                              class: "p-3 -m-3 bg-transparent border-none cursor-pointer text-[18px] leading-none transition hover:scale-110 active:scale-95 #{favorited ? 'text-[#F9C639] hover:text-[#d4a317]' : 'text-[#9a9570] hover:text-[#F9C639]'}" %>
+                      <% end %>
                     <% end %>
-                  <% end %>
+                    <%# この1品だけ入れ替える（ゲストにも表示する）。同じ画面に戻るので履歴は置き換える %>
+                    <%= form_with url: regenerate_menu_meal_path(@menu, meal), data: { turbo_action: "replace" } do |f| %>
+                      <%= f.button type: "submit",
+                            title: "この品を入れ替える",
+                            aria: { label: "#{meal.meal_master.name}を入れ替える" },
+                            class: "p-2 -m-2 bg-transparent border-none cursor-pointer leading-none text-[#9a9570] transition hover:scale-110 hover:text-[#b8860b] active:scale-95" do %>
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                        </svg>
+                      <% end %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
 
@@ -110,12 +124,6 @@
             </div>
           <% end %>
         </div>
-
-        <%# 追加：この食事だけ入れ替えるボタン（timingごとに1つ） %>
-        <%= form_with url: regenerate_menu_meal_path(@menu, timing),
-              data: { action: "submit->loading#showLoading" }, class: "mt-2" do |f| %>
-          <%= f.submit "この食事を入れ替える", class: secondary_button_classes("block w-full text-[12px] py-2") %>
-        <% end %>
       </div>
     <% end %>
 
