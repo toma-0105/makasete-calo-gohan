@@ -38,6 +38,8 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   # request specでsign_inヘルパーを使えるようにする
   config.include Devise::Test::IntegrationHelpers, type: :request
+  # request specでHTMLの中身（リンクのhrefなど）を have_css / have_link で検証できるようにする
+  config.include Capybara::RSpecMatchers, type: :request
   # Rails 8ではルーティングが初回アクセスまで読み込まれない（遅延読み込み）。
   # Deviseのsign_inはルーティング由来のmappingを参照するため、テスト開始前に読み込んでおく
   # （CIはeager_loadが有効なので影響を受けないが、ローカルでは実行順によって失敗する）
