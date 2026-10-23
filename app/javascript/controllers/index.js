@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import BackLinkController from "./back_link_controller"
+application.register("back-link", BackLinkController)
+
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 

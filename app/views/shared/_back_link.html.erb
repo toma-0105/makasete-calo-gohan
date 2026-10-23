@@ -1,0 +1,7 @@
+<%# 「1つ前の画面」へ戻るリンク（各ページの先頭に置く）
+    fallback_path: 履歴が無いとき・JSが動かないときの戻り先
+    label: 表示文言（省略時は「戻る」） %>
+<% label = local_assigns.fetch(:label, "戻る") %>
+<%= link_to "← #{label}", fallback_path,
+      data: { controller: "back-link", action: "click->back-link#goBack" },
+      class: "inline-block mb-3 text-[13px] text-[#7a7550] hover:text-[#3a3820] transition" %>
