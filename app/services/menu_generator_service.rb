@@ -34,6 +34,8 @@ class MenuGeneratorService
   # 主食に適用できる倍率の上限（#134）
   # カロリー調整を主食の増量に頼ると炭水化物過多になるため、不足分は主菜の増量で埋める
   STAPLE_MAX_PORTION_SCALE = 1.25
+  # 分量倍率を変えてよいカテゴリ（副菜・汁物は常に等倍）
+  SCALABLE_CATEGORIES = %w[staple main_dish one_dish].freeze
 
   def initialize(excluded_meal_master_ids: [], target_calories: nil, favorite_meal_master_ids: [])
     # 昼・夕は共通プールのため、選出済みIDを記録して重複を避ける
@@ -60,6 +62,17 @@ class MenuGeneratorService
     when :breakfast then generate_breakfast
     when :lunch, :dinner then generate_lunch_or_dinner(period: meal_timing.to_sym)
     end
+  end
+
+  # 献立のうち1品だけを入れ替えるための選出（MealItemRegenerateServiceから利用）
+  # lead_meal_master: ジャンルを合わせる基準の料理（nilなら絞り込まない）
+  # target_calories: 入れ替え前の品のカロリー（これに近づくよう倍率を決める）
+  # 候補が尽きている場合はnilを返す
+  def generate_item_for(meal_timing:, category:, lead_meal_master:, target_calories:)
+    meal_master = pick_random(replacement_candidates(meal_timing.to_sym, category, lead_meal_master))
+    return nil unless meal_master
+
+    SelectedMeal.new(meal_master, fit_item_scale(meal_master, target_calories))
   end
 
   private
@@ -107,6 +120,26 @@ class MenuGeneratorService
 
     candidates.reject do |meal|
       LUNCH_EXCLUDED_ONE_DISH_KEYWORDS.any? { |keyword| meal.name.include?(keyword) }
+    end
+  end
+
+  # 入れ替え候補：同じ時間帯のプールから同じカテゴリを探し、除外IDを外してジャンルを合わせる
+  def replacement_candidates(meal_timing, category, lead_meal_master)
+    timing_pool = meal_timing == :breakfast ? MealMaster.breakfast : MealMaster.lunch_or_dinner
+    pool = timing_pool.where(category: category).where.not(id: @excluded_meal_master_ids)
+    candidates = genre_matched(pool, lead_meal_master)
+    # 昼食の一品料理は弁当想定のため、初回生成と同じくスープ系を除く
+    category.to_s == "one_dish" ? one_dish_candidates_for(candidates, period: meal_timing) : candidates
+  end
+
+  # 入れ替え後の品を、元の品のカロリーに最も近づける倍率にする
+  def fit_item_scale(meal_master, target_calories)
+    return DEFAULT_SCALE unless SCALABLE_CATEGORIES.include?(meal_master.category)
+
+    # 主食は炭水化物過多を防ぐため、初回生成と同じ上限を守る（#134）
+    max_scale = meal_master.staple? ? STAPLE_MAX_PORTION_SCALE : nil
+    portion_scales_for(meal_master, max_scale: max_scale).min_by do |scale|
+      ((meal_master.calories * scale) - target_calories).abs
     end
   end
 
