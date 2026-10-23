@@ -223,6 +223,46 @@ RSpec.describe "Menus", type: :request do
             .to have_css("form[action='#{regenerate_menu_path(menu)}'][data-turbo-action='replace']")
         end
 
+        context "献立に主食・主菜・副菜・汁物・一品料理がある場合（#327）" do
+          # 表示順が登録順に依存しないよう、表示したい順とは逆の順で登録する
+          def add_meal(category, name, timing: :dinner)
+            master = create(:meal_master, name: name, meal_timing: :lunch_or_dinner, category: category)
+            create(:meal, menu: menu, meal_master: master, meal_timing: timing)
+          end
+
+          let!(:soup_meal)     { add_meal(:soup, "テスト汁物") }
+          let!(:side_meal)     { add_meal(:side_dish, "テスト副菜") }
+          let!(:main_meal)     { add_meal(:main_dish, "テスト主菜") }
+          let!(:staple_meal)   { add_meal(:staple, "テスト主食") }
+          let!(:one_dish_meal) { add_meal(:one_dish, "テスト一品料理", timing: :lunch) }
+
+          it "同じ食事の中は 主食 → 主菜 → 副菜 → 汁物 の順に並ぶ" do
+            get menu_path(menu)
+
+            names = response.body.scan(/テスト(?:主食|主菜|副菜|汁物)/).uniq
+            expect(names).to eq(%w[テスト主食 テスト主菜 テスト副菜 テスト汁物])
+          end
+
+          it "主菜・副菜・一品料理の行には入れ替えフォームがあり、履歴を置き換える設定になっている" do
+            get menu_path(menu)
+
+            html = Capybara.string(response.body)
+            [ main_meal, side_meal, one_dish_meal ].each do |meal|
+              expect(html)
+                .to have_css("form[action='#{regenerate_menu_meal_path(menu, meal)}'][data-turbo-action='replace']")
+            end
+          end
+
+          it "主食・汁物の行には入れ替えフォームがない" do
+            get menu_path(menu)
+
+            html = Capybara.string(response.body)
+            [ staple_meal, soup_meal ].each do |meal|
+              expect(html).not_to have_css("form[action='#{regenerate_menu_meal_path(menu, meal)}']")
+            end
+          end
+        end
+
         context "料理にレシピ情報(材料・手順・PFC)がある場合" do
           let(:allergen) { create(:allergen_master, name: "鶏肉") }
           let(:meal_master) do
@@ -304,6 +344,17 @@ RSpec.describe "Menus", type: :request do
           get menu_path(menu)
           expect(Capybara.string(response.body))
             .to have_css("a[data-controller='back-link'][href='#{tdee_profile_path(tdee_profile)}']")
+        end
+
+        it "入れ替えマークは表示され、お気に入り（★）は表示されない（#327）" do
+          master = create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish)
+          meal = create(:meal, menu: menu, meal_master: master, meal_timing: :dinner)
+
+          get menu_path(menu)
+
+          html = Capybara.string(response.body)
+          expect(html).to have_css("form[action='#{regenerate_menu_meal_path(menu, meal)}']")
+          expect(html).not_to have_css("form[action='#{meal_master_favorite_path(master)}']")
         end
       end
 
