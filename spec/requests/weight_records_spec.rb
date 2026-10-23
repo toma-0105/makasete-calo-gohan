@@ -83,6 +83,12 @@ RSpec.describe "WeightRecords", type: :request do
         expect(displayed_labels).to eq(expected_labels(record_count))
       end
     end
+
+    it "戻るリンクが表示され、保険の戻り先はマイページになる" do
+      get weight_records_path
+      expect(Capybara.string(response.body))
+        .to have_css("a[data-controller='back-link'][href='#{mypage_path}']")
+    end
   end
 
   describe "POST /weight_records" do

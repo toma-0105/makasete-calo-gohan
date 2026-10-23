@@ -92,6 +92,27 @@ RSpec.describe "Menus", type: :request do
         get period_menus_path(menu_ids: menu.id)
         expect(response.body).to include(%(href="#{menu_path(menu)}"))
       end
+
+      it "会員には「マイページに戻る」が表示され、マイページへ遷移する" do
+        get period_menus_path(menu_ids: menu.id)
+        expect(Capybara.string(response.body)).to have_link("マイページに戻る", href: mypage_path)
+      end
+    end
+
+    context "ゲストとしてログインしている場合" do
+      # 外側の before { sign_in user } がゲストでログインするように、user を上書きする
+      let(:user) { create(:user, guest: true) }
+      let!(:tdee_profile) { create(:tdee_profile, user: user) }
+      let(:menu) { create(:menu, user: user) }
+
+      before { create(:meal, menu: menu) }
+
+      it "会員限定のマイページではなく、TDEE診断結果へ戻るリンクが表示される" do
+        get period_menus_path(menu_ids: menu.id)
+        page = Capybara.string(response.body)
+        expect(page).to have_link("診断結果に戻る", href: tdee_profile_path(tdee_profile))
+        expect(page).not_to have_link("マイページに戻る")
+      end
     end
 
     it "複数日分でもN+1が発生しない（発生するとBulletが例外を出してテストが失敗する）" do
@@ -190,6 +211,18 @@ RSpec.describe "Menus", type: :request do
           expect(response).to have_http_status(:ok)
         end
 
+        it "戻るリンクが表示され、保険の戻り先は会員のホーム（マイページ）になる" do
+          get menu_path(menu)
+          expect(Capybara.string(response.body))
+            .to have_css("a[data-controller='back-link'][href='#{mypage_path}']")
+        end
+
+        it "献立の再生成フォームは、遷移時に履歴を置き換える設定になっている" do
+          get menu_path(menu)
+          expect(Capybara.string(response.body))
+            .to have_css("form[action='#{regenerate_menu_path(menu)}'][data-turbo-action='replace']")
+        end
+
         context "料理にレシピ情報(材料・手順・PFC)がある場合" do
           let(:allergen) { create(:allergen_master, name: "鶏肉") }
           let(:meal_master) do
@@ -257,6 +290,20 @@ RSpec.describe "Menus", type: :request do
             get menu_path(menu)
             expect(response.body).not_to include("レシピを見る")
           end
+        end
+      end
+
+      context "ゲストとしてログインしている場合" do
+        let(:guest) { create(:user, guest: true) }
+        let!(:tdee_profile) { create(:tdee_profile, user: guest) }
+        let(:menu) { create(:menu, user: guest) }
+
+        before { sign_in guest }
+
+        it "戻るリンクの保険の戻り先は、会員限定のマイページではなくTDEE診断結果になる" do
+          get menu_path(menu)
+          expect(Capybara.string(response.body))
+            .to have_css("a[data-controller='back-link'][href='#{tdee_profile_path(tdee_profile)}']")
         end
       end
 

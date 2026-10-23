@@ -10,6 +10,24 @@ RSpec.describe "TdeeProfiles", type: :request do
       expect(response).to have_http_status(:success)
     end
 
+    it "戻るリンクが表示され、会員の保険の戻り先はマイページになる" do
+      sign_in user
+      get new_tdee_profile_path
+      expect(Capybara.string(response.body))
+        .to have_css("a[data-controller='back-link'][href='#{mypage_path}']")
+    end
+
+    context "ゲストで診断済みの場合" do
+      it "戻るリンクの保険の戻り先は、最新のTDEE診断結果になる" do
+        guest = create(:user, guest: true)
+        tdee_profile = create(:tdee_profile, user: guest)
+        sign_in guest
+        get new_tdee_profile_path
+        expect(Capybara.string(response.body))
+          .to have_css("a[data-controller='back-link'][href='#{tdee_profile_path(tdee_profile)}']")
+      end
+    end
+
     context "ログインしていない場合" do
       it "ログインページにリダイレクトされる" do
         get new_tdee_profile_path
