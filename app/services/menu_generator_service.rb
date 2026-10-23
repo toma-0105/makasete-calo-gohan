@@ -56,14 +56,6 @@ class MenuGeneratorService
     }
   end
 
-  # 対象の1食（meal_timing）分だけ生成する（MealRegenerateServiceから利用）
-  def generate_for(meal_timing)
-    case meal_timing.to_sym
-    when :breakfast then generate_breakfast
-    when :lunch, :dinner then generate_lunch_or_dinner(period: meal_timing.to_sym)
-    end
-  end
-
   # 献立のうち1品だけを入れ替えるための選出（MealItemRegenerateServiceから利用）
   # lead_meal_master: ジャンルを合わせる基準の料理（nilなら絞り込まない）
   # target_calories: 入れ替え前の品のカロリー（これに近づくよう倍率を決める）
@@ -76,6 +68,14 @@ class MenuGeneratorService
   end
 
   private
+
+  # 対象の1食（meal_timing）分だけ生成する（generateから利用）
+  def generate_for(meal_timing)
+    case meal_timing.to_sym
+    when :breakfast then generate_breakfast
+    when :lunch, :dinner then generate_lunch_or_dinner(period: meal_timing.to_sym)
+    end
+  end
 
   # その食事に配分するカロリー（目標未指定ならnil＝調整なし）
   def allocated_calories_for(meal_timing)

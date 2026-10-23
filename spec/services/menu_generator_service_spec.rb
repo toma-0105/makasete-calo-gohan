@@ -348,4 +348,115 @@ RSpec.describe MenuGeneratorService do
       end
     end
   end
+
+  describe '#generate_item_for（1品だけの入れ替え選出 #327）' do
+    before do
+      # 共通のbeforeで作った料理を消し、候補をこのdescribeで用意したものだけにする
+      MealMaster.delete_all
+    end
+
+    # 夕食の主菜を200kcalに近づけて選ぶ、を基本形にして、変えたい引数だけ上書きする
+    def select_item(generator: service, **overrides)
+      generator.generate_item_for(
+        **{ meal_timing: 'dinner', category: 'main_dish', lead_meal_master: nil, target_calories: 200 }.merge(overrides)
+      )
+    end
+
+    it '指定したカテゴリの料理から選ぶ' do
+      main = create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish)
+      create(:meal_master, meal_timing: :lunch_or_dinner, category: :side_dish)
+
+      expect(select_item.meal_master).to eq(main)
+    end
+
+    it '朝食は朝食用、昼食・夕食は昼夕共通のプールから選ぶ' do
+      breakfast_main = create(:meal_master, meal_timing: :breakfast, category: :main_dish)
+      shared_main = create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish)
+
+      expect(select_item(meal_timing: 'breakfast').meal_master).to eq(breakfast_main)
+      expect(select_item(meal_timing: 'lunch').meal_master).to eq(shared_main)
+      expect(select_item(meal_timing: 'dinner').meal_master).to eq(shared_main)
+    end
+
+    it '除外IDの料理は選ばれない' do
+      excluded = create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish)
+      other = create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish)
+      generator = described_class.new(excluded_meal_master_ids: [ excluded.id ])
+
+      10.times { expect(select_item(generator: generator).meal_master).to eq(other) }
+    end
+
+    it '候補が尽きていればnilを返す' do
+      only = create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish)
+      generator = described_class.new(excluded_meal_master_ids: [ only.id ])
+
+      expect(select_item(generator: generator)).to be_nil
+    end
+
+    describe 'ジャンルの絞り込み' do
+      let!(:japanese_main) { create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish, genre: :japanese) }
+      let!(:western_main) { create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish, genre: :western) }
+
+      it '基準の料理と同じジャンル（または汎用）の料理から選ぶ' do
+        lead = build(:meal_master, category: :side_dish, genre: :japanese)
+
+        10.times { expect(select_item(lead_meal_master: lead).meal_master).to eq(japanese_main) }
+      end
+
+      it '基準の料理が無ければ絞り込まず、どちらのジャンルも候補になる' do
+        picked = 30.times.map { select_item.meal_master }.uniq
+
+        expect(picked).to contain_exactly(japanese_main, western_main)
+      end
+    end
+
+    describe '分量の倍率' do
+      it '主菜は元のカロリーに最も近い倍率にする' do
+        create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish, calories: 100, scaling_type: :gram_scalable)
+
+        result = select_item(target_calories: 200)
+
+        expect(result.portion_scale).to eq(2.0)
+        expect(result.calories).to eq(200)
+      end
+
+      it '副菜は元のカロリーと差があっても等倍のままにする' do
+        create(:meal_master, meal_timing: :lunch_or_dinner, category: :side_dish, calories: 100, scaling_type: :gram_scalable)
+
+        result = select_item(category: 'side_dish', target_calories: 200)
+
+        expect(result.portion_scale).to eq(1.0)
+      end
+
+      it '主食は倍率の上限（STAPLE_MAX_PORTION_SCALE）を超えない' do
+        create(:meal_master, meal_timing: :lunch_or_dinner, category: :staple, calories: 100, scaling_type: :gram_scalable)
+
+        result = select_item(category: 'staple', target_calories: 300)
+
+        expect(result.portion_scale).to eq(described_class::STAPLE_MAX_PORTION_SCALE)
+      end
+
+      it '調整不可（fixed）の料理は等倍のままにする' do
+        create(:meal_master, meal_timing: :lunch_or_dinner, category: :main_dish, calories: 100, scaling_type: :fixed)
+
+        result = select_item(target_calories: 200)
+
+        expect(result.portion_scale).to eq(1.0)
+      end
+    end
+
+    describe '一品料理（昼食は弁当想定）' do
+      before do
+        create(:meal_master, name: '醤油ラーメン', meal_timing: :lunch_or_dinner, category: :one_dish)
+      end
+
+      it '昼食ではスープ系の一品料理は選ばれない' do
+        expect(select_item(meal_timing: 'lunch', category: 'one_dish')).to be_nil
+      end
+
+      it '夕食ではスープ系の一品料理も選ばれる' do
+        expect(select_item(meal_timing: 'dinner', category: 'one_dish').name).to eq('醤油ラーメン')
+      end
+    end
+  end
 end
