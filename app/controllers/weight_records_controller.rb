@@ -8,8 +8,6 @@ class WeightRecordsController < ApplicationController
   def index
     @weight_record = current_user.weight_records.new
     @weight_records = current_user.weight_records.order(recorded_on: :desc).limit(RECENT_RECORDS_LIMIT)
-    @chart_data = current_user.weight_records.group_by_day(:recorded_on).average(:weight)
-    @chart_range = WeightChartRangeService.new(@chart_data.values).call
   end
 
   def create

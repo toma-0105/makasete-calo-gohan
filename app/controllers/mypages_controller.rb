@@ -6,6 +6,8 @@ class MypagesController < ApplicationController
     @user = current_user
     @tdee_profile = current_user.tdee_profiles.last
     @tdee_reminder = TdeeReminderService.new(current_user)
+    @chart_data = current_user.weight_records.group_by_day(:recorded_on).average(:weight)
+    @chart_range = WeightChartRangeService.new(@chart_data.values).call
   end
 
   private
