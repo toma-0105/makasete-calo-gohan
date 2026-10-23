@@ -61,16 +61,21 @@
                               class: "p-3 -m-3 bg-transparent border-none cursor-pointer text-[18px] leading-none transition hover:scale-110 active:scale-95 #{favorited ? 'text-[#F9C639] hover:text-[#d4a317]' : 'text-[#9a9570] hover:text-[#F9C639]'}" %>
                       <% end %>
                     <% end %>
-                    <%# この1品だけ入れ替える（ゲストにも表示する）。同じ画面に戻るので履歴は置き換える %>
-                    <%= form_with url: regenerate_menu_meal_path(@menu, meal), data: { turbo_action: "replace" } do |f| %>
-                      <%= f.button type: "submit",
-                            title: "この品を入れ替える",
-                            aria: { label: "#{meal.meal_master.name}を入れ替える" },
-                            class: "p-2 -m-2 bg-transparent border-none cursor-pointer leading-none text-[#9a9570] transition hover:scale-110 hover:text-[#b8860b] active:scale-95" do %>
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                          <path d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-                        </svg>
+                    <%# この1品だけ入れ替える（主菜・一品料理・副菜のみ。ゲストにも表示する）。同じ画面に戻るので履歴は置き換える %>
+                    <% if MealItemRegenerateService.swappable?(meal) %>
+                      <%= form_with url: regenerate_menu_meal_path(@menu, meal), data: { turbo_action: "replace" } do |f| %>
+                        <%= f.button type: "submit",
+                              title: "この品を入れ替える",
+                              aria: { label: "#{meal.meal_master.name}を入れ替える" },
+                              class: "p-2 -m-2 bg-transparent border-none cursor-pointer leading-none text-[#9a9570] transition hover:scale-110 hover:text-[#b8860b] active:scale-95" do %>
+                          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                          </svg>
+                        <% end %>
                       <% end %>
+                    <% else %>
+                      <%# 入れ替え対象外の品（主食・汁物）は、★の位置が他の行とそろうよう同じ幅の空き枠を置く %>
+                      <span class="w-5 h-5" aria-hidden="true"></span>
                     <% end %>
                   </div>
                 </div>

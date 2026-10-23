@@ -9,6 +9,8 @@ class MealsController < ApplicationController
 
     MealItemRegenerateService.new(meal).regenerate!
     redirect_to menu_path(menu)
+  rescue MealItemRegenerateService::NotSwappableError
+    redirect_to menu_path(menu), alert: "この品は入れ替えできません"
   rescue MealItemRegenerateService::NoCandidateError
     redirect_to menu_path(menu), alert: "他の候補がありません"
   end

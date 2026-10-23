@@ -2,9 +2,19 @@
 class MealItemRegenerateService
   # 入れ替えられる候補が無かったときのエラー（コントローラーで通知に変換する）
   class NoCandidateError < StandardError; end
+  # 入れ替え対象外の品（主食・汁物）が指定されたときのエラー
+  class NotSwappableError < StandardError; end
 
+  # 入れ替えを許可するカテゴリ
+  # 主食・汁物は、候補が少なく量違いの同じ料理に替わりやすいため対象外とする
+  SWAPPABLE_CATEGORIES = %w[main_dish one_dish side_dish].freeze
   # 食事のジャンルを決める主役のカテゴリ
   LEAD_CATEGORIES = %w[main_dish one_dish].freeze
+
+  # 入れ替えできる品か（画面のマーク表示と、サーバー側のチェックの両方で使う）
+  def self.swappable?(meal)
+    SWAPPABLE_CATEGORIES.include?(meal.meal_master.category)
+  end
 
   def initialize(meal)
     @meal = meal
@@ -13,6 +23,9 @@ class MealItemRegenerateService
   end
 
   def regenerate!
+    # 画面ではマークを隠しているが、直接リクエストされた場合に備えてサーバー側でも拒否する
+    raise NotSwappableError unless self.class.swappable?(@meal)
+
     # 候補の選定はDB書き込みを伴わないためトランザクションの外で行う
     selected = select_replacement
     raise NoCandidateError unless selected
@@ -47,7 +60,7 @@ class MealItemRegenerateService
 
   # ジャンルを合わせる基準にする料理（同じ食の、入れ替え対象以外の品から選ぶ）
   # ・主菜/一品料理を入れ替えるとき：他の品のうちジャンルを持つもの（無ければnil＝絞り込まない）
-  # ・主食/副菜/汁物を入れ替えるとき：同じ食の主菜（または一品料理）
+  # ・副菜を入れ替えるとき：同じ食の主菜（または一品料理）
   def genre_lead_meal_master
     others = other_meal_masters_in_same_timing
     if LEAD_CATEGORIES.include?(@meal.meal_master.category)
