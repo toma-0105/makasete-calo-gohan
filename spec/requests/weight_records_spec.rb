@@ -25,7 +25,7 @@ RSpec.describe "WeightRecords", type: :request do
   end
 
   # レスポンス内に表示されている日付を、表示順のまま取り出す
-  # （グラフのデータはハイフン区切りなので、スラッシュ区切りの一覧表示だけを拾える）
+  # （一覧表示はスラッシュ区切りなので、ハイフン区切りの入力フォームの日付は拾わない）
   def displayed_labels
     response.body.scan(%r{\d{4}/\d{2}/\d{2}})
   end
@@ -88,6 +88,13 @@ RSpec.describe "WeightRecords", type: :request do
       get weight_records_path
       expect(Capybara.string(response.body))
         .to have_css("a[data-controller='back-link'][href='#{mypage_path}']")
+    end
+
+    it "体重推移グラフは表示されない（マイページに移設済み）" do
+      # 記録があってもグラフが出ないことを確かめるため、記録を1件作っておく
+      create(:weight_record, user: user)
+      get weight_records_path
+      expect(response.body).not_to include('Chartkick["LineChart"]')
     end
   end
 

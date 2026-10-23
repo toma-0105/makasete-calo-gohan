@@ -143,6 +143,48 @@ RSpec.describe "Mypages", type: :request do
       end
     end
 
+    context "体重推移グラフ" do
+      let(:user) { create(:user) }
+      # Chartkickが折れ線グラフを描画するために出力するスクリプトの一部
+      let(:line_chart_script) { 'Chartkick["LineChart"]' }
+
+      before { sign_in user }
+
+      context "体重記録がある場合" do
+        let(:own_weight) { 65.0 }
+        let(:others_weight) { 99.9 }
+
+        before do
+          create(:weight_record, user: user, weight: own_weight)
+          create(:weight_record, user: create(:user), weight: others_weight)
+          get mypage_path
+        end
+
+        it "体重推移グラフが表示される" do
+          expect(response.body).to include("体重推移")
+          expect(response.body).to include(line_chart_script)
+        end
+
+        it "TDEE診断履歴カードの下に表示される" do
+          expect(response.body.index("TDEE診断履歴")).to be < response.body.index("体重推移")
+        end
+
+        it "自分の記録だけがグラフに使われる" do
+          expect(response.body).to include(own_weight.to_s)
+          expect(response.body).not_to include(others_weight.to_s)
+        end
+      end
+
+      context "体重記録がない場合" do
+        before { get mypage_path }
+
+        it "体重推移グラフは表示されない" do
+          expect(response.body).not_to include("体重推移")
+          expect(response.body).not_to include(line_chart_script)
+        end
+      end
+    end
+
     context "ログインしていない場合" do
       before { get mypage_path }
 
