@@ -19,8 +19,10 @@
       </div>
     <% end %>
 
+    <%# マイページは会員限定のため、ゲストはホーム（診断結果）へ戻す %>
+    <% back_label = current_user.guest? ? "診断結果に戻る" : "マイページに戻る" %>
     <div class="mt-6">
-      <%= link_to "マイページに戻る", mypage_path,
+      <%= link_to back_label, home_path_for(current_user),
             class: secondary_button_classes("block w-full") %>
     </div>
   </main>
