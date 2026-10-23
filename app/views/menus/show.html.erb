@@ -31,12 +31,12 @@
       <% end %>
     </div>
 
-        <%# 朝食・昼食・夕食 %>
-    <% [["breakfast", "朝食"], ["lunch", "昼食"], ["dinner", "夕食"]].each do |timing, label| %>
+    <%# 朝食・昼食・夕食（各食の中は 主食 → 主菜 → 副菜 → 汁物 の順。並び順はMenusHelperで決める） %>
+    <% meals_grouped_by_timing(@menu).each do |label, meals| %>
       <div class="mb-4">
         <h2 class="text-[14px] font-bold text-[#2a2810] mb-2"><%= label %></h2>
         <div class="bg-white border border-[#EAE070] rounded-xl divide-y divide-[#F0ECC4]">
-                            <% (@meals_by_timing[timing] || []).each do |meal| %>
+          <% meals.each do |meal| %>
             <div class="px-4 py-3">
               <div class="flex justify-between items-center">
                 <p class="text-[14px] text-[#3a3820]">
