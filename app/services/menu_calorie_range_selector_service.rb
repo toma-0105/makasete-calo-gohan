@@ -18,27 +18,32 @@ class MenuCalorieRangeSelectorService
     closest_diff = Float::INFINITY
 
     MAX_ATTEMPTS.times do
-      # 目標カロリーを渡し、生成側で配分・倍率調整を行う
-      menu = MenuGeneratorService.new(
-        excluded_meal_master_ids: @excluded_meal_master_ids,
-        target_calories: @target_calories,
-        favorite_meal_master_ids: @favorite_meal_master_ids
-      ).generate
+      menu = generate_menu
       total_calories = total_calories_for(menu)
 
       return menu if within_range?(total_calories)
 
       diff = (@target_calories - total_calories).abs
-      if diff < closest_diff
-        closest_diff = diff
-        closest_menu = menu
-      end
+      next unless diff < closest_diff
+
+      closest_menu = menu
+      closest_diff = diff
     end
 
+    # 許容範囲に収まらなかった場合は、最も目標に近かった献立を返す
     closest_menu
   end
 
   private
+
+  # 目標カロリーを渡し、生成側で配分・倍率調整を行う
+  def generate_menu
+    MenuGeneratorService.new(
+      excluded_meal_master_ids: @excluded_meal_master_ids,
+      target_calories: @target_calories,
+      favorite_meal_master_ids: @favorite_meal_master_ids
+    ).generate
+  end
 
   def total_calories_for(menu)
     menu.values.flatten.sum(&:calories)

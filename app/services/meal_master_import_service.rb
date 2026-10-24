@@ -6,25 +6,8 @@ class MealMasterImportService
 
   # 検証済みレシピ1件からMealMasterとMealIngredientを作成する
   def import(recipe)
-    meal_master = MealMaster.create!(
-      name: recipe["name"],
-      meal_timing: recipe["meal_timing"],
-      category: recipe["category"],
-      scaling_type: recipe["scaling_type"],
-      genre: recipe["genre"],
-      calories: recipe["calories"],
-      protein: recipe["protein"],
-      fat: recipe["fat"],
-      carbohydrate: recipe["carbohydrate"],
-      ingredients: recipe["ingredients"],
-      steps: recipe["steps"]
-    )
-
-    recipe["allergens"].each do |allergen_name|
-      allergen_master = @allergen_master_by_name.fetch(allergen_name)
-      MealIngredient.create!(meal_master: meal_master, allergen_master: allergen_master)
-    end
-
+    meal_master = create_meal_master(recipe)
+    create_meal_ingredients(meal_master, recipe["allergens"])
     meal_master
   end
 
@@ -41,5 +24,32 @@ class MealMasterImportService
       ingredients: recipe["ingredients"],
       steps: recipe["steps"]
     )
+  end
+
+  private
+
+  # レシピの項目からMealMasterを作成する
+  def create_meal_master(recipe)
+    MealMaster.create!(
+      name: recipe["name"],
+      meal_timing: recipe["meal_timing"],
+      category: recipe["category"],
+      scaling_type: recipe["scaling_type"],
+      genre: recipe["genre"],
+      calories: recipe["calories"],
+      protein: recipe["protein"],
+      fat: recipe["fat"],
+      carbohydrate: recipe["carbohydrate"],
+      ingredients: recipe["ingredients"],
+      steps: recipe["steps"]
+    )
+  end
+
+  # アレルゲン名からAllergenMasterを引き、MealMasterに紐付ける
+  def create_meal_ingredients(meal_master, allergen_names)
+    allergen_names.each do |allergen_name|
+      allergen_master = @allergen_master_by_name.fetch(allergen_name)
+      MealIngredient.create!(meal_master: meal_master, allergen_master: allergen_master)
+    end
   end
 end

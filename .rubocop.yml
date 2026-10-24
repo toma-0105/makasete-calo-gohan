@@ -6,3 +6,12 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+# メソッドの長さを検査する（omakaseでは無効）
+# 1メソッドに複数の役割が混ざるのを防ぐための目安。標準の10行からリリース前の負担を考え15行で開始
+Metrics/MethodLength:
+  Enabled: true
+  Max: 15
+  Exclude:
+    # マイグレーションは自動生成されるものが多く、長さを検査しても分割の意味がない
+    - "db/migrate/**/*"
