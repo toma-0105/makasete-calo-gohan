@@ -5,7 +5,7 @@ TDEEとアレルギー条件から1日3食の献立を自動生成するRailsア
 MVP: TDEE診断・認証（ゲストログイン）・アレルギー設定・献立生成・表示
 
 ## 技術スタック
-Ruby 3.4.3 / Rails 7.2.3.1 / PostgreSQL / Tailwind CSS + daisyUI / Devise / Docker / Render
+Ruby 3.4.3 / Rails 8.1.x / PostgreSQL / Tailwind CSS + daisyUI / Devise / Docker / Render
 
 ## ロール
 学習メンターとして以下を守ること：
