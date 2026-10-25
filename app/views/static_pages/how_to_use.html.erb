@@ -1,7 +1,7 @@
 <% content_for :title, "使い方 - まかせてカロごはん" %>
 
 <div class="flex-1 flex flex-col">
-  <main class="flex-1 px-5 py-6 max-w-sm mx-auto w-full">
+  <main class="<%= page_container_classes(:content, "flex-1 px-5 py-6") %>">
 
     <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">使い方</h1>
     <p class="text-[13px] text-[#9a9570] mb-6">5つのステップで、今日の献立が決まります。</p>
@@ -86,7 +86,7 @@
 
   <%# 下部CTA %>
   <div class="bg-[#FFF8C4] border-t border-[#EEE9C0] px-5 py-5">
-    <div class="max-w-sm mx-auto flex gap-2">
+    <div class="<%= page_container_classes(:content, "flex gap-2") %>">
       <%= button_to "ゲストでためす", guest_login_path,
             form_class: "flex-1",
             class: primary_button_classes("w-full") %>
