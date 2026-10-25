@@ -2,7 +2,7 @@
 
 <div class="flex-1 flex flex-col">
 
-  <main class="flex-1 flex flex-col px-5 py-6 max-w-sm mx-auto w-full gap-8">
+  <main class="<%= page_container_classes(:content, "flex-1 flex flex-col px-5 py-6 gap-8") %>">
 
     <%# ヒーローセクション %>
     <div class="text-center">
@@ -92,7 +92,7 @@
 
   <%# 下部CTA %>
   <div class="bg-[#FFF8C4] border-t border-[#EEE9C0] px-5 py-5">
-    <div class="max-w-sm mx-auto">
+    <div class="<%= page_container_classes(:content) %>">
       <%= link_to "さっそくはじめる", new_user_registration_path,
             class: primary_button_classes("block w-full") %>
     </div>

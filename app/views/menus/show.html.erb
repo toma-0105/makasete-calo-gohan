@@ -1,13 +1,13 @@
 <% content_for :title, "今日の献立 - まかせてカロごはん" %>
 
 <div class="flex-1 flex flex-col">
-  <main class="flex-1 px-5 py-6 max-w-sm mx-auto w-full">
+  <main class="<%= page_container_classes(:wide, "flex-1 px-5 py-6") %>">
     <%= render "shared/back_link", fallback_path: home_path_for(current_user) %>
     <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">今日の献立</h1>
 
     <p class="text-[13px] text-[#9a9570] mb-5"><%= @menu.date.strftime("%Y年%m月%d日") %></p>
     <%# 合計カロリーカード %>
-    <div class="bg-[#FFF8C4] border border-[#EAE070] rounded-xl p-4 mb-5 text-center">
+    <div class="bg-[#FFF8C4] border border-[#EAE070] rounded-xl p-4 mb-5 text-center md:max-w-md md:mx-auto">
       <p class="text-[11px] text-[#9a9570] font-medium mb-1">合計カロリー</p>
       <p class="text-[28px] font-bold text-[#2a2810]">
         <%= number_with_delimiter(@menu.total_calories.to_i) %>
@@ -32,8 +32,10 @@
     </div>
 
     <%# 朝食・昼食・夕食（各食の中は 主食 → 主菜 → 副菜 → 汁物 の順。並び順はMenusHelperで決める） %>
+    <%# lg以上では朝・昼・夕を3列に並べる（スマホ・タブレットは従来どおり縦並び）。items-startで列の高さを内容に合わせる %>
+    <div class="lg:grid lg:grid-cols-3 lg:gap-4 lg:items-start">
     <% meals_grouped_by_timing(@menu).each do |label, meals| %>
-      <div class="mb-4">
+      <div class="mb-4 lg:mb-0">
         <h2 class="text-[14px] font-bold text-[#2a2810] mb-2"><%= label %></h2>
         <div class="bg-white border border-[#EAE070] rounded-xl divide-y divide-[#F0ECC4]">
           <% meals.each do |meal| %>
@@ -131,9 +133,10 @@
         </div>
       </div>
     <% end %>
+    </div>
 
-    <%# ボタンエリア %>
-    <div class="mt-6 flex flex-col gap-3" data-controller="loading">
+    <%# ボタンエリア（PCでは横に伸びすぎないよう、合計カロリーカードと同じ幅で中央に寄せる） %>
+    <div class="mt-6 flex flex-col gap-3 md:max-w-md md:mx-auto" data-controller="loading">
       <%# ローディングオーバーレイ %>
       <div data-loading-target="overlay"
           class="hidden fixed inset-0 bg-[#FFFEF5]/90 flex flex-col items-center justify-center z-50">
