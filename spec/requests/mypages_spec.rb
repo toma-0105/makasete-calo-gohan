@@ -73,8 +73,18 @@ RSpec.describe "Mypages", type: :request do
 
       before do
         create(:tdee_profile, user: user, tdee: 2200)
+        # 他人の診断を自分より後に作る（絞り込みが漏れていると、最新の他人の値が表示されてしまう）
+        create(:tdee_profile, user: create(:user), tdee: 3333)
         sign_in user
         get mypage_path
+      end
+
+      it "自分のTDEEが表示される" do
+        expect(response.body).to include("2,200")
+      end
+
+      it "他人のTDEEは表示されない" do
+        expect(response.body).not_to include("3,333")
       end
 
       it "「TDEEを再診断する」リンクが表示される" do

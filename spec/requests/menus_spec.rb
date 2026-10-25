@@ -387,5 +387,77 @@ RSpec.describe "Menus", type: :request do
         expect(response).to have_http_status(:not_found)
       end
     end
+
+    # 再生成後に、古い献立が消えて新しい献立が画面に反映されること
+    context "自分の献立を再生成する場合" do
+      let(:user)         { create(:user) }
+      let(:old_menu)     { create(:menu, user: user) }
+      let(:old_master)   { create(:meal_master, name: "再生成前の料理") }
+      let(:new_master)   { create(:meal_master, name: "再生成後の料理") }
+      let(:menu_hash) do
+        { breakfast: [ MenuGeneratorService::SelectedMeal.new(new_master, 1.0) ], lunch: [], dinner: [] }
+      end
+
+      before do
+        create(:tdee_profile, user: user)
+        create(:meal, menu: old_menu, meal_master: old_master)
+        # 献立候補の選定ロジックはサービスのspecで担保するため、固定の結果を返すようにスタブする
+        selector = instance_double(MenuCalorieRangeSelectorService, generate: menu_hash)
+        allow(MenuCalorieRangeSelectorService).to receive(:new).and_return(selector)
+        sign_in user
+        post regenerate_menu_path(old_menu)
+      end
+
+      it "古い献立が削除される" do
+        expect(Menu.exists?(old_menu.id)).to be false
+      end
+
+      it "新しい献立の画面にリダイレクトされる" do
+        expect(response).to redirect_to(menu_path(user.menus.last))
+      end
+
+      it "新しい料理が表示され、古い料理は表示されない" do
+        follow_redirect!
+        expect(response.body).to include(new_master.name)
+        expect(response.body).not_to include(old_master.name)
+      end
+    end
+  end
+
+  describe "POST /menus（献立生成）" do
+    let(:user) { create(:user) }
+
+    before { sign_in user }
+
+    context "TDEE診断済みの場合" do
+      let(:master) { create(:meal_master, name: "生成された料理", calories: 300) }
+      let(:menu_hash) do
+        { breakfast: [ MenuGeneratorService::SelectedMeal.new(master, 1.0) ], lunch: [], dinner: [] }
+      end
+
+      before do
+        create(:tdee_profile, user: user)
+        # 献立候補の選定ロジックはサービスのspecで担保するため、固定の結果を返すようにスタブする
+        selector = instance_double(MenuCalorieRangeSelectorService, generate: menu_hash)
+        allow(MenuCalorieRangeSelectorService).to receive(:new).and_return(selector)
+      end
+
+      it "自分の献立として保存される" do
+        expect { post menus_path }.to change { user.menus.count }.by(1)
+      end
+
+      it "生成した献立が結果一覧に反映される" do
+        post menus_path
+        follow_redirect!
+        expect(response.body).to include(master.name)
+      end
+    end
+
+    context "TDEE未診断の場合" do
+      it "献立は作られず、TDEE診断画面へリダイレクトされる" do
+        expect { post menus_path }.not_to change(Menu, :count)
+        expect(response).to redirect_to(new_tdee_profile_path)
+      end
+    end
   end
 end

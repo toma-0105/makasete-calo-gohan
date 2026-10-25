@@ -39,6 +39,18 @@ RSpec.describe "UserAllergens", type: :request do
         expect(doc.css("input[name='allergen_ids[]'][checked]")).to be_empty
       end
     end
+
+    context "他のユーザーだけがアレルギー設定を持っている場合" do
+      before do
+        create(:user_allergen, user: create(:user), allergen_master: old_allergen)
+        get new_user_allergen_path
+      end
+
+      it "他人の設定はチェックされた状態で表示されない" do
+        doc = Nokogiri::HTML(response.body)
+        expect(doc.css("input[name='allergen_ids[]'][checked]")).to be_empty
+      end
+    end
   end
 
   describe "POST /user_allergens" do
@@ -57,6 +69,21 @@ RSpec.describe "UserAllergens", type: :request do
       it "マイページへリダイレクトされる" do
         post user_allergens_path, params: { allergen_ids: [ other_allergen.id ] }
         expect(response).to redirect_to(mypage_path)
+      end
+    end
+
+    context "他のユーザーもアレルギー設定を持っている場合" do
+      let(:another_user) { create(:user) }
+
+      before do
+        create(:tdee_profile, user: user)
+        create(:user_allergen, user: user, allergen_master: old_allergen)
+        create(:user_allergen, user: another_user, allergen_master: old_allergen)
+      end
+
+      it "自分の設定を更新しても、他人の設定は変わらない" do
+        post user_allergens_path, params: { allergen_ids: [ other_allergen.id ] }
+        expect(another_user.reload.user_allergens.pluck(:allergen_master_id)).to eq([ old_allergen.id ])
       end
     end
 

@@ -28,6 +28,31 @@ RSpec.describe "TdeeProfiles", type: :request do
       end
     end
 
+    # 編集フォームに保存済みデータが初期表示されること（前回の診断内容を引き継ぐ）
+    context "過去に診断済みの場合" do
+      let(:doc) { Nokogiri::HTML(response.body) }
+
+      before do
+        create(:tdee_profile, user: user, height: 160.5, weight: 55.5, age: 33, gender: :female, activity_level: :very_active)
+        # 他人の診断内容は引き継がれない
+        create(:tdee_profile, user: create(:user), height: 190.0, weight: 90.0, age: 50)
+        sign_in user
+        get new_tdee_profile_path
+      end
+
+      it "身長・体重・年齢が前回の値で初期表示される" do
+        expect(doc.at("input[name='tdee_profile[height]']")["value"]).to eq("160.5")
+        expect(doc.at("input[name='tdee_profile[weight]']")["value"]).to eq("55.5")
+        expect(doc.at("input[name='tdee_profile[age]']")["value"]).to eq("33")
+      end
+
+      it "性別と活動レベルが前回の値で選択された状態になる" do
+        expect(doc.at("input[name='tdee_profile[gender]'][value='female']")["checked"]).to eq("checked")
+        # 先頭の案内文にも selected が付いているが、単一選択では最後の selected が有効になるため、前回値の option を直接確認する
+        expect(doc.at("select[name='tdee_profile[activity_level]'] option[value='very_active']")["selected"]).to eq("selected")
+      end
+    end
+
     context "ログインしていない場合" do
       it "ログインページにリダイレクトされる" do
         get new_tdee_profile_path
@@ -111,6 +136,14 @@ RSpec.describe "TdeeProfiles", type: :request do
     it "体重連動のプロフィール（weight_sync）は増えない" do
       expect { post tdee_profiles_path, params: params }
         .not_to change { user.tdee_profiles.weight_sync.count }
+    end
+
+    # 登録した内容から計算された目標カロリーが、遷移先の結果画面に表示されること
+    it "登録した診断結果が結果画面に反映される" do
+      post tdee_profiles_path, params: params
+      follow_redirect!
+      target = ActiveSupport::NumberHelper.number_to_delimited(user.tdee_profiles.last.target_calories.to_i)
+      assert_select "p.text-6xl", text: target
     end
 
     # source を勝手に書き換えて送られても、手動診断のままになること
