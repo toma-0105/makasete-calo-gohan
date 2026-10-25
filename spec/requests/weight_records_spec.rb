@@ -84,6 +84,19 @@ RSpec.describe "WeightRecords", type: :request do
       end
     end
 
+    context "他のユーザーの記録がある場合" do
+      before do
+        # 自分は今日のみ、他人は5日前の記録を持つ
+        create(:weight_record, user: user, recorded_on: Date.current)
+        create(:weight_record, user: create(:user), recorded_on: Date.current - 5)
+        get weight_records_path
+      end
+
+      it "自分の記録だけが表示される" do
+        expect(displayed_labels).to eq(expected_labels(1))
+      end
+    end
+
     it "戻るリンクが表示され、保険の戻り先はマイページになる" do
       get weight_records_path
       expect(Capybara.string(response.body))
@@ -99,6 +112,23 @@ RSpec.describe "WeightRecords", type: :request do
   end
 
   describe "POST /weight_records" do
+    context "他のユーザーが同じ日付の記録を持っている場合" do
+      let(:other_record) { create(:weight_record, user: create(:user), weight: 50.0, recorded_on: Date.current) }
+
+      before do
+        other_record
+        post weight_records_path, params: { weight_record: { weight: 60.5, recorded_on: Date.current } }
+      end
+
+      it "自分の記録として保存される" do
+        expect(user.weight_records.find_by(recorded_on: Date.current).weight).to eq(60.5)
+      end
+
+      it "他人の記録は上書きされない" do
+        expect(other_record.reload.weight).to eq(50.0)
+      end
+    end
+
     context "記録が上限を超えている状態で新しい記録を追加した場合" do
       let(:new_weight) { 60.5 }
 
