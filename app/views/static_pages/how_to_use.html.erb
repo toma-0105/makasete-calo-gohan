@@ -3,77 +3,70 @@
 <div class="flex-1 flex flex-col">
   <main class="<%= page_container_classes(:content, "flex-1 px-5 py-6") %>">
 
-    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">使い方</h1>
-    <p class="text-[13px] text-[#9a9570] mb-6">5つのステップで、今日の献立が決まります。</p>
+    <h1 class="text-[20px] font-bold text-center text-[#2a2810] mb-1">使い方</h1>
 
-    <div class="flex flex-col gap-5">
+    <h2 class="text-[15px] font-bold text-[#2a2810] mb-4">基本の流れ</h2>
+    <div class="flex flex-col gap-5 mb-10">
+      <%= render "how_to_use_step", number: 1, title: "アカウント登録 または ゲストログイン" do %>
+        メールアドレスで登録すると、献立の保存と履歴の確認ができます。<br>
+        まず試したい方は、登録不要の「ゲストでログイン」からどうぞ。
+      <% end %>
 
-      <%# ステップ1: はじめる %>
-      <div class="flex items-start gap-3.5">
-        <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">1</div>
-        <div>
-          <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">アカウント登録 または ゲストログイン</p>
-          <p class="text-[12px] text-[#7a7550] leading-[1.6]">
-            メールアドレスで登録すると、献立の保存と履歴の確認ができます。<br>
-            まず試したい方は、登録不要の「ゲストでログイン」からどうぞ。
-          </p>
-        </div>
-      </div>
+      <%= render "how_to_use_step", number: 2, title: "TDEE診断" do %>
+        身長・体重・年齢・性別・活動量を入力すると、1日の消費カロリー（TDEE）と、
+        ダイエットに適した目標摂取カロリーを自動で計算します。
+      <% end %>
 
-      <%# ステップ2: TDEE診断 %>
-      <div class="flex items-start gap-3.5">
-        <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">2</div>
-        <div>
-          <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">TDEE診断</p>
-          <p class="text-[12px] text-[#7a7550] leading-[1.6]">
-            身長・体重・年齢・性別・活動量を入力すると、1日の消費カロリー（TDEE）と、
-            ダイエットに適した目標摂取カロリーを自動で計算します。
-          </p>
-        </div>
-      </div>
+      <%= render "how_to_use_step", number: 3, title: "アレルギー設定", badge: "任意" do %>
+        アレルギーのある食材を選ぶと、その食材を除いた献立を提案します。<br>
+        なければスキップしてOKです。
+      <% end %>
 
-      <%# ステップ3: アレルギー設定 %>
-      <div class="flex items-start gap-3.5">
-        <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">3</div>
-        <div>
-          <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">
-            アレルギー設定
-            <span class="text-[10px] px-1.5 py-0.5 rounded-[10px] bg-[#FFF3A0] text-[#5a4a10] ml-1.5">任意</span>
-          </p>
-          <p class="text-[12px] text-[#7a7550] leading-[1.6]">
-            アレルギーのある食材を選ぶと、その食材を除いた献立を提案します。<br>
-            なければスキップしてOKです。
-          </p>
-        </div>
-      </div>
+      <%= render "how_to_use_step", number: 4, title: "献立を自動生成" do %>
+        朝・昼・夜の3食分が即座に表示されます。<br>
+        合計カロリーは目標に合わせて自動調整され、ご飯の量（グラム）や品数まで具体的にわかります。
+      <% end %>
 
-      <%# ステップ4: 献立生成 %>
-      <div class="flex items-start gap-3.5">
-        <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">4</div>
-        <div>
-          <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">献立を自動生成</p>
-          <p class="text-[12px] text-[#7a7550] leading-[1.6]">
-            朝・昼・夜の3食分が即座に表示されます。<br>
-            合計カロリーは目標に合わせて自動調整され、ご飯の量（グラム）や品数まで具体的にわかります。<br>
-            気に入らなければ「再生成」で何度でも作り直せます。
-          </p>
-        </div>
-      </div>
+      <%= render "how_to_use_step", number: 5, title: "保存して履歴から見返す", badge: "会員限定" do %>
+        気に入った献立は保存しておけば、マイページの献立履歴からいつでも見返せます。
+      <% end %>
+    </div>
 
-      <%# ステップ5: 保存と履歴 %>
-      <div class="flex items-start gap-3.5">
-        <div class="w-[30px] h-[30px] rounded-full bg-[#3a3820] text-[#FDF9DD] text-[14px] font-bold flex items-center justify-center shrink-0">5</div>
-        <div>
-          <p class="text-[14px] font-semibold text-[#2a2810] mb-0.5">
-            保存して履歴から見返す
-            <span class="text-[10px] px-1.5 py-0.5 rounded-[10px] bg-[#FFF3A0] text-[#5a4a10] ml-1.5">会員限定</span>
-          </p>
-          <p class="text-[12px] text-[#7a7550] leading-[1.6]">
-            気に入った献立は保存しておけば、マイページの献立履歴からいつでも見返せます。
-          </p>
-        </div>
-      </div>
+    <%# 「会員限定」バッジは、コントローラーの reject_guest_user でゲストを拒否している機能に付ける %>
+    <h2 class="text-[15px] font-bold text-[#2a2810] mb-4">便利な機能</h2>
+    <div class="flex flex-col gap-3">
+      <%= render "how_to_use_feature", title: "1品だけ入れ替え" do %>
+        献立の詳細画面（「詳細・保存へ」から開けます）で、各料理の右端にある「⇄」を押してください。<br>
+        その料理だけを、別の料理に入れ替えられます。<br>
+        入れ替えられるのは主菜・一品料理・副菜で、ほかの料理はそのままです。
+      <% end %>
 
+      <%= render "how_to_use_feature", title: "献立をまるごと再生成" do %>
+        献立の詳細画面の下にある「献立を再生成する」ボタンを押してください。<br>
+        朝・昼・夜の料理がすべて新しくなり、今の献立は置き換わります。<br>
+        1品だけ変えたいときは、「1品だけ入れ替え」を使いましょう。
+      <% end %>
+
+      <%= render "how_to_use_feature", title: "日数を選んでまとめて生成", badge: "会員限定" do %>
+        マイページで日数（<%= MenuPeriodGeneratorService::MIN_GENERATION_DAYS %>〜<%= MenuPeriodGeneratorService::MAX_GENERATION_DAYS %>日分）を選ぶと、まとめて献立を作れます。<br>
+        生成した日付をタップすると、朝・昼・夕の料理が開きます。
+      <% end %>
+
+      <%= render "how_to_use_feature", title: "お気に入り料理", badge: "会員限定" do %>
+        献立の詳細画面で、各料理の右端にある「☆」を押すと、お気に入りに登録されて「★」に変わります。<br>
+        もう一度押すと、登録を解除できます。<br>
+        登録した料理は、マイページの「お気に入りの献立を見る」からまとめて見返せます。
+      <% end %>
+
+      <%= render "how_to_use_feature", title: "体重記録とグラフ", badge: "会員限定" do %>
+        TDEE診断のあと、マイページの「体重を記録する」から体重を記録できます。<br>
+        記録すると体重の推移がグラフで表示され、その体重でTDEEも自動で計算し直されます。
+      <% end %>
+
+      <%= render "how_to_use_feature", title: "TDEE再診断のお知らせ", badge: "会員限定" do %>
+        最後のTDEE診断から<%= TdeeReminderService::REMINDER_INTERVAL_DAYS %>日以上たつと、マイページを開いたときに再診断をすすめるお知らせが出ます。<br>
+        体重や活動量が変わったときは、マイページの「TDEEを再診断する」からいつでも診断し直せます。
+      <% end %>
     </div>
 
     <%# トップへ戻る %>
