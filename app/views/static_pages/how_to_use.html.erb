@@ -12,14 +12,14 @@
         まず試したい方は、登録不要の「ゲストでログイン」からどうぞ。
       <% end %>
 
-      <%= render "how_to_use_step", number: 2, title: "TDEE診断" do %>
-        身長・体重・年齢・性別・活動量を入力すると、1日の消費カロリー（TDEE）と、
-        ダイエットに適した目標摂取カロリーを自動で計算します。
-      <% end %>
-
-      <%= render "how_to_use_step", number: 3, title: "アレルギー設定", badge: "任意" do %>
+      <%= render "how_to_use_step", number: 2, title: "アレルギー設定", badge: "任意" do %>
         アレルギーのある食材を選ぶと、その食材を除いた献立を提案します。<br>
         なければスキップしてOKです。
+      <% end %>
+
+      <%= render "how_to_use_step", number: 3, title: "TDEE診断" do %>
+        身長・体重・年齢・性別・活動量を入力すると、1日の消費カロリー（TDEE）と、
+        ダイエットに適した目標摂取カロリーを自動で計算します。
       <% end %>
 
       <%= render "how_to_use_step", number: 4, title: "献立を自動生成" do %>
