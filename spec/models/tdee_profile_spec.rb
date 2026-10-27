@@ -77,6 +77,17 @@ RSpec.describe TdeeProfile, type: :model do
     end
   end
 
+  describe "DBのNOT NULL制約" do
+    %i[height weight age gender activity_level].each do |column|
+      it "#{column}がNULLだと、バリデーションを通さなくても保存できない" do
+        tdee_profile[column] = nil
+
+        # validate: false でモデルのチェックを飛ばし、DBの制約だけを確認する
+        expect { tdee_profile.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
+      end
+    end
+  end
+
   describe "source" do
     it "デフォルトは手動診断（diagnosis）になる" do
       expect(TdeeProfile.new.source).to eq "diagnosis"
