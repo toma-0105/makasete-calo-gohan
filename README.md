@@ -169,11 +169,7 @@
 ---
 
 ## ER図
-
-> 本リリース版に作り直す予定です。以下はMVP時点のものです。
-
-[ER図（MVP時点）](https://app.diagrams.net/#G1Z-oQ8c4PjcVLOJOdEhDDwFbMoHjlqG7D#%7B%22pageId%22%3A%22bbRv8jsxfHTHRj3OKq_V%22%7D)
+![ER図](docs/images/er.png)
 
 ## 画面遷移図
-
 [画面遷移図（MVP時点）](https://www.figma.com/design/2IupXekaNEZpDr9Bkh7gzp/%E7%84%A1%E9%A1%8C?node-id=0-1&p=f&t=Deo6UxFG2HF0FgiY-0)
