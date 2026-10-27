@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_10_035719) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_060622) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "allergen_masters", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category", default: 0, null: false
@@ -181,11 +181,11 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_10_035719) do
 
   create_table "tdee_profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.decimal "height"
-    t.decimal "weight"
-    t.integer "age"
-    t.integer "gender"
-    t.integer "activity_level"
+    t.decimal "height", null: false
+    t.decimal "weight", null: false
+    t.integer "age", null: false
+    t.integer "gender", null: false
+    t.integer "activity_level", null: false
     t.decimal "tdee"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -200,6 +200,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_10_035719) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["allergen_master_id"], name: "index_user_allergens_on_allergen_master_id"
+    t.index ["user_id", "allergen_master_id"], name: "index_user_allergens_on_user_id_and_allergen_master_id", unique: true
     t.index ["user_id"], name: "index_user_allergens_on_user_id"
   end
 
