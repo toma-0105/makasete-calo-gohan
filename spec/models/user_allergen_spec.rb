@@ -21,4 +21,17 @@ RSpec.describe UserAllergen, type: :model do
       expect(duplicate).not_to be_valid
     end
   end
+
+  describe 'DBの一意制約' do
+    let(:user) { create(:user) }
+    let(:allergen) { create(:allergen_master) }
+
+    it 'バリデーションを通さなくても、同じ組み合わせは保存できない' do
+      create(:user_allergen, user:, allergen_master: allergen)
+      duplicate = build(:user_allergen, user:, allergen_master: allergen)
+
+      # validate: false でモデルのチェックを飛ばし、DBの制約だけを確認する
+      expect { duplicate.save(validate: false) }.to raise_error(ActiveRecord::RecordNotUnique)
+    end
+  end
 end
