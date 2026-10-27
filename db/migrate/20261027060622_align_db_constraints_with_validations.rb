@@ -12,4 +12,3 @@ class AlignDbConstraintsWithValidations < ActiveRecord::Migration[8.1]
     change_column_null :allergen_masters, :name, false
   end
 end
-
