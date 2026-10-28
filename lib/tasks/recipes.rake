@@ -38,4 +38,12 @@ namespace :recipes do
 
     puts "#{result[:valid_recipes].size}件のレシピをバックフィルしました"
   end
+
+  desc "db/data のレシピJSONを全件まとめてDBに反映する（デプロイ時に実行。何回実行しても結果は同じ）"
+  task sync: :environment do
+    result = RecipeSyncService.new.call
+
+    puts "警告#{result.warnings.size}件（手順に登場しない材料など。反映には影響しません）" if result.warnings.any?
+    puts "バックフィル#{result.backfilled_count}件・新規投入#{result.imported_count}件を反映しました"
+  end
 end
