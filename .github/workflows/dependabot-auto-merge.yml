@@ -20,7 +20,7 @@ jobs:
       # 更新の種類（patch / minor / major）を取得する
       - name: Dependabotのメタデータを取得
         id: metadata
-        uses: dependabot/fetch-metadata@v2
+        uses: dependabot/fetch-metadata@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
