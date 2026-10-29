@@ -20,11 +20,7 @@
       </p>
       <div class="h-4"></div>
       <div class="flex gap-2">
-        <%= button_to "ゲストでログイン", guest_login_path,
-              form_class: "flex-1",
-              class: primary_button_classes("w-full") %>
-        <%= link_to "新規登録", new_user_registration_path,
-              class: secondary_button_classes("flex-1") %>
+        <%= render "static_pages/start_buttons", guest_label: "ゲストでログイン" %>
       </div>
     </div>
 
@@ -93,8 +89,17 @@
   <%# 下部CTA %>
   <div class="bg-[#FFF8C4] border-t border-[#EEE9C0] px-5 py-5">
     <div class="<%= page_container_classes(:content) %>">
-      <%= link_to "さっそくはじめる", new_user_registration_path,
-            class: primary_button_classes("block w-full") %>
+      <%# ここは全幅の1ボタンのため、パーシャルではなくログイン状態ごとに直接出し分ける（#358） %>
+      <% if !user_signed_in? %>
+        <%= link_to "さっそくはじめる", new_user_registration_path,
+              class: primary_button_classes("block w-full") %>
+      <% elsif current_user.guest? %>
+        <%= link_to "会員登録して保存", new_guest_promotion_path,
+              class: primary_button_classes("block w-full") %>
+      <% else %>
+        <%= link_to "マイページへ", mypage_path,
+              class: primary_button_classes("block w-full") %>
+      <% end %>
     </div>
   </div>
 </div>

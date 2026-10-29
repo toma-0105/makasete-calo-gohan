@@ -83,4 +83,60 @@ RSpec.describe "StaticPages", type: :request do
       expect(response.body).to include(new_user_registration_path)
     end
   end
+
+  # ログイン中に「ゲストでログイン」「新規登録」が出ると紛らわしく、押すと会員のセッションが
+  # ゲストに置き換わってしまうため、ログイン状態に合った導線だけを出す（#358）
+  describe "ログイン状態による「はじめる」導線の出し分け" do
+    { "トップページ" => :root_path, "使い方ページ" => :how_to_use_path }.each do |page_name, path_name|
+      describe page_name do
+        let(:page_path) { public_send(path_name) }
+
+        context "未ログインの場合" do
+          before { get page_path }
+
+          it "ゲストログインと新規登録の導線が表示される" do
+            expect(response.body).to have_css("form[action='#{guest_login_path}']")
+            expect(response.body).to have_link("新規登録", href: new_user_registration_path)
+          end
+
+          it "マイページ・会員登録して保存の導線は表示されない" do
+            expect(response.body).not_to have_link(href: mypage_path)
+            expect(response.body).not_to have_link(href: new_guest_promotion_path)
+          end
+        end
+
+        context "会員の場合" do
+          before do
+            sign_in create(:user)
+            get page_path
+          end
+
+          it "マイページへの導線が表示される" do
+            expect(response.body).to have_link("マイページへ", href: mypage_path)
+          end
+
+          it "ゲストログインと新規登録の導線は表示されない" do
+            expect(response.body).not_to have_css("form[action='#{guest_login_path}']")
+            expect(response.body).not_to have_link(href: new_user_registration_path)
+          end
+        end
+
+        context "ゲストの場合" do
+          before do
+            sign_in create(:user, guest: true)
+            get page_path
+          end
+
+          it "会員登録して保存する導線が表示される" do
+            expect(response.body).to have_link("会員登録して保存", href: new_guest_promotion_path)
+          end
+
+          it "ゲストログインと新規登録の導線は表示されない" do
+            expect(response.body).not_to have_css("form[action='#{guest_login_path}']")
+            expect(response.body).not_to have_link(href: new_user_registration_path)
+          end
+        end
+      end
+    end
+  end
 end

@@ -1,0 +1,17 @@
+<%# ログイン状態に応じて「はじめる」ボタンを出し分ける（#358）
+    未ログイン: ゲストログイン + 新規登録 / ゲスト: 会員登録して保存 / 会員: マイページへ
+    ログイン中に「ゲストでログイン」を出すと、押したときに会員がゲストに置き換わるため出さない
+    ローカル変数 guest_label: ゲストログインボタンの文言（ページごとに異なる） %>
+<% if !user_signed_in? %>
+  <%= button_to guest_label, guest_login_path,
+        form_class: "flex-1",
+        class: primary_button_classes("w-full") %>
+  <%= link_to "新規登録", new_user_registration_path,
+        class: secondary_button_classes("flex-1 flex items-center justify-center") %>
+<% elsif current_user.guest? %>
+  <%= link_to "会員登録して保存", new_guest_promotion_path,
+        class: primary_button_classes("flex-1") %>
+<% else %>
+  <%= link_to "マイページへ", mypage_path,
+        class: primary_button_classes("flex-1") %>
+<% end %>
