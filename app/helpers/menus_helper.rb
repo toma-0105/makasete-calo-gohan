@@ -4,6 +4,10 @@ module MenusHelper
   # 料理カテゴリの表示順（主食 → 主菜 → 一品料理 → 副菜 → 汁物）
   MEAL_CATEGORY_DISPLAY_ORDER = %w[staple main_dish one_dish side_dish soup].freeze
 
+  # 日付の表示形式（例: 11月5日）と、複数並べるときの区切り
+  DATE_LABEL_FORMAT = "%-m月%-d日"
+  DATE_LABEL_SEPARATOR = "、"
+
   # 分量倍率を反映した料理の表示名を返す
   # グラム調整可の料理は、名前中のグラム数を換算値に置き換える（例: ご飯(150g) → ご飯(225g)）
   def meal_display_name(meal)
@@ -32,5 +36,10 @@ module MenusHelper
 
       [ label, meals.sort_by { |meal| MEAL_CATEGORY_DISPLAY_ORDER.index(meal.meal_master.category) || MEAL_CATEGORY_DISPLAY_ORDER.size } ]
     end
+  end
+
+  # 日付の配列を「11月5日、11月6日」のような文字列にする
+  def menu_dates_label(dates)
+    dates.map { |date| date.strftime(DATE_LABEL_FORMAT) }.join(DATE_LABEL_SEPARATOR)
   end
 end

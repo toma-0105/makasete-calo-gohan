@@ -20,9 +20,11 @@ class MenusController < ApplicationController
     end
 
     days = params[:days].presence&.to_i || 1
-    menus = MenuPeriodGeneratorService.new(current_user, tdee_profile, days: days).generate!
-    redirect_to period_menus_path(menu_ids: menus.map(&:id).join(","))
+    result = MenuPeriodGeneratorService.new(current_user, tdee_profile, days: days).generate!
+    # すでに献立がある日はスキップされるため、生成した分と既存の分をまとめて表示する
+    redirect_to period_menus_path(menu_ids: result.all_menus.map(&:id).join(",")), **skipped_flash(result)
   end
+
   # 複数日分の生成結果をまとめて表示する
   def period
     menu_ids = params[:menu_ids].to_s.split(",").map(&:to_i)
@@ -60,5 +62,20 @@ class MenusController < ApplicationController
 
     MenuRegenerateService.new(current_user, menu, tdee_profile).regenerate!
     redirect_to menu_path(menu)
+  end
+
+  private
+
+  # スキップした日がある場合の通知を返す
+  # 何も生成できなかったときは目立つ alert、一部だけスキップしたときは notice にする
+  def skipped_flash(result)
+    return {} if result.skipped_menus.empty?
+
+    dates_label = helpers.menu_dates_label(result.skipped_menus.map(&:date))
+    if result.menus.empty?
+      { alert: "#{dates_label}の献立はすでにあります" }
+    else
+      { notice: "#{dates_label}の献立はすでにあるため、スキップして残りの日を生成しました" }
+    end
   end
 end
