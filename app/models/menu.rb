@@ -1,6 +1,4 @@
 class Menu < ApplicationRecord
-  self.ignored_columns += %w[saved]
-
   belongs_to :user
   has_many :meals, dependent: :destroy
 

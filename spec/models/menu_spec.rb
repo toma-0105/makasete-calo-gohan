@@ -47,11 +47,4 @@ RSpec.describe Menu, type: :model do
       expect { duplicate.save(validate: false) }.to raise_error(ActiveRecord::RecordNotUnique)
     end
   end
-
-  # saved カラムを削除する前に、アプリが参照しない状態にしておく（旧コードが動いている間のデプロイでエラーにならないため）
-  describe '使わなくなったカラム' do
-    it 'saved カラムはアプリから無視される' do
-      expect(Menu.column_names).not_to include('saved')
-    end
-  end
 end
