@@ -91,4 +91,15 @@ RSpec.describe MenusHelper, type: :helper do
       expect(labels).to eq(%w[昼食])
     end
   end
+
+  describe '#menu_dates_label' do
+    it '日付を「11月5日」の形式にする' do
+      expect(helper.menu_dates_label([ Date.new(2026, 11, 5) ])).to eq('11月5日')
+    end
+
+    it '複数の日付は「、」で区切って並べる' do
+      dates = [ Date.new(2026, 11, 5), Date.new(2026, 11, 6) ]
+      expect(helper.menu_dates_label(dates)).to eq('11月5日、11月6日')
+    end
+  end
 end

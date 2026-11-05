@@ -116,7 +116,8 @@ RSpec.describe "Menus", type: :request do
     end
 
     it "複数日分でもN+1が発生しない（発生するとBulletが例外を出してテストが失敗する）" do
-      menus = create_list(:menu, 3, user: user)
+      # 同じユーザーは同じ日付の献立を持てないため、日付を1日ずつずらして作る
+      menus = Array.new(3) { |i| create(:menu, user: user, date: Date.new(2026, 7, 1) + i.days) }
       menus.each { |menu| create(:meal, menu: menu) }
 
       get period_menus_path(menu_ids: menus.map(&:id).join(","))
@@ -152,12 +153,6 @@ RSpec.describe "Menus", type: :request do
       it "保存成功のフラッシュメッセージが設定される" do
         patch save_menu_path(menu)
         expect(flash[:notice]).to eq("献立を保存しました")
-      end
-
-      it "同じ日付の保存済み献立がある場合は置き換えの通知が出る" do
-        create(:menu, :saved, user: user, date: menu.date)
-        patch save_menu_path(menu)
-        expect(flash[:notice]).to eq("献立を保存しました。同じ日付の保存済み献立を置き換えました")
       end
 
       it "同じ日付の保存済み献立がない場合は置き換えの通知は出ない" do
@@ -388,10 +383,10 @@ RSpec.describe "Menus", type: :request do
       end
     end
 
-    # 再生成後に、古い献立が消えて新しい献立が画面に反映されること
+    # 再生成後に、同じ献立のまま中身だけが新しい料理に差し替わること
     context "自分の献立を再生成する場合" do
       let(:user)         { create(:user) }
-      let(:old_menu)     { create(:menu, user: user) }
+      let(:menu)         { create(:menu, user: user) }
       let(:old_master)   { create(:meal_master, name: "再生成前の料理") }
       let(:new_master)   { create(:meal_master, name: "再生成後の料理") }
       let(:menu_hash) do
@@ -400,20 +395,21 @@ RSpec.describe "Menus", type: :request do
 
       before do
         create(:tdee_profile, user: user)
-        create(:meal, menu: old_menu, meal_master: old_master)
+        create(:meal, menu: menu, meal_master: old_master)
         # 献立候補の選定ロジックはサービスのspecで担保するため、固定の結果を返すようにスタブする
         selector = instance_double(MenuCalorieRangeSelectorService, generate: menu_hash)
         allow(MenuCalorieRangeSelectorService).to receive(:new).and_return(selector)
         sign_in user
-        post regenerate_menu_path(old_menu)
+        post regenerate_menu_path(menu)
       end
 
-      it "古い献立が削除される" do
-        expect(Menu.exists?(old_menu.id)).to be false
+      it "献立は作り直されず、同じ献立のまま残る" do
+        expect(Menu.exists?(menu.id)).to be true
+        expect(user.menus.count).to eq(1)
       end
 
-      it "新しい献立の画面にリダイレクトされる" do
-        expect(response).to redirect_to(menu_path(user.menus.last))
+      it "同じ献立の画面にリダイレクトされる" do
+        expect(response).to redirect_to(menu_path(menu))
       end
 
       it "新しい料理が表示され、古い料理は表示されない" do
@@ -450,6 +446,44 @@ RSpec.describe "Menus", type: :request do
         post menus_path
         follow_redirect!
         expect(response.body).to include(master.name)
+      end
+
+      context "今日の献立がすでにある場合（1日分）" do
+        let!(:existing_menu) { create(:menu, user: user, date: Date.today) }
+
+        before { create(:meal, menu: existing_menu) }
+
+        it "献立は作られない" do
+          expect { post menus_path }.not_to change(Menu, :count)
+        end
+
+        it "既存の献立の一覧へ遷移し、すでにある旨が通知される" do
+          post menus_path
+          expect(response).to redirect_to(period_menus_path(menu_ids: existing_menu.id))
+          expect(flash[:alert]).to eq("#{Date.today.strftime('%-m月%-d日')}の献立はすでにあります")
+        end
+      end
+
+      context "3日分を生成して、今日の献立だけがすでにある場合" do
+        let!(:existing_menu) { create(:menu, user: user, date: Date.today) }
+
+        before { create(:meal, menu: existing_menu) }
+
+        it "足りない2日分だけ作られる" do
+          expect { post menus_path, params: { days: 3 } }.to change { user.menus.count }.by(2)
+        end
+
+        it "既存の献立も含めた3日分の一覧へ遷移し、スキップした旨が通知される" do
+          post menus_path, params: { days: 3 }
+          expect(response).to redirect_to(period_menus_path(menu_ids: user.menus.order(:date).ids.join(",")))
+          expect(flash[:notice]).to eq("#{Date.today.strftime('%-m月%-d日')}の献立はすでにあるため、スキップして残りの日を生成しました")
+        end
+
+        it "一覧に3日分の献立が表示される" do
+          post menus_path, params: { days: 3 }
+          follow_redirect!
+          expect(response.body).to include("3日分の献立")
+        end
       end
     end
 

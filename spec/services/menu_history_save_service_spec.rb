@@ -12,21 +12,6 @@ RSpec.describe MenuHistorySaveService do
       expect(result.replaced_count).to eq 0
     end
 
-    context "同じ日付の保存済み献立がある場合" do
-      let!(:old_menu) { create(:menu, :saved, user: user, date: date) }
-
-      it "古い献立は未保存に戻り、新しい献立が保存済みになる" do
-        described_class.new(user, menu).save!
-        expect(old_menu.reload.saved).to be false
-        expect(menu.reload.saved).to be true
-      end
-
-      it "置き換え件数が1になる" do
-        result = described_class.new(user, menu).save!
-        expect(result.replaced_count).to eq 1
-      end
-    end
-
     context "別の日付の保存済み献立がある場合" do
       let!(:other_date_menu) { create(:menu, :saved, user: user, date: date - 1) }
 

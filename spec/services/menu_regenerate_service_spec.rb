@@ -4,9 +4,11 @@ RSpec.describe MenuRegenerateService do
   let(:user)         { create(:user) }
   let(:tdee_profile) { create(:tdee_profile, user: user) }
 
-  # 再生成前の古い献立（mealも1件ぶら下げておく）
-  let!(:old_menu) { create(:menu, user: user) }
-  let!(:old_meal) { create(:meal, menu: old_menu) }
+  # 再生成前の献立（mealも1件ぶら下げておく）
+  # 日付とフラグが再生成後も変わらないことを確かめるため、あえて今日以外・保存済みにしている
+  let(:menu_date) { Date.today + 3.days }
+  let!(:menu)     { create(:menu, :saved, user: user, date: menu_date) }
+  let!(:old_meal) { create(:meal, menu: menu) }
 
   let(:breakfast_meal) { create(:meal_master, meal_timing: :breakfast,       category: :staple,    calories: 300) }
   let(:lunch_meal)     { create(:meal_master, meal_timing: :lunch_or_dinner, category: :staple,    calories: 500) }
@@ -20,7 +22,7 @@ RSpec.describe MenuRegenerateService do
     }
   end
 
-  subject(:service) { described_class.new(user, old_menu, tdee_profile) }
+  subject(:service) { described_class.new(user, menu, tdee_profile) }
 
   before do
     # 献立候補の選定ロジック自体は MenuCalorieRangeSelectorService のテストで担保するため、
@@ -30,36 +32,47 @@ RSpec.describe MenuRegenerateService do
   end
 
   describe '#regenerate!' do
-    it '古い献立が削除される' do
-      service.regenerate!
-      expect(Menu.exists?(old_menu.id)).to be false
+    it '同じ献立を返す' do
+      expect(service.regenerate!).to eq(menu)
     end
 
-    it '古い献立の meals も一緒に削除される' do
+    it '献立は作り直されず、件数は変わらない' do
+      expect { service.regenerate! }.not_to change(Menu, :count)
+    end
+
+    it '古い meals が削除される' do
       service.regenerate!
       expect(Meal.exists?(old_meal.id)).to be false
     end
 
-    it '新しい献立が作成され、全体の件数は変わらない' do
-      # 1件削除 + 1件作成のため、差し引きゼロになる
-      expect { service.regenerate! }.not_to change(Menu, :count)
+    it '新しい内容の meals に差し替わる' do
+      service.regenerate!
+      expect(menu.reload.meals.map(&:meal_master)).to contain_exactly(breakfast_meal, lunch_meal, dinner_meal)
     end
 
-    it '新しい献立を返す' do
-      new_menu = service.regenerate!
-      expect(new_menu).to be_persisted
-      expect(new_menu.id).not_to eq(old_menu.id)
-      expect(new_menu.total_calories).to eq(1400)
+    it '合計カロリーが新しい内容で再計算される' do
+      service.regenerate!
+      expect(menu.reload.total_calories).to eq(1400)
     end
 
-    context '新しい献立の保存に失敗した場合' do
+    it '日付は変わらない（今日に戻らない）' do
+      service.regenerate!
+      expect(menu.reload.date).to eq(menu_date)
+    end
+
+    it '保存済みフラグは変わらない' do
+      service.regenerate!
+      expect(menu.reload).to be_saved
+    end
+
+    context '差し替えに失敗した場合' do
       before do
         allow(Meal).to receive(:create!).and_raise(ActiveRecord::RecordInvalid)
       end
 
-      it '古い献立の削除もロールバックされる' do
+      it '古い meals の削除もロールバックされ、献立が空にならない' do
         expect { service.regenerate! }.to raise_error(ActiveRecord::RecordInvalid)
-        expect(Menu.exists?(old_menu.id)).to be true
+        expect(Meal.exists?(old_meal.id)).to be true
       end
     end
   end
