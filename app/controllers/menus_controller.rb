@@ -3,10 +3,10 @@ class MenusController < ApplicationController
 
   # 献立の一覧（日付の新しい順）
   def index
-    # 献立履歴は会員限定（ビューで非表示にした上で、直接アクセスもサーバー側で拒否する）
+    # 献立一覧は会員限定（ビューで非表示にした上で、直接アクセスもサーバー側で拒否する）
     if current_user.guest?
       # マイページもゲスト拒否になったため、ループしないようゲスト用ホームへ逃がす
-      return redirect_to home_path_for(current_user), alert: "献立履歴は会員限定の機能です"
+      return redirect_to home_path_for(current_user), alert: "献立一覧は会員限定の機能です"
     end
 
     @menus = current_user.menus.order(date: :desc)

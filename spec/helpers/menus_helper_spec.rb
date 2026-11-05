@@ -92,6 +92,17 @@ RSpec.describe MenusHelper, type: :helper do
     end
   end
 
+  describe '#menu_title' do
+    it '今日の献立は「今日の献立」を返す' do
+      expect(helper.menu_title(build(:menu, date: Date.today))).to eq('今日の献立')
+    end
+
+    it '今日以外の献立は日付つきで返す' do
+      date = Date.today + 1.day
+      expect(helper.menu_title(build(:menu, date: date))).to eq("#{date.month}月#{date.day}日の献立")
+    end
+  end
+
   describe '#menu_dates_label' do
     it '日付を「11月5日」の形式にする' do
       expect(helper.menu_dates_label([ Date.new(2026, 11, 5) ])).to eq('11月5日')

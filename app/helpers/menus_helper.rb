@@ -42,4 +42,11 @@ module MenusHelper
   def menu_dates_label(dates)
     dates.map { |date| date.strftime(DATE_LABEL_FORMAT) }.join(DATE_LABEL_SEPARATOR)
   end
+
+  # 献立の見出し。今日の献立なら「今日の献立」、それ以外は日付つき（例: 11月6日の献立）
+  def menu_title(menu)
+    return "今日の献立" if menu.date == Date.today
+
+    "#{menu_dates_label([ menu.date ])}の献立"
+  end
 end

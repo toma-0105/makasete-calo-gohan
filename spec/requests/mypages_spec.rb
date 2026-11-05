@@ -22,8 +22,8 @@ RSpec.describe "Mypages", type: :request do
         expect(response.body).to include(new_user_allergen_path)
       end
 
-      it "献立履歴へのリンクが表示される" do
-        expect(response.body).to include("献立履歴を見る")
+      it "献立一覧へのリンクが表示される" do
+        expect(response.body).to include("献立一覧を見る")
       end
     end
 

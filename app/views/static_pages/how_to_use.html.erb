@@ -8,7 +8,7 @@
     <h2 class="text-[15px] font-bold text-[#2a2810] mb-4">基本の流れ</h2>
     <div class="flex flex-col gap-5 mb-10">
       <%= render "how_to_use_step", number: 1, title: "アカウント登録 または ゲストログイン" do %>
-        メールアドレスで登録すると、献立の保存と履歴の確認ができます。<br>
+        メールアドレスで登録すると、作った献立をあとから一覧で見返せます。<br>
         まず試したい方は、登録不要の「ゲストでログイン」からどうぞ。
       <% end %>
 
@@ -24,11 +24,14 @@
 
       <%= render "how_to_use_step", number: 4, title: "献立を自動生成" do %>
         朝・昼・夜の3食分が即座に表示されます。<br>
-        合計カロリーは目標に合わせて自動調整され、ご飯の量（グラム）や品数まで具体的にわかります。
+        合計カロリーは目標に合わせて自動調整され、ご飯の量（グラム）や品数まで具体的にわかります。<br>
+        献立は1日につき1つです。<br>
+        同じ日にもう一度生成すると、すでにある献立が表示されます。
       <% end %>
 
-      <%= render "how_to_use_step", number: 5, title: "保存して履歴から見返す", badge: "会員限定" do %>
-        気に入った献立は保存しておけば、マイページの献立履歴からいつでも見返せます。
+      <%= render "how_to_use_step", number: 5, title: "献立一覧から見返す", badge: "会員限定" do %>
+        生成した献立は自動で保存されます。<br>
+        マイページの献立一覧から、いつでも見返せます。
       <% end %>
     </div>
 
@@ -36,7 +39,7 @@
     <h2 class="text-[15px] font-bold text-[#2a2810] mb-4">便利な機能</h2>
     <div class="flex flex-col gap-3">
       <%= render "how_to_use_feature", title: "1品だけ入れ替え" do %>
-        献立の詳細画面（「詳細・保存へ」から開けます）で、各料理の右端にある「⇄」を押してください。<br>
+        献立の詳細画面（「詳細へ」から開けます）で、各料理の右端にある「⇄」を押してください。<br>
         その料理だけを、別の料理に入れ替えられます。<br>
         入れ替えられるのは主菜・一品料理・副菜で、ほかの料理はそのままです。
       <% end %>
@@ -49,6 +52,7 @@
 
       <%= render "how_to_use_feature", title: "日数を選んでまとめて生成", badge: "会員限定" do %>
         マイページで日数（<%= MenuPeriodGeneratorService::MIN_GENERATION_DAYS %>〜<%= MenuPeriodGeneratorService::MAX_GENERATION_DAYS %>日分）を選ぶと、まとめて献立を作れます。<br>
+        すでに献立がある日はそのままにして、ない日だけ作ります。<br>
         生成した日付をタップすると、朝・昼・夕の料理が開きます。
       <% end %>
 

@@ -18,7 +18,7 @@ class MenuSaveService
   end
 
   # 既存の献立の中身（meals・合計カロリー）を、menu_hashの内容に差し替える
-  # Menu自体は作り直さないため、id・日付・保存済みフラグ・作成日時は変わらない
+  # Menu自体は作り直さないため、id・日付・作成日時は変わらない
   def replace!(menu)
     # with_lockで献立の行をロックし、トランザクションも兼ねる
     # ・連打などで同時に再生成されても順番に処理され、mealsが二重に作られるのを防ぐ

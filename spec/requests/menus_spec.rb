@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Menus", type: :request do
-  describe "GET /menus（献立履歴一覧）" do
+  describe "GET /menus（献立一覧）" do
     context "ログインしている場合" do
       let(:user) { create(:user) }
 
@@ -34,17 +34,17 @@ RSpec.describe "Menus", type: :request do
 
       it "献立がない場合は案内メッセージが表示される" do
         get menus_path
-        expect(response.body).to include("保存した献立はまだありません")
+        expect(response.body).to include("献立はまだありません")
       end
     end
 
     context "ゲストとしてログインしている場合" do
       before { sign_in create(:user, guest: true) }
 
-      it "献立履歴は会員限定のためTDEE診断ページにリダイレクトされる" do
+      it "献立一覧は会員限定のためTDEE診断ページにリダイレクトされる" do
         get menus_path
         expect(response).to redirect_to(new_tdee_profile_path)
-        expect(flash[:alert]).to eq("献立履歴は会員限定の機能です")
+        expect(flash[:alert]).to eq("献立一覧は会員限定の機能です")
       end
     end
 
@@ -82,7 +82,7 @@ RSpec.describe "Menus", type: :request do
         expect(response.body).to include("朝食", "夕食", "ご飯(150g)", "焼き鮭1切れ(80g)", "234", "137")
       end
 
-      it "詳細・保存ページへのリンクが表示される" do
+      it "詳細ページへのリンクが表示される" do
         get period_menus_path(menu_ids: menu.id)
         expect(response.body).to include(%(href="#{menu_path(menu)}"))
       end
@@ -143,6 +143,21 @@ RSpec.describe "Menus", type: :request do
           get menu_path(menu)
           expect(response.body).not_to include("この献立を保存する")
           expect(response.body).not_to include("保存済みの献立です")
+        end
+
+        it "今日の献立の見出しは「今日の献立」になる" do
+          get menu_path(menu)
+          expect(Capybara.string(response.body)).to have_css("h1", text: "今日の献立")
+        end
+
+        it "今日以外の献立の見出しは日付つきになる" do
+          tomorrow = Date.today + 1.day
+          other_day_menu = create(:menu, user: user, date: tomorrow)
+
+          get menu_path(other_day_menu)
+          page = Capybara.string(response.body)
+          expect(page).to have_css("h1", text: "#{tomorrow.month}月#{tomorrow.day}日の献立")
+          expect(page).not_to have_css("h1", text: "今日の献立")
         end
 
         it "戻るリンクが表示され、保険の戻り先は会員のホーム（マイページ）になる" do

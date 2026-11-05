@@ -1,9 +1,9 @@
-<% content_for :title, "今日の献立 - まかせてカロごはん" %>
+<% content_for :title, "#{menu_title(@menu)} - まかせてカロごはん" %>
 
 <div class="flex-1 flex flex-col">
   <main class="<%= page_container_classes(:wide, "flex-1 px-5 py-6") %>">
     <%= render "shared/back_link", fallback_path: home_path_for(current_user) %>
-    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">今日の献立</h1>
+    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1"><%= menu_title(@menu) %></h1>
 
     <p class="text-[13px] text-[#9a9570] mb-5"><%= @menu.date.strftime("%Y年%m月%d日") %></p>
     <%# 合計カロリーカード %>
