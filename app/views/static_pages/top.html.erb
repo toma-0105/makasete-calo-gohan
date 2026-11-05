@@ -94,7 +94,7 @@
         <%= link_to "さっそくはじめる", new_user_registration_path,
               class: primary_button_classes("block w-full") %>
       <% elsif current_user.guest? %>
-        <%= link_to "会員登録して保存", new_guest_promotion_path,
+        <%= link_to "会員登録して続ける", new_guest_promotion_path,
               class: primary_button_classes("block w-full") %>
       <% else %>
         <%= link_to "マイページへ", mypage_path,

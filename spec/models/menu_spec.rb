@@ -23,7 +23,6 @@ RSpec.describe Menu, type: :model do
       expect(menu).to be_invalid
       expect(menu.errors[:total_calories]).to be_present
     end
-  end
 
     it '同じユーザーの同じ日付の献立は無効である' do
       user = create(:user)
@@ -47,15 +46,12 @@ RSpec.describe Menu, type: :model do
       duplicate = build(:menu, user: user, date: Date.new(2026, 11, 5))
       expect { duplicate.save(validate: false) }.to raise_error(ActiveRecord::RecordNotUnique)
     end
+  end
 
-  describe 'スコープ' do
-    describe '.saved' do
-      let!(:saved_menu)   { create(:menu, :saved) }
-      let!(:unsaved_menu) { create(:menu) }
-
-      it '保存済みの献立のみ取得できる' do
-        expect(Menu.saved).to contain_exactly(saved_menu)
-      end
+  # saved カラムを削除する前に、アプリが参照しない状態にしておく（旧コードが動いている間のデプロイでエラーにならないため）
+  describe '使わなくなったカラム' do
+    it 'saved カラムはアプリから無視される' do
+      expect(Menu.column_names).not_to include('saved')
     end
   end
 end

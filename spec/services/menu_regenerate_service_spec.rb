@@ -5,9 +5,9 @@ RSpec.describe MenuRegenerateService do
   let(:tdee_profile) { create(:tdee_profile, user: user) }
 
   # 再生成前の献立（mealも1件ぶら下げておく）
-  # 日付とフラグが再生成後も変わらないことを確かめるため、あえて今日以外・保存済みにしている
+  # 日付が再生成後も変わらないことを確かめるため、あえて今日以外にしている
   let(:menu_date) { Date.today + 3.days }
-  let!(:menu)     { create(:menu, :saved, user: user, date: menu_date) }
+  let!(:menu)     { create(:menu, user: user, date: menu_date) }
   let!(:old_meal) { create(:meal, menu: menu) }
 
   let(:breakfast_meal) { create(:meal_master, meal_timing: :breakfast,       category: :staple,    calories: 300) }
@@ -58,11 +58,6 @@ RSpec.describe MenuRegenerateService do
     it '日付は変わらない（今日に戻らない）' do
       service.regenerate!
       expect(menu.reload.date).to eq(menu_date)
-    end
-
-    it '保存済みフラグは変わらない' do
-      service.regenerate!
-      expect(menu.reload).to be_saved
     end
 
     context '差し替えに失敗した場合' do

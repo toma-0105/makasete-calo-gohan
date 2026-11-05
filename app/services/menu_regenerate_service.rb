@@ -1,5 +1,5 @@
 # 既存の献立の中身を、新しく生成した内容に差し替えるサービス
-# 献立（Menu）自体は作り直さないため、id・日付・保存済みフラグは変わらない
+# 献立（Menu）自体は作り直さないため、id・日付は変わらない
 class MenuRegenerateService
   def initialize(user, menu, tdee_profile)
     @user         = user

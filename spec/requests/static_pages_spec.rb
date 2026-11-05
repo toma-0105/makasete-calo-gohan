@@ -52,7 +52,7 @@ RSpec.describe "StaticPages", type: :request do
     describe "「会員限定」バッジ" do
       # コントローラーで reject_guest_user している（ゲストが使えない）機能
       let(:member_only_titles) do
-        [ "保存して履歴から見返す", "日数を選んでまとめて生成", "お気に入り料理", "体重記録とグラフ", "TDEE再診断のお知らせ" ]
+        [ "献立一覧から見返す", "日数を選んでまとめて生成", "お気に入り料理", "体重記録とグラフ", "TDEE再診断のお知らせ" ]
       end
 
       # ゲストも使える機能（バッジを付けると「使えない」と誤解させてしまう）
@@ -99,7 +99,7 @@ RSpec.describe "StaticPages", type: :request do
             expect(response.body).to have_link("新規登録", href: new_user_registration_path)
           end
 
-          it "マイページ・会員登録して保存の導線は表示されない" do
+          it "マイページ・会員登録して続ける導線は表示されない" do
             expect(response.body).not_to have_link(href: mypage_path)
             expect(response.body).not_to have_link(href: new_guest_promotion_path)
           end
@@ -127,8 +127,8 @@ RSpec.describe "StaticPages", type: :request do
             get page_path
           end
 
-          it "会員登録して保存する導線が表示される" do
-            expect(response.body).to have_link("会員登録して保存", href: new_guest_promotion_path)
+          it "会員登録して続ける導線が表示される" do
+            expect(response.body).to have_link("会員登録して続ける", href: new_guest_promotion_path)
           end
 
           it "ゲストログインと新規登録の導線は表示されない" do
