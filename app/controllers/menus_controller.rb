@@ -50,15 +50,15 @@ class MenusController < ApplicationController
     redirect_to menu_path(menu), notice: notice
   end
 
-  # 既存の献立を削除して新しい献立を生成し直す
+  # 既存の献立の中身を新しく生成し直す（献立自体は同じまま）
   def regenerate
-    old_menu = current_user.menus.find(params[:id])
+    menu = current_user.menus.find(params[:id])
     tdee_profile = current_user.tdee_profiles.last
     unless tdee_profile
       return redirect_to new_tdee_profile_path, alert: "先にTDEE診断を行ってください"
     end
 
-    new_menu = MenuRegenerateService.new(current_user, old_menu, tdee_profile).regenerate!
-    redirect_to menu_path(new_menu)
+    MenuRegenerateService.new(current_user, menu, tdee_profile).regenerate!
+    redirect_to menu_path(menu)
   end
 end

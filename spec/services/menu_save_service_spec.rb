@@ -54,4 +54,49 @@ RSpec.describe MenuSaveService do
       end
     end
   end
+
+  describe '#replace!' do
+    # 差し替え前の献立（古いmealを1件ぶら下げておく）
+    let!(:menu)     { create(:menu, :saved, user: user, date: Date.new(2026, 11, 8), total_calories: 999) }
+    let!(:old_meal) { create(:meal, menu: menu) }
+
+    it '同じ献立を返す' do
+      expect(service.replace!(menu)).to eq(menu)
+    end
+
+    it '献立は作り直されず、Menuの件数は変わらない' do
+      expect { service.replace!(menu) }.not_to change(Menu, :count)
+    end
+
+    it '古い meals が削除され、新しい3件に置き換わる' do
+      service.replace!(menu)
+      expect(Meal.exists?(old_meal.id)).to be false
+      expect(menu.reload.meals.count).to eq(3)
+    end
+
+    it 'total_calories が新しい内容で再計算される' do
+      service.replace!(menu)
+      # 300×1.0 + 500×1.0 + 600×1.5 = 1700
+      expect(menu.reload.total_calories).to eq(1700)
+    end
+
+    it '日付と保存済みフラグは変わらない' do
+      service.replace!(menu)
+      menu.reload
+      expect(menu.date).to eq(Date.new(2026, 11, 8))
+      expect(menu).to be_saved
+    end
+
+    context '差し替えに失敗した場合' do
+      before do
+        allow(Meal).to receive(:create!).and_raise(ActiveRecord::RecordInvalid)
+      end
+
+      it '古い meals の削除も合計カロリーの更新もロールバックされる' do
+        expect { service.replace!(menu) }.to raise_error(ActiveRecord::RecordInvalid)
+        expect(Meal.exists?(old_meal.id)).to be true
+        expect(menu.reload.total_calories).to eq(999)
+      end
+    end
+  end
 end
