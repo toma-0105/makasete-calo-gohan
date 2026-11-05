@@ -40,8 +40,6 @@ Rails.application.routes.draw do
   resources :menus, only: [ :index, :create, :show ] do
     # 献立の再生成（既存の献立を削除して新しい献立を作り直す）
     post :regenerate, on: :member
-    # 献立の保存（会員のみ。保存済みフラグを立てて履歴に残す）
-    patch :save, on: :member
     # 複数日分の生成結果一覧（#166）
     collection do
       get :period

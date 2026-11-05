@@ -57,7 +57,7 @@ RSpec.describe MenuSaveService do
 
   describe '#replace!' do
     # 差し替え前の献立（古いmealを1件ぶら下げておく）
-    let!(:menu)     { create(:menu, :saved, user: user, date: Date.new(2026, 11, 8), total_calories: 999) }
+    let!(:menu)     { create(:menu, user: user, date: Date.new(2026, 11, 8), total_calories: 999) }
     let!(:old_meal) { create(:meal, menu: menu) }
 
     it '同じ献立を返す' do
@@ -80,11 +80,9 @@ RSpec.describe MenuSaveService do
       expect(menu.reload.total_calories).to eq(1700)
     end
 
-    it '日付と保存済みフラグは変わらない' do
+    it '日付は変わらない' do
       service.replace!(menu)
-      menu.reload
-      expect(menu.date).to eq(Date.new(2026, 11, 8))
-      expect(menu).to be_saved
+      expect(menu.reload.date).to eq(Date.new(2026, 11, 8))
     end
 
     context '差し替えに失敗した場合' do

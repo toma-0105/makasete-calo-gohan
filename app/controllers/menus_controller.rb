@@ -1,7 +1,7 @@
 class MenusController < ApplicationController
   before_action :authenticate_user!
 
-  # 保存済みの献立履歴一覧（新しい順）
+  # 献立の一覧（日付の新しい順）
   def index
     # 献立履歴は会員限定（ビューで非表示にした上で、直接アクセスもサーバー側で拒否する）
     if current_user.guest?
@@ -9,8 +9,7 @@ class MenusController < ApplicationController
       return redirect_to home_path_for(current_user), alert: "献立履歴は会員限定の機能です"
     end
 
-    # 同じ日付の献立が複数ある場合に備えて created_at でも並べる
-    @menus = current_user.menus.saved.order(date: :desc, created_at: :desc)
+    @menus = current_user.menus.order(date: :desc)
   end
 
   def create
@@ -35,21 +34,6 @@ class MenusController < ApplicationController
     @menu = current_user.menus.includes(meals: { meal_master: :allergen_masters }).find(params[:id])
     @tdee_profile = current_user.tdee_profiles.last
     @favorite_meal_master_ids = current_user.favorites.pluck(:meal_master_id)
-  end
-
-  # 献立に保存済みフラグを立てて履歴に残す（会員のみ）
-  def save
-    # ビューでは非表示だが、直接リクエストされた場合に備えてサーバー側でも拒否する
-    if current_user.guest?
-      return redirect_to menu_path(params[:id]), alert: "献立の保存は会員登録が必要です"
-    end
-
-    menu = current_user.menus.find(params[:id])
-    result = MenuHistorySaveService.new(current_user, menu).save!
-    # 置き換えが起きたときだけ通知を足す
-    notice = "献立を保存しました"
-    notice += "。同じ日付の保存済み献立を置き換えました" if result.replaced_count.positive?
-    redirect_to menu_path(menu), notice: notice
   end
 
   # 既存の献立の中身を新しく生成し直す（献立自体は同じまま）
