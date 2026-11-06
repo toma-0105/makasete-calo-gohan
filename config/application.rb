@@ -12,6 +12,14 @@ module Myapp
     config.load_defaults 8.1
     config.active_job.queue_adapter = :good_job
     config.good_job.execution_mode = :async
+    # 定期実行するジョブ（実際に動かすかどうかは、環境ごとの enable_cron で決める）
+    config.good_job.cron = {
+      guest_cleanup: {
+        cron: "0 * * * *", # 毎時0分
+        class: "GuestCleanupJob",
+        description: "期限切れのゲストを削除する"
+      }
+    }
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.

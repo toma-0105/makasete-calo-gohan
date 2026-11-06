@@ -60,6 +60,9 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :resend
   config.action_mailer.raise_delivery_errors = true
 
+  # 定期実行ジョブ（ゲストの削除）を、本番だけで有効にする
+  config.good_job.enable_cron = true
+
   # Set host to be used by links generated in mailer templates.
   # メール内のリンクは旧ドメイン（onrender.com）ではなく独自ドメインにする（routes.rb の canonical_host と同じ値）
   config.action_mailer.default_url_options = { host: "makasete-calo-gohan.toma15.com", protocol: "https" }
