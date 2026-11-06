@@ -1,5 +1,5 @@
 class MenuSaveService
-  def initialize(user, menu_hash, date: Date.today)
+  def initialize(user, menu_hash, date: Date.current)
     @user      = user
     @menu_hash = menu_hash
     @date      = date

@@ -35,7 +35,7 @@ class MenuPeriodGeneratorService
 
   # 献立がない日を調べて生成する（スキップ判定からやり直せるよう切り出している）
   def generate_missing_menus
-    dates = Array.new(@days) { |i| Date.today + i.days }
+    dates = Array.new(@days) { |i| Date.current + i.days }
     existing_menus = @user.menus.includes(:meals).where(date: dates).order(:date)
     new_dates = dates - existing_menus.map(&:date)
 

@@ -151,7 +151,7 @@ RSpec.describe "Menus", type: :request do
         end
 
         it "今日以外の献立の見出しは日付つきになる" do
-          tomorrow = Date.today + 1.day
+          tomorrow = Date.current + 1.day
           other_day_menu = create(:menu, user: user, date: tomorrow)
 
           get menu_path(other_day_menu)
@@ -403,7 +403,7 @@ RSpec.describe "Menus", type: :request do
       end
 
       context "今日の献立がすでにある場合（1日分）" do
-        let!(:existing_menu) { create(:menu, user: user, date: Date.today) }
+        let!(:existing_menu) { create(:menu, user: user, date: Date.current) }
 
         before { create(:meal, menu: existing_menu) }
 
@@ -414,12 +414,12 @@ RSpec.describe "Menus", type: :request do
         it "既存の献立の一覧へ遷移し、すでにある旨が通知される" do
           post menus_path
           expect(response).to redirect_to(period_menus_path(menu_ids: existing_menu.id))
-          expect(flash[:alert]).to eq("#{Date.today.strftime('%-m月%-d日')}の献立はすでにあります")
+          expect(flash[:alert]).to eq("#{Date.current.strftime('%-m月%-d日')}の献立はすでにあります")
         end
       end
 
       context "3日分を生成して、今日の献立だけがすでにある場合" do
-        let!(:existing_menu) { create(:menu, user: user, date: Date.today) }
+        let!(:existing_menu) { create(:menu, user: user, date: Date.current) }
 
         before { create(:meal, menu: existing_menu) }
 
@@ -430,7 +430,7 @@ RSpec.describe "Menus", type: :request do
         it "既存の献立も含めた3日分の一覧へ遷移し、スキップした旨が通知される" do
           post menus_path, params: { days: 3 }
           expect(response).to redirect_to(period_menus_path(menu_ids: user.menus.order(:date).ids.join(",")))
-          expect(flash[:notice]).to eq("#{Date.today.strftime('%-m月%-d日')}の献立はすでにあるため、スキップして残りの日を生成しました")
+          expect(flash[:notice]).to eq("#{Date.current.strftime('%-m月%-d日')}の献立はすでにあるため、スキップして残りの日を生成しました")
         end
 
         it "一覧に3日分の献立が表示される" do

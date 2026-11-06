@@ -94,12 +94,19 @@ RSpec.describe MenusHelper, type: :helper do
 
   describe '#menu_title' do
     it '今日の献立は「今日の献立」を返す' do
-      expect(helper.menu_title(build(:menu, date: Date.today))).to eq('今日の献立')
+      expect(helper.menu_title(build(:menu, date: Date.current))).to eq('今日の献立')
     end
 
     it '今日以外の献立は日付つきで返す' do
-      date = Date.today + 1.day
+      date = Date.current + 1.day
       expect(helper.menu_title(build(:menu, date: date))).to eq("#{date.month}月#{date.day}日の献立")
+    end
+
+    it '日本時間の朝（UTCでは前日）でも、日本の今日の献立は「今日の献立」を返す' do
+      # UTC 11/5 23:00 = 日本時間 11/6 8:00
+      travel_to(Time.utc(2026, 11, 5, 23, 0)) do
+        expect(helper.menu_title(build(:menu, date: Date.new(2026, 11, 6)))).to eq('今日の献立')
+      end
     end
   end
 

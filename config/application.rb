@@ -31,6 +31,9 @@ module Myapp
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
+    # 日付・時刻の基準を日本時間にする（DBへの保存はUTCのまま。画面や「今日」の判定のときに変換される）
+    config.time_zone = "Tokyo"
+
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

@@ -45,7 +45,7 @@ module MenusHelper
 
   # 献立の見出し。今日の献立なら「今日の献立」、それ以外は日付つき（例: 11月6日の献立）
   def menu_title(menu)
-    return "今日の献立" if menu.date == Date.today
+    return "今日の献立" if menu.date == Date.current
 
     "#{menu_dates_label([ menu.date ])}の献立"
   end
