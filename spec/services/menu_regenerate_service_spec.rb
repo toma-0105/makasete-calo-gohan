@@ -6,7 +6,7 @@ RSpec.describe MenuRegenerateService do
 
   # 再生成前の献立（mealも1件ぶら下げておく）
   # 日付が再生成後も変わらないことを確かめるため、あえて今日以外にしている
-  let(:menu_date) { Date.today + 3.days }
+  let(:menu_date) { Date.current + 3.days }
   let!(:menu)     { create(:menu, user: user, date: menu_date) }
   let!(:old_meal) { create(:meal, menu: menu) }
 

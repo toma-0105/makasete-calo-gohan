@@ -36,6 +36,8 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
+  # travel_to で現在時刻を固定できるようにする（日本時間の朝など、特定の時間帯を再現するため）
+  config.include ActiveSupport::Testing::TimeHelpers
   # request specでsign_inヘルパーを使えるようにする
   config.include Devise::Test::IntegrationHelpers, type: :request
   # request specでHTMLの中身（リンクのhrefなど）を have_css / have_link で検証できるようにする

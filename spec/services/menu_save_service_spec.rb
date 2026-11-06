@@ -43,6 +43,13 @@ RSpec.describe MenuSaveService do
       expect(dinner.calories).to eq(900)
     end
 
+    it '日付を省略すると、日本の今日の日付で保存される（日本時間の朝はUTCでは前日）' do
+      # UTC 11/5 23:00 = 日本時間 11/6 8:00
+      travel_to(Time.utc(2026, 11, 5, 23, 0)) do
+        expect(service.save!.date).to eq(Date.new(2026, 11, 6))
+      end
+    end
+
     context '保存に失敗した場合' do
       before do
         allow(Meal).to receive(:create!).and_raise(ActiveRecord::RecordInvalid)

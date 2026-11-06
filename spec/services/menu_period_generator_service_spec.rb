@@ -32,7 +32,7 @@ RSpec.describe MenuPeriodGeneratorService do
 
       it '日付が今日から1日ずつずれて保存される' do
         menus = service.generate!.menus
-        expect(menus.map(&:date)).to eq([ Date.today, Date.today + 1.day, Date.today + 2.days ])
+        expect(menus.map(&:date)).to eq([ Date.current, Date.current + 1.day, Date.current + 2.days ])
       end
 
       it '既存の献立がないので、スキップした献立は無い' do
@@ -58,12 +58,31 @@ RSpec.describe MenuPeriodGeneratorService do
       end
     end
 
+    # 日本時間の0〜9時は、UTCではまだ前日。この時間帯でも、日本の今日から数えて保存されることを確かめる
+    context '日本時間の朝（UTCでは前日）に2日分を生成する場合' do
+      let(:days) { 2 }
+      let(:selector) { instance_double(MenuCalorieRangeSelectorService) }
+
+      before do
+        allow(MenuCalorieRangeSelectorService).to receive(:new).and_return(selector)
+        allow(selector).to receive(:generate).and_return(menu_hash_for(day1_master))
+      end
+
+      it '日本の今日から数えた日付で保存される' do
+        # UTC 11/5 23:00 = 日本時間 11/6 8:00
+        travel_to(Time.utc(2026, 11, 5, 23, 0)) do
+          dates = service.generate!.menus.map(&:date)
+          expect(dates).to eq([ Date.new(2026, 11, 6), Date.new(2026, 11, 7) ])
+        end
+      end
+    end
+
     # 今日の分だけ、すでに献立がある場合
     context '3日分を生成し、今日の献立がすでにある場合' do
       let(:days) { 3 }
       let(:selector) { instance_double(MenuCalorieRangeSelectorService) }
       let(:existing_master) { create(:meal_master, calories: 280) }
-      let!(:existing_menu) { create(:menu, user: user, date: Date.today, total_calories: 280) }
+      let!(:existing_menu) { create(:menu, user: user, date: Date.current, total_calories: 280) }
 
       before do
         create(:meal, menu: existing_menu, meal_master: existing_master)
@@ -77,7 +96,7 @@ RSpec.describe MenuPeriodGeneratorService do
 
       it '生成した献立は明日以降の日付になる' do
         result = service.generate!
-        expect(result.menus.map(&:date)).to eq([ Date.today + 1.day, Date.today + 2.days ])
+        expect(result.menus.map(&:date)).to eq([ Date.current + 1.day, Date.current + 2.days ])
       end
 
       it 'スキップした既存の献立を返す' do
@@ -101,7 +120,7 @@ RSpec.describe MenuPeriodGeneratorService do
 
     context '指定した日数すべてに献立がすでにある場合' do
       let(:days) { 2 }
-      let!(:existing_menus) { Array.new(days) { |i| create(:menu, user: user, date: Date.today + i.days) } }
+      let!(:existing_menus) { Array.new(days) { |i| create(:menu, user: user, date: Date.current + i.days) } }
 
       before do
         allow(MenuCalorieRangeSelectorService).to receive(:new)
@@ -128,7 +147,7 @@ RSpec.describe MenuPeriodGeneratorService do
       let(:selector) { instance_double(MenuCalorieRangeSelectorService) }
 
       before do
-        create(:menu, date: Date.today)
+        create(:menu, date: Date.current)
         allow(MenuCalorieRangeSelectorService).to receive(:new).and_return(selector)
         allow(selector).to receive(:generate).and_return(menu_hash_for(day1_master))
       end
