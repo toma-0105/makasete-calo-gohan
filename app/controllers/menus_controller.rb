@@ -1,15 +1,15 @@
 class MenusController < ApplicationController
   before_action :authenticate_user!
 
-  # 献立の一覧（日付の新しい順）
+  # 直近の献立（昨日以降の献立を、日付の古い順に表示する）
   def index
-    # 献立一覧は会員限定（ビューで非表示にした上で、直接アクセスもサーバー側で拒否する）
+    # 直近の献立は会員限定（ビューで非表示にした上で、直接アクセスもサーバー側で拒否する）
     if current_user.guest?
       # マイページもゲスト拒否になったため、ループしないようゲスト用ホームへ逃がす
-      return redirect_to home_path_for(current_user), alert: "献立一覧は会員限定の機能です"
+      return redirect_to home_path_for(current_user), alert: "直近の献立は会員限定の機能です"
     end
 
-    @menus = current_user.menus.order(date: :desc)
+    @menus = MenuRetentionService.recent_menus(current_user).order(:date)
   end
 
   def create

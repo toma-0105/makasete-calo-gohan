@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "Menus", type: :request do
-  describe "GET /menus（献立一覧）" do
+  describe "GET /menus（直近の献立）" do
+    # 日本時間 2026-11-07 12:00 に固定する（昨日は 11/6、おとといは 11/5）
+    # 「昨日以降だけを表示する」仕様のため、日付が動くとテストが成り立たなくなる
+    let(:now) { Time.utc(2026, 11, 7, 3, 0) }
+
+    around { |example| travel_to(now) { example.run } }
+
     context "ログインしている場合" do
       let(:user) { create(:user) }
 
@@ -13,38 +19,52 @@ RSpec.describe "Menus", type: :request do
       end
 
       it "献立の日付と合計カロリーが表示される" do
-        create(:menu, user: user, date: Date.new(2026, 7, 1), total_calories: 1800)
+        create(:menu, user: user, date: Date.new(2026, 11, 8), total_calories: 1800)
         get menus_path
-        expect(response.body).to include("2026年07月01日")
+        expect(response.body).to include("2026年11月08日")
         expect(response.body).to include("1,800")
       end
 
       it "他人の献立は表示されない" do
-        create(:menu, date: Date.new(2026, 6, 20))
+        create(:menu, date: Date.new(2026, 11, 9))
         get menus_path
-        expect(response.body).not_to include("2026年06月20日")
+        expect(response.body).not_to include("2026年11月09日")
       end
 
-      it "新しい日付の献立が先に表示される" do
-        create(:menu, user: user, date: Date.new(2026, 7, 1))
-        create(:menu, user: user, date: Date.new(2026, 7, 2))
+      it "昨日以降の献立が表示され、昨日より前の献立は表示されない" do
+        create(:menu, user: user, date: Date.new(2026, 11, 5))
+        create(:menu, user: user, date: Date.new(2026, 11, 6))
+        create(:menu, user: user, date: Date.new(2026, 11, 7))
+        create(:menu, user: user, date: Date.new(2026, 11, 10))
         get menus_path
-        expect(response.body.index("2026年07月02日")).to be < response.body.index("2026年07月01日")
+        expect(response.body).not_to include("2026年11月05日")
+        expect(response.body).to include("2026年11月06日", "2026年11月07日", "2026年11月10日")
       end
 
-      it "献立がない場合は案内メッセージが表示される" do
+      it "古い日付の献立が先に表示される（今日が上のほうに来る）" do
+        create(:menu, user: user, date: Date.new(2026, 11, 7))
+        create(:menu, user: user, date: Date.new(2026, 11, 8))
+        create(:menu, user: user, date: Date.new(2026, 11, 13))
         get menus_path
-        expect(response.body).to include("献立はまだありません")
+        expect(response.body.index("2026年11月07日")).to be < response.body.index("2026年11月08日")
+        expect(response.body.index("2026年11月08日")).to be < response.body.index("2026年11月13日")
+      end
+
+      it "表示できる献立がない場合は案内メッセージが表示される" do
+        # 昨日より前の献立しかない場合も、案内メッセージになる
+        create(:menu, user: user, date: Date.new(2026, 11, 5))
+        get menus_path
+        expect(response.body).to include("直近の献立はまだありません")
       end
     end
 
     context "ゲストとしてログインしている場合" do
       before { sign_in create(:user, guest: true) }
 
-      it "献立一覧は会員限定のためTDEE診断ページにリダイレクトされる" do
+      it "直近の献立は会員限定のためTDEE診断ページにリダイレクトされる" do
         get menus_path
         expect(response).to redirect_to(new_tdee_profile_path)
-        expect(flash[:alert]).to eq("献立一覧は会員限定の機能です")
+        expect(flash[:alert]).to eq("直近の献立は会員限定の機能です")
       end
     end
 
