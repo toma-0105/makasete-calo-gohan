@@ -18,6 +18,11 @@ module Myapp
         cron: "0 * * * *", # 毎時0分
         class: "GuestCleanupJob",
         description: "期限切れのゲストを削除する"
+      },
+      menu_cleanup: {
+        cron: "0 * * * *", # 毎時0分
+        class: "MenuCleanupJob",
+        description: "昨日より前の献立を削除する"
       }
     }
 
