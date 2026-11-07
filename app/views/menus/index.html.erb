@@ -1,13 +1,16 @@
-<% content_for :title, "献立一覧 - まかせてカロごはん" %>
+<% content_for :title, "直近の献立 - まかせてカロごはん" %>
 
 <div class="flex-1 flex flex-col">
   <main class="<%= page_container_classes(:content, "flex-1 px-5 py-6") %>">
 
-    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">献立一覧</h1>
-    <p class="text-[13px] text-[#9a9570] mb-5">これまでに生成した献立の一覧です</p>
+    <h1 class="text-[20px] font-bold text-[#2a2810] mb-1">直近の献立</h1>
+    <p class="text-[13px] text-[#9a9570] mb-5">
+      直近の献立を表示しています。<br>
+      古い献立は、自動で削除されます。
+    </p>
 
     <% if @menus.any? %>
-      <%# 献立の一覧（新しい順） %>
+      <%# 献立の一覧（古い順） %>
       <div class="flex flex-col gap-3">
         <% @menus.each do |menu| %>
           <%= link_to menu_path(menu),
@@ -26,7 +29,7 @@
     <% else %>
       <%# 献立がまだない場合 %>
       <div class="bg-[#FFF8C4] border border-[#EAE070] rounded-xl p-6 text-center">
-        <p class="text-[14px] text-[#5a5530] mb-1">献立はまだありません</p>
+        <p class="text-[14px] text-[#5a5530] mb-1">直近の献立はまだありません</p>
         <p class="text-[12px] text-[#9a9570]">献立を生成すると、ここに表示されます</p>
       </div>
     <% end %>
