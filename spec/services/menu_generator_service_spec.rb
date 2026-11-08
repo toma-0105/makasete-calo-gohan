@@ -243,6 +243,10 @@ RSpec.describe MenuGeneratorService do
   end
 
   describe 'ジャンル制約（#105）' do
+    # 料理をランダムに選ぶため、まれにしか通らない道（例：夕食で洋の主菜に汁物が付く。1回あたり約19%）も
+    # ほぼ確実に1回は検証できる回数にする（一度も通らない確率は、10回だと約12%、30回なら約0.2%）
+    let(:genre_check_iterations) { 30 }
+
     before do
       # 和・洋それぞれの主菜と、和・洋・汎用の主食・副菜・汁物を用意する
       { japanese: 2, western: 2 }.each do |genre, count|
@@ -258,7 +262,9 @@ RSpec.describe MenuGeneratorService do
     end
 
     it '主菜がジャンルを持つ食事では、他の料理が同ジャンルか汎用のみになる' do
-      10.times do
+      checked_count = 0
+
+      genre_check_iterations.times do
         service = described_class.new
         allow(service).to receive(:select_one_dish?).and_return(false)
 
@@ -269,12 +275,18 @@ RSpec.describe MenuGeneratorService do
 
           other_genres = meals.map { |meal| meal.meal_master.genre }
           expect(other_genres).to all(be_in([ lead.meal_master.genre, 'neutral' ]))
+          checked_count += 1
         end
       end
+
+      # 主菜が毎回汎用で、何も検証しないまま通ってしまうことを防ぐ
+      expect(checked_count).to be_positive
     end
 
     it '朝食では主菜と同ジャンルの主食があれば汎用より優先される' do
-      10.times do
+      checked_count = 0
+
+      genre_check_iterations.times do
         service = described_class.new
         allow(service).to receive(:select_one_dish?).and_return(false)
 
@@ -285,6 +297,44 @@ RSpec.describe MenuGeneratorService do
         staple = breakfast.find { |meal| meal.category == 'staple' }
         # 各ジャンルの朝食主食をbeforeで用意しているため、必ず同ジャンルが選ばれる
         expect(staple.meal_master.genre).to eq(main.meal_master.genre)
+        checked_count += 1
+      end
+
+      # 主菜が毎回汎用で、何も検証しないまま通ってしまうことを防ぐ
+      expect(checked_count).to be_positive
+    end
+
+    context '一品料理が選ばれる場合' do
+      before do
+        # 和・洋の一品料理を追加する（外側のbeforeで汎用の一品料理が2件ある）
+        %i[japanese western].each do |genre|
+          create_list(:meal_master, 2, meal_timing: :lunch_or_dinner, category: :one_dish, genre: genre)
+        end
+      end
+
+      it '副菜・汁物が一品料理と同ジャンルか汎用のみになる' do
+        checked_count = 0
+
+        genre_check_iterations.times do
+          service = described_class.new
+          allow(service).to receive(:select_one_dish?).and_return(true)
+          # 夕食の汁物も毎回検証できるよう、汁物は必ず追加させる
+          allow(service).to receive(:include_soup?).and_return(true)
+
+          # 朝食には一品料理が出ない設計のため、昼食・夕食だけを確かめる
+          service.generate.values_at(:lunch, :dinner).each do |meals|
+            lead = meals.find { |meal| meal.category == 'one_dish' }
+            # 一品料理が汎用の場合は絞り込まない設計のため検証対象外
+            next if lead.meal_master.neutral?
+
+            genres = meals.map { |meal| meal.meal_master.genre }
+            expect(genres).to all(be_in([ lead.meal_master.genre, 'neutral' ]))
+            checked_count += 1
+          end
+        end
+
+        # 一品料理が毎回汎用で、何も検証しないまま通ってしまうことを防ぐ
+        expect(checked_count).to be_positive
       end
     end
 
