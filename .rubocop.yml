@@ -15,3 +15,11 @@ Metrics/MethodLength:
   Exclude:
     # マイグレーションは自動生成されるものが多く、長さを検査しても分割の意味がない
     - "db/migrate/**/*"
+
+# タイムゾーンを無視する日付・時刻の書き方を検出する（omakaseではRails系のcopが無効）
+# 本番サーバーはUTCのため、Date.today / Time.now だと日本時間の0〜9時に日付が前日になる（#370）
+Rails/Date:
+  Enabled: true
+
+Rails/TimeZone:
+  Enabled: true
